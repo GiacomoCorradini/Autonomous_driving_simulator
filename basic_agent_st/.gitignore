@@ -1,0 +1,14 @@
+.idea
+bin
+matlab/codegen/mex
+matlab/coef_list.m
+matlab/total_cost.m
+matlab/final_*
+matlab/j_opt.m
+matlab/a_opt.m
+matlab/s_opt.m
+
+cmake-build-release
+cmake-build-debug
+Icon
+icon
