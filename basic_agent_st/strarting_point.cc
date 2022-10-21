@@ -6,6 +6,7 @@
 #include <math.h>
 #include <vector>
 #include <algorithm>
+#include <string.h>
 
 extern "C" {
 #include "screen_print_c.h"

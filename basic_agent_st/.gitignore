@@ -1,5 +1,6 @@
 .idea
 bin
+build
 matlab/codegen/mex
 matlab/coef_list.m
 matlab/total_cost.m
