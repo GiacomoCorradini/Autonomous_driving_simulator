@@ -9,8 +9,10 @@ matlab/v_opt.m
 matlab/evalPrimitiveCoeffs.m
 matlab/finalOptTimeStop.m
 matlab/totalCost.m
+matlab/finalOptTime.m
+matlab/finalOptVel.m
 
-
+matlab/*.asv
 cmake-build-release
 cmake-build-debug
 Icon
