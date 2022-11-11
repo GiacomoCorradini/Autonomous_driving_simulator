@@ -2,7 +2,7 @@
 
 function m = stop_primitive(v0,a0,sf)
     if (v0 <= 0) || (sf == 0)
-        m = 0;
+        m = zeros(1,6);
     end
     if v0 > 0
         if 4*v0.^2 + 5*a0*sf < 0
