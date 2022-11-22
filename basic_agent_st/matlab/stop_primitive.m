@@ -1,16 +1,18 @@
 %% Stopping primitive algorithm
 
-function m = stop_primitive(v0,a0,sf)
+function [m,smax,tf] = stop_primitive(v0,a0,sf)
     if (v0 <= 0) || (sf == 0)
+        tf = 0.;
+        smax = 0.;
         m = zeros(1,6);
     end
     if v0 > 0
         if 4*v0.^2 + 5*a0*sf < 0
-            smax = -(4*v0^2)/(5*a0);
+            smax = -((4*v0^2)/(5*a0));
             tf = (10*smax)/(2*v0);
         else
             smax = sf;
             tf = finalOptTimeStop(v0,a0,smax);
         end
-        m = evalPrimitiveCoeffs(v0,a0,smax,0,0,tf);
+        m = evalPrimitiveCoeffs(v0,a0,smax,0.,0.,tf);
     end

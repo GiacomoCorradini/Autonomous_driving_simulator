@@ -32,8 +32,8 @@ typedef struct __attribute__((packed)) {
   int32_t CycleNumber; /* This is an increasing number increamented at every time-step. It allow to relate the manoeuvre with the corresponding scenario */
   double ECUupTime; /* Means system up-time. It starts from zero when the simulation begins */
   int32_t Status; /* 0 = ACTIVE, 0 > Faild  (means working correctly or not), 0 < Closing */
-  double VLgtFild;
-  double ALgtFild;
+  double VLgtFild; /* longitudinal velocity v0*/
+  double ALgtFild; /* longitudinal acceleration a0*/
   double YawRateFild; /* Note that yaw-rate is the derivative of the heading, i.e. chassis rotation rate, not speed rotation rate */
   double SteerWhlAg; /* Positive when the car is turning left */
   double VehicleLen; /* Total length from front bumper to the rear bumper */

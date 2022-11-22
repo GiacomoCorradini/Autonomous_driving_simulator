@@ -10,13 +10,12 @@ matlab/evalPrimitiveCoeffs.m
 matlab/finalOptTimeStop.m
 matlab/totalCost.m
 matlab/finalOptTime.m
+matlab/finalOptTimeVel.m
 matlab/finalOptVel.m
 matlab/finalOptPosj0.m
 matlab/finalOptTimej0.m
 matlab/finalOptTimeStopj0.m
 matlab/finalOptVelj0.m
-matlab/pass_primitivej0.m
-matlab/stop_primitivej0.m
 
 matlab/*.asv
 cmake-build-release

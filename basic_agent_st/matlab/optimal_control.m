@@ -79,10 +79,13 @@ j_opt_fun = matlabFunction(sol_opt.j,'Vars',[t,v0,a0,sf,vf,af,T],'File','j_opt.m
 
 %% Coefficient list export function
 
+% the coeffs are moltiplied by [1,2,6,24,120] to obtain the value of c1,
+% c2, c3, c4, c5
+
 m = [0, coeffs(sol_opt.s,t) .* [1, 2, 6, 24, 120]];
 evalPrimitiveCoeffs_fun = matlabFunction(m,'Vars',[v0,a0,sf,vf,af,T],'File','evalPrimitiveCoeffs.m');
 
 %% Total cost function
 
-cost = int(sol_opt.j.^2,t,[0 T]);
+cost = simplify(int(sol_opt.j.^2,t,[0 T]));
 totalCost_fun = matlabFunction(cost,'Vars',[v0,a0,sf,vf,af,T],'File','totalCost.m');

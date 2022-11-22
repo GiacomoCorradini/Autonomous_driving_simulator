@@ -1,7 +1,7 @@
-function [ Overlap ] = range_intersection( A,B )
+function [t1,t2] = range_intersection( A,B )
 
 %A and B is a vector 
-%for example A = [1 2 3]; B = [2 2.5 3 4]; 
+%for example A = [1 2]; B = [2 2.5]; 
 
 %find lower and upper limit for vector A and B
 Lower_A = min(A); 
@@ -33,6 +33,9 @@ Overlap = input_vector(intersect(find(input_vector>=Lower_Lim),find(input_vector
 if isempty(Overlap)
     Overlap = [0, 0];
 end
+
+t1 = Overlap(1);
+t2 = Overlap(2);
 
 end
 
