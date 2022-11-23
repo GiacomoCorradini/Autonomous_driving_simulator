@@ -5,8 +5,7 @@ function [m,smax,tf] = stop_primitive(v0,a0,sf)
         tf = 0.;
         smax = 0.;
         m = zeros(1,6);
-    end
-    if v0 > 0
+    else
         if 4*v0.^2 + 5*a0*sf < 0
             smax = -((4*v0^2)/(5*a0));
             tf = (10*smax)/(2*v0);
