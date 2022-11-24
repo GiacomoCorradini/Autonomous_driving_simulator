@@ -50,8 +50,7 @@ class Agent():
         self.manoeuvre_msg_pointer = ct.pointer(self.manoeuvre_msg)
 
         self.cycle_number = 0
-        self.start = datetime.now()
-        self.requested_cruising_speed = 30
+        self.requested_cruising_speed = 15
         self.action = (0,0)
 
         # Data to be filtered
@@ -95,8 +94,8 @@ class Agent():
         s.ID = 0
         s.TimeStamp = ct.c_double(datetime.timestamp(datetime.now()))
         s.Status = 0
-        delta_time = datetime.now() - self.start
-        s.ECUupTime = ct.c_double(delta_time.total_seconds())
+        s.ECUupTime = World().time
+
         # Vehicle parameters
         s.VehicleLen = v.vehicle.vehicle.L                          # double - lenght dimension [m]
         s.VehicleWidth = v.vehicle.vehicle.Wf                       # double - width dimension [m]
@@ -117,9 +116,9 @@ class Agent():
             s.TrfLightCurrState = trafficlight.state+1        # 1 = Green, 2 = Yellow, 3 = Red, 0 = Flashing
             s.TrfLightFirstTimeToChange = trafficlight.time_phases[trafficlight.state]-trafficlight.time_past_switch
             s.TrfLightFirstNextState = divmod(trafficlight.state+1,3)[1]+1
-            s.TrfLightSecondTimeToChange = s.TrfLightFirstTimeToChange+trafficlight.time_phases[divmod(trafficlight.state+1,2)[1]]
+            s.TrfLightSecondTimeToChange = s.TrfLightFirstTimeToChange+trafficlight.time_phases[divmod(trafficlight.state+1,3)[1]]
             s.TrfLightSecondNextState = divmod(trafficlight.state+2,3)[1]+1
-            s.TrfLightThirdTimeToChange = s.TrfLightSecondTimeToChange+trafficlight.time_phases[divmod(trafficlight.state+2,2)[1]]
+            s.TrfLightThirdTimeToChange = s.TrfLightSecondTimeToChange+trafficlight.time_phases[divmod(trafficlight.state+2,3)[1]]
         else:
             s.NrTrfLights = 0
             if trafficlight.pos[0] - v.state[0] < -20.0:
@@ -149,8 +148,7 @@ class Agent():
         self.cycle_number += 1
         self.scenario_msg.CycleNumber = self.cycle_number
         self.scenario_msg.TimeStamp = ct.c_double(datetime.timestamp(datetime.now()))
-        delta_time = datetime.now() - self.start
-        self.scenario_msg.ECUupTime = ct.c_double(delta_time.total_seconds())
+        self.scenario_msg.ECUupTime = World().time;
         self.scenario_msg.Status = 1
 
         c.client_agent_compute(self.scenario_msg_pointer, self.manoeuvre_msg_pointer)
