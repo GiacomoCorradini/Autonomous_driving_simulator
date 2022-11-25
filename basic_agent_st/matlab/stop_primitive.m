@@ -9,7 +9,7 @@ function [m,smax,tf] = stop_primitive(v0,a0,sf)
         if 4*v0.^2 + 5*a0*sf < 0
             smax = -((4*v0^2)/(5*a0));
             tf = (10*smax)/(2*v0);
-        else
+        else                                                                     
             smax = sf;
             tf = finalOptTimeStop(v0,a0,smax);
         end

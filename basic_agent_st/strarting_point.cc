@@ -70,6 +70,7 @@ int main(int argc, const char * argv[]) {
 
             // Data struct
             input_data_str *in = &scenario_msg.data_struct;
+            //output_data_str *out = &manoeuvre_msg.data_struct;
             manoeuvre_msg.data_struct.CycleNumber = in->CycleNumber;
             manoeuvre_msg.data_struct.Status = in->Status;
 
@@ -78,7 +79,22 @@ int main(int argc, const char * argv[]) {
 
             // ADD AGENT CODE HERE
 
+/*
             // ADD LOW LEVEL CONTROL CODE HERE
+            static double integral = 0.0;
+            double P_gain = 0.2;
+            double I_gain = 1;
+            double error = req_acc - acc;
+            integral = integral + error * DT;
+            req_pedal = P_gain * error + I_gain * integral;
+
+            // Reset the memory
+            if(vel < 0.1 && old_req_acc < 0 && jint > 0){
+                old_req_acc = 0;
+                integral = 0;
+            }
+*/
+            manoeuvre_msg.data_struct.RequestedAcc = 0.1;
 
             // Write log
             logger.write_line("Example");
