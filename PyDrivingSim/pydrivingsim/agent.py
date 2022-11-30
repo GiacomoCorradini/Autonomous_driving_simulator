@@ -34,7 +34,7 @@ class Agent():
         self.sim_call_freq = self.__metadata["dt"] / World().get_dt()
         self.num_of_step = 0
 
-        IP = [127, 0, 0, 1]  # Remote usage
+        IP = [127, 0, 1, 1]  # Remote usage
         PORT = 30000  # Default port for agent_test
         log_enable = 0  # The log can be True only in local usage
         type_of_log = 0  # Different level of log
@@ -50,7 +50,7 @@ class Agent():
         self.manoeuvre_msg_pointer = ct.pointer(self.manoeuvre_msg)
 
         self.cycle_number = 0
-        self.requested_cruising_speed = 15
+        self.requested_cruising_speed = 20
         self.action = (0,0)
 
         # Data to be filtered
@@ -140,7 +140,7 @@ class Agent():
         # print("CycleNumber = " + str(m.CycleNumber))
         # print("RequestedAcc = " + str(m.RequestedAcc))
 
-        self.action = (m.RequestedAcc,0)
+        self.action = (m.RequestedAcc,m.RequestedSteerWhlAg)
 
     def terminate(self):
         # Basic parameters
