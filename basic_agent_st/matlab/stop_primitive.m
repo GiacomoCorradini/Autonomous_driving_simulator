@@ -1,6 +1,6 @@
 %% Stopping primitive algorithm
 
-function [m,smax,tf] = stop_primitive(v0,a0,sf)
+function m = stop_primitive(v0,a0,sf)
     if (v0 <= 0) || (sf == 0)
         tf = 0.;
         smax = 0.;

@@ -1,6 +1,6 @@
 %% Passing primitive algorithm with j0 = 0
 
-function [m,vfj0,tfj0] = pass_primitivej0(v0,a0,sf,v_min,v_max)
+function m = pass_primitivej0(v0,a0,sf,v_min,v_max)
     T_bar = finalOptTimej0(v0,a0,sf);
     vfj0 = finalOptVelj0(v0,a0,sf,T_bar(1));
     if (v_min < vfj0) || (vfj0 < v_max)
