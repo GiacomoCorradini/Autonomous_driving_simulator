@@ -27,8 +27,11 @@ end
 
 %merge all vectors
 input_vector = union(A,B); 
-
-Overlap = input_vector(intersect(find(input_vector>=Lower_Lim),find(input_vector<=Upper_Lim)));
+if (input_vector ~= 0)
+    Overlap = input_vector(intersect(find(input_vector>=Lower_Lim),find(input_vector<=Upper_Lim)));
+else
+    Overlap = [0,0];
+end
 
 if isempty(Overlap)
     Overlap = [0, 0];
