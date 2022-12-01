@@ -20,7 +20,13 @@ function [m1, m2] = pass_primitive(a0,v0,sf,v_min,v_max,t_min,t_max)
             end
         end
     end
-    [t1,t2] = range_intersection([t_min, t_max],[tv_max, tv_min]);
+    if t_min == 0 && t_max == 0
+        t1 = tv_max;
+        t2 = tv_min;
+    else
+        t1 = max(tv_max,t_min);
+        t2 = min(tv_min,t_max);  
+    end
     if (0 < t1) && (t1 <= t2)
         v_min = finalOptVel(v0,a0,sf,t2);
         v_max = finalOptVel(v0,a0,sf,t1);
