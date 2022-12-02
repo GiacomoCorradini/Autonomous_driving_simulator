@@ -150,7 +150,7 @@ public:
 					if (++it != names->end())
 						*list_file[file] << ", ";
 				}
-				*list_file[file] << ";\n";
+				*list_file[file] << "\n";
 				list_first_print[file] = false;
 #ifdef DEBUG
 				std::cout << "]" << std::endl;
@@ -176,7 +176,7 @@ public:
 #ifdef DEBUG
 			std::cout << "]" << std::endl;
 #endif
-			*list_file[file] << ";\n";
+			*list_file[file] << "\n";
 		}
 	}
 };
