@@ -1,6 +1,6 @@
 %% Passing primitive algorithm
 
-function [m1, m2] = pass_primitive(a0,v0,sf,v_min,v_max,t_min,t_max)
+function [m1, m2, t1, t2, v_min, v_max] = pass_primitive(a0,v0,sf,v_min,v_max,t_min,t_max)
     if a0 >= 0
         tv_min = finalOptTime(v0,a0,sf,v_min);
         tv_max = finalOptTime(v0,a0,sf,v_max);
