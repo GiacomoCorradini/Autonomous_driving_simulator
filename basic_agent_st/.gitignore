@@ -2,25 +2,8 @@
 bin
 build
 
-matlab/j_opt.m
-matlab/a_opt.m
-matlab/s_opt.m
-matlab/v_opt.m
-matlab/evalPrimitiveCoeffs.m
-matlab/finalOptTimeStop.m
-matlab/totalCost.m
-matlab/finalOptTime.m
-matlab/finalOptTimeVel.m
-matlab/finalOptVel.m
-matlab/finalOptPosj0.m
-matlab/finalOptTimej0.m
-matlab/finalOptTimeStopj0.m
-matlab/finalOptVelj0.m
-
 matlab/*.asv
 cmake-build-release
 cmake-build-debug
 Icon
 icon
-*.prj
-codegen

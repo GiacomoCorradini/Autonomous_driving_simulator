@@ -1,0 +1,49 @@
+//
+// Academic License - for use in teaching, academic research, and meeting
+// course requirements at degree granting institutions only.  Not for
+// government, commercial, or other organizational use.
+//
+// a_opt_mex_data.cpp
+//
+// Code generation for function 'a_opt_mex_data'
+//
+
+// Include files
+#include "a_opt_mex_data.h"
+#include "rt_nonfinite.h"
+
+// Variable Definitions
+emlrtCTX emlrtRootTLSGlobal{nullptr};
+
+emlrtContext emlrtContextGlobal{
+    true,                                                 // bFirstTime
+    false,                                                // bInitialized
+    131626U,                                              // fVersionInfo
+    nullptr,                                              // fErrorFunction
+    "a_opt_mex",                                          // fFunctionName
+    nullptr,                                              // fRTCallStack
+    false,                                                // bDebugMode
+    {2045744189U, 2170104910U, 2743257031U, 4284093946U}, // fSigWrd
+    nullptr                                               // fSigMem
+};
+
+emlrtRSInfo p_emlrtRSI{
+    8,                 // lineNo
+    "finalOptTimeVel", // fcnName
+    "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
+    "ento\\Master degree\\2nd year\\Intelligent vehicles and autonomous "
+    "driving\\Au"
+    "tonomous_driving_simulator\\basic_agent_st\\matlab\\finalOptTimeVel.m" // pathName
+};
+
+emlrtRTEInfo emlrtRTEI{
+    13,     // lineNo
+    9,      // colNo
+    "sqrt", // fName
+    "C:\\Program "
+    "Files\\MATLAB\\R2022a\\toolbox\\eml\\lib\\matlab\\elfun\\sqrt.m" // pName
+};
+
+covrtInstance emlrtCoverageInstance;
+
+// End of code generation (a_opt_mex_data.cpp)
