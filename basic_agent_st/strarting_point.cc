@@ -78,7 +78,7 @@ int main(int argc, const char * argv[]) {
     size_t scenario_msg_size = sizeof(scenario_msg.data_buffer);
     size_t manoeuvre_msg_size = sizeof(manoeuvre_msg.data_buffer);
     uint32_t message_id = 0;
-    std::string filename = "Example";
+    std::string filename = "Example1";
 
 #ifndef _MSC_VER
     // More portable way of supporting signals on UNIX

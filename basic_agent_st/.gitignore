@@ -2,6 +2,8 @@
 bin
 build
 
+log_internal/Example*
+
 matlab/*.asv
 cmake-build-release
 cmake-build-debug
