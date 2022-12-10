@@ -23,18 +23,17 @@
 // Function Declarations
 void a_opt_api(const mxArray *const prhs[7], const mxArray **plhs);
 
-void pass_primitive_1_api(const mxArray *const prhs[7], int32_T nlhs,
-                          const mxArray *plhs[2]);
-
 void pass_primitive_api(const mxArray *const prhs[7], int32_T nlhs,
-                        const mxArray *plhs[2]);
+                        const mxArray *plhs[4]);
 
 void pass_primitivej0_api(const mxArray *const prhs[5], int32_T nlhs,
                           const mxArray *plhs[3]);
 
-void stop_primitive_api(const mxArray *const prhs[3], const mxArray **plhs);
+void stop_primitive_api(const mxArray *const prhs[3], int32_T nlhs,
+                        const mxArray *plhs[3]);
 
-void stop_primitivej0_api(const mxArray *const prhs[2], const mxArray **plhs);
+void stop_primitivej0_api(const mxArray *const prhs[2], int32_T nlhs,
+                          const mxArray *plhs[3]);
 
 void v_opt_api(const mxArray *const prhs[7], const mxArray **plhs);
 

@@ -5,7 +5,7 @@
 // File: primitives.h
 //
 // MATLAB Coder version            : 5.4
-// C/C++ source code generated on  : 02-Dec-2022 09:30:20
+// C/C++ source code generated on  : 06-Dec-2022 22:21:22
 //
 
 #ifndef PRIMITIVES_H
@@ -20,8 +20,8 @@
 extern double a_opt(double t, double v0, double a0, double sf, double vf,
                     double af, double T);
 
-extern void pass_primitive(double a0, double v0, double sf, double *v_min,
-                           double *v_max, double t_min, double t_max,
+extern void pass_primitive(double a0, double v0, double sf, double v_min,
+                           double v_max, double t_min, double t_max,
                            double m1[6], double m2[6], double *t1, double *t2);
 
 extern void pass_primitivej0(double v0, double a0, double sf, double v_min,

@@ -21,6 +21,7 @@
 #include <cstring>
 
 // Function Declarations
-void stop_primitivej0(const emlrtStack *sp, real_T v0, real_T a0, real_T m[6]);
+void stop_primitivej0(const emlrtStack *sp, real_T v0, real_T a0, real_T m[6],
+                      real_T *T, real_T *smax);
 
 // End of code generation (stop_primitivej0.h)

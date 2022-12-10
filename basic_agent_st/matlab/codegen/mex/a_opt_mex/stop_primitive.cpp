@@ -16,54 +16,49 @@
 #include "mwmathutil.h"
 
 // Variable Definitions
-static emlrtRSInfo wb_emlrtRSI{
+static emlrtRSInfo db_emlrtRSI{
     9,                // lineNo
     "stop_primitive", // fcnName
     "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-    "ento\\Master degree\\2nd year\\Intelligent vehicles and autonomous "
-    "driving\\Au"
-    "tonomous_driving_simulator\\basic_agent_st\\matlab\\stop_primitive.m" // pathName
+    "ento\\Autonomous_driving_simulator\\basic_agent_st\\matlab\\stop_"
+    "primitive.m" // pathName
 };
 
-static emlrtRSInfo xb_emlrtRSI{
+static emlrtRSInfo eb_emlrtRSI{
     10,               // lineNo
     "stop_primitive", // fcnName
     "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-    "ento\\Master degree\\2nd year\\Intelligent vehicles and autonomous "
-    "driving\\Au"
-    "tonomous_driving_simulator\\basic_agent_st\\matlab\\stop_primitive.m" // pathName
+    "ento\\Autonomous_driving_simulator\\basic_agent_st\\matlab\\stop_"
+    "primitive.m" // pathName
 };
 
-static emlrtRSInfo yb_emlrtRSI{
+static emlrtRSInfo fb_emlrtRSI{
     14,               // lineNo
     "stop_primitive", // fcnName
     "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-    "ento\\Master degree\\2nd year\\Intelligent vehicles and autonomous "
-    "driving\\Au"
-    "tonomous_driving_simulator\\basic_agent_st\\matlab\\stop_primitive.m" // pathName
+    "ento\\Autonomous_driving_simulator\\basic_agent_st\\matlab\\stop_"
+    "primitive.m" // pathName
 };
 
-static emlrtRSInfo ac_emlrtRSI{
+static emlrtRSInfo gb_emlrtRSI{
     16,               // lineNo
     "stop_primitive", // fcnName
     "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-    "ento\\Master degree\\2nd year\\Intelligent vehicles and autonomous "
-    "driving\\Au"
-    "tonomous_driving_simulator\\basic_agent_st\\matlab\\stop_primitive.m" // pathName
+    "ento\\Autonomous_driving_simulator\\basic_agent_st\\matlab\\stop_"
+    "primitive.m" // pathName
 };
 
-static emlrtRSInfo cc_emlrtRSI{
+static emlrtRSInfo ib_emlrtRSI{
     8,                  // lineNo
     "finalOptTimeStop", // fcnName
     "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-    "ento\\Master degree\\2nd year\\Intelligent vehicles and autonomous "
-    "driving\\Au"
-    "tonomous_driving_simulator\\basic_agent_st\\matlab\\finalOptTimeStop.m" // pathName
+    "ento\\Autonomous_driving_simulator\\basic_agent_"
+    "st\\matlab\\finalOptTimeStop.m" // pathName
 };
 
 // Function Definitions
 void stop_primitive(const emlrtStack *sp, real_T v0, real_T a0, real_T sf,
-                    real_T m[6])
+                    real_T m[6], real_T *tf, real_T *smax)
 {
   emlrtStack b_st;
   emlrtStack st;
@@ -71,52 +66,52 @@ void stop_primitive(const emlrtStack *sp, real_T v0, real_T a0, real_T sf,
   st.tls = sp->tls;
   b_st.prev = &st;
   b_st.tls = st.tls;
-  covrtLogFcn(&emlrtCoverageInstance, 11, 0);
+  covrtLogFcn(&emlrtCoverageInstance, 9, 0);
   //  Stopping primitive algorithm
-  if (covrtLogCond(&emlrtCoverageInstance, 11, 0, 0, v0 <= 0.0) ||
-      covrtLogCond(&emlrtCoverageInstance, 11, 0, 1, sf == 0.0)) {
-    covrtLogMcdc(&emlrtCoverageInstance, 11, 0, 0, true);
-    covrtLogIf(&emlrtCoverageInstance, 11, 0, 0, true);
-    covrtLogBasicBlock(&emlrtCoverageInstance, 11, 0);
+  if (covrtLogCond(&emlrtCoverageInstance, 9, 0, 0, v0 <= 0.0) ||
+      covrtLogCond(&emlrtCoverageInstance, 9, 0, 1, sf == 0.0)) {
+    covrtLogMcdc(&emlrtCoverageInstance, 9, 0, 0, true);
+    covrtLogIf(&emlrtCoverageInstance, 9, 0, 0, true);
+    covrtLogBasicBlock(&emlrtCoverageInstance, 9, 0);
+    *tf = 0.0;
+    *smax = 0.0;
     for (int32_T i{0}; i < 6; i++) {
       m[i] = 0.0;
     }
   } else {
-    real_T smax;
-    real_T tf;
-    covrtLogMcdc(&emlrtCoverageInstance, 11, 0, 0, false);
-    covrtLogIf(&emlrtCoverageInstance, 11, 0, 0, false);
-    st.site = &wb_emlrtRSI;
-    tf = 4.0 * (v0 * v0);
-    if (covrtLogIf(&emlrtCoverageInstance, 11, 0, 1,
-                   tf + 5.0 * a0 * sf < 0.0)) {
-      covrtLogBasicBlock(&emlrtCoverageInstance, 11, 1);
-      st.site = &xb_emlrtRSI;
-      smax = -(tf / (5.0 * a0));
-      tf = 10.0 * smax / (2.0 * v0);
+    real_T x;
+    covrtLogMcdc(&emlrtCoverageInstance, 9, 0, 0, false);
+    covrtLogIf(&emlrtCoverageInstance, 9, 0, 0, false);
+    st.site = &db_emlrtRSI;
+    x = 4.0 * (v0 * v0);
+    if (covrtLogIf(&emlrtCoverageInstance, 9, 0, 1, x + 5.0 * a0 * sf < 0.0)) {
+      covrtLogBasicBlock(&emlrtCoverageInstance, 9, 1);
+      st.site = &eb_emlrtRSI;
+      *smax = -(x / (5.0 * a0));
+      *tf = 10.0 * *smax / (2.0 * v0);
     } else {
-      covrtLogBasicBlock(&emlrtCoverageInstance, 11, 2);
-      smax = sf;
-      st.site = &yb_emlrtRSI;
-      covrtLogFcn(&emlrtCoverageInstance, 12, 0);
-      covrtLogBasicBlock(&emlrtCoverageInstance, 12, 0);
+      covrtLogBasicBlock(&emlrtCoverageInstance, 9, 2);
+      *smax = sf;
+      st.site = &fb_emlrtRSI;
+      covrtLogFcn(&emlrtCoverageInstance, 10, 0);
+      covrtLogBasicBlock(&emlrtCoverageInstance, 10, 0);
       // finalOptTimeStop
       //     OUT1 = finalOptTimeStop(V0,A0,SF)
       //     This function was generated by the Symbolic Math Toolbox
       //     version 9.1. 29-Nov-2022 16:34:15
-      b_st.site = &cc_emlrtRSI;
-      tf += a0 * sf * 5.0;
-      if (tf < 0.0) {
+      b_st.site = &ib_emlrtRSI;
+      x += a0 * sf * 5.0;
+      if (x < 0.0) {
         emlrtErrorWithMessageIdR2018a(
             &b_st, &emlrtRTEI, "Coder:toolbox:ElFunDomainError",
             "Coder:toolbox:ElFunDomainError", 3, 4, 4, "sqrt");
       }
-      tf = muDoubleScalarSqrt(tf);
-      tf = sf * 10.0 / (v0 * 2.0 + tf);
+      x = muDoubleScalarSqrt(x);
+      *tf = sf * 10.0 / (v0 * 2.0 + x);
     }
-    covrtLogBasicBlock(&emlrtCoverageInstance, 11, 3);
-    st.site = &ac_emlrtRSI;
-    evalPrimitiveCoeffs(v0, a0, smax, 0.0, tf, m);
+    covrtLogBasicBlock(&emlrtCoverageInstance, 9, 3);
+    st.site = &gb_emlrtRSI;
+    evalPrimitiveCoeffs(v0, a0, *smax, 0.0, *tf, m);
   }
 }
 

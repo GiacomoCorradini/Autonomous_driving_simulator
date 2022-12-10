@@ -27,15 +27,6 @@ emlrtContext emlrtContextGlobal{
     nullptr                                               // fSigMem
 };
 
-emlrtRSInfo p_emlrtRSI{
-    8,                 // lineNo
-    "finalOptTimeVel", // fcnName
-    "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-    "ento\\Master degree\\2nd year\\Intelligent vehicles and autonomous "
-    "driving\\Au"
-    "tonomous_driving_simulator\\basic_agent_st\\matlab\\finalOptTimeVel.m" // pathName
-};
-
 emlrtRTEInfo emlrtRTEI{
     13,     // lineNo
     9,      // colNo

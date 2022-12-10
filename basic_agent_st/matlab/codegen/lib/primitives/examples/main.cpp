@@ -5,7 +5,7 @@
 // File: main.cpp
 //
 // MATLAB Coder version            : 5.4
-// C/C++ source code generated on  : 02-Dec-2022 09:30:20
+// C/C++ source code generated on  : 06-Dec-2022 22:21:22
 //
 
 /*************************************************************************/
@@ -87,14 +87,10 @@ static void main_pass_primitive()
   double a0_tmp;
   double t1;
   double t2;
-  double v_max;
-  double v_min;
   // Initialize function 'pass_primitive' input arguments.
   a0_tmp = argInit_real_T();
   // Call the entry-point 'pass_primitive'.
-  v_min = a0_tmp;
-  v_max = a0_tmp;
-  pass_primitive(a0_tmp, a0_tmp, a0_tmp, &v_min, &v_max, a0_tmp, a0_tmp, m1, m2,
+  pass_primitive(a0_tmp, a0_tmp, a0_tmp, a0_tmp, a0_tmp, a0_tmp, a0_tmp, m1, m2,
                  &t1, &t2);
 }
 

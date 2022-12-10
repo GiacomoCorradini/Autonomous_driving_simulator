@@ -23,7 +23,6 @@
 // Variable Declarations
 extern emlrtCTX emlrtRootTLSGlobal;
 extern emlrtContext emlrtContextGlobal;
-extern emlrtRSInfo p_emlrtRSI;
 extern emlrtRTEInfo emlrtRTEI;
 extern covrtInstance emlrtCoverageInstance;
 

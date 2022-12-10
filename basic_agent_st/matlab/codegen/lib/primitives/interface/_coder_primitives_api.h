@@ -5,7 +5,7 @@
 // File: _coder_primitives_api.h
 //
 // MATLAB Coder version            : 5.4
-// C/C++ source code generated on  : 02-Dec-2022 09:30:20
+// C/C++ source code generated on  : 06-Dec-2022 22:21:22
 //
 
 #ifndef _CODER_PRIMITIVES_API_H
@@ -27,12 +27,12 @@ real_T a_opt(real_T t, real_T v0, real_T a0, real_T sf, real_T vf, real_T af,
 
 void a_opt_api(const mxArray *const prhs[7], const mxArray **plhs);
 
-void pass_primitive(real_T a0, real_T v0, real_T sf, real_T *v_min,
-                    real_T *v_max, real_T t_min, real_T t_max, real_T m1[6],
-                    real_T m2[6], real_T *t1, real_T *t2);
+void pass_primitive(real_T a0, real_T v0, real_T sf, real_T v_min, real_T v_max,
+                    real_T t_min, real_T t_max, real_T m1[6], real_T m2[6],
+                    real_T *t1, real_T *t2);
 
 void pass_primitive_api(const mxArray *const prhs[7], int32_T nlhs,
-                        const mxArray *plhs[6]);
+                        const mxArray *plhs[4]);
 
 void pass_primitivej0(real_T v0, real_T a0, real_T sf, real_T v_min,
                       real_T v_max, real_T m[6], real_T *tfj0, real_T *vfj0);

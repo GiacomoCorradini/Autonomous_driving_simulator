@@ -23,6 +23,6 @@
 // Function Declarations
 void pass_primitive(const emlrtStack *sp, real_T a0, real_T v0, real_T sf,
                     real_T v_min, real_T v_max, real_T t_min, real_T t_max,
-                    real_T m1[6], real_T m2[6]);
+                    real_T m1[6], real_T m2[6], real_T *t1, real_T *t2);
 
 // End of code generation (pass_primitive.h)

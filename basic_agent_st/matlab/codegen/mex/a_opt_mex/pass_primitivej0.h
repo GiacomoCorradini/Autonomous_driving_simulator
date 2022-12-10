@@ -22,7 +22,7 @@
 
 // Function Declarations
 void pass_primitivej0(const emlrtStack *sp, real_T v0, real_T a0, real_T sf,
-                      real_T v_min, real_T v_max, real_T m[6], real_T *vfj0,
-                      real_T *tfj0);
+                      real_T v_min, real_T v_max, real_T m[6], real_T *tfj0,
+                      real_T *vfj0);
 
 // End of code generation (pass_primitivej0.h)

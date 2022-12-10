@@ -22,6 +22,6 @@
 
 // Function Declarations
 void stop_primitive(const emlrtStack *sp, real_T v0, real_T a0, real_T sf,
-                    real_T m[6]);
+                    real_T m[6], real_T *tf, real_T *smax);
 
 // End of code generation (stop_primitive.h)

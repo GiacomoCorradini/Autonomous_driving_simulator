@@ -15,14 +15,14 @@
 #include "mwmathutil.h"
 
 // Variable Definitions
-static emlrtRSInfo o_emlrtRSI{
-    8,              // lineNo
-    "finalOptTime", // fcnName
-    "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-    "ento\\Master degree\\2nd year\\Intelligent vehicles and autonomous "
-    "driving\\Au"
-    "tonomous_driving_simulator\\basic_agent_st\\matlab\\finalOptTime.m" // pathName
-};
+static emlrtRSInfo
+    o_emlrtRSI{
+        8,              // lineNo
+        "finalOptTime", // fcnName
+        "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
+        "ento\\Autonomous_driving_simulator\\basic_agent_"
+        "st\\matlab\\finalOptTime.m" // pathName
+    };
 
 // Function Definitions
 real_T finalOptTime(const emlrtStack *sp, real_T v0, real_T a0, real_T sf,

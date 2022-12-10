@@ -16,6 +16,17 @@
 #include "emlrt.h"
 
 // Type Definitions
+struct rtBoundsCheckInfo {
+  int32_T iFirst;
+  int32_T iLast;
+  int32_T lineNo;
+  int32_T colNo;
+  const char_T *aName;
+  const char_T *fName;
+  const char_T *pName;
+  int32_T checkKind;
+};
+
 struct rtDesignRangeCheckInfo {
   int32_T lineNo;
   int32_T colNo;

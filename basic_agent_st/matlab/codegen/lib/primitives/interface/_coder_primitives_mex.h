@@ -5,7 +5,7 @@
 // File: _coder_primitives_mex.h
 //
 // MATLAB Coder version            : 5.4
-// C/C++ source code generated on  : 02-Dec-2022 09:30:20
+// C/C++ source code generated on  : 06-Dec-2022 22:21:22
 //
 
 #ifndef _CODER_PRIMITIVES_MEX_H
@@ -25,7 +25,7 @@ emlrtCTX mexFunctionCreateRootTLS();
 void unsafe_a_opt_mexFunction(int32_T nlhs, mxArray *plhs[1], int32_T nrhs,
                               const mxArray *prhs[7]);
 
-void unsafe_pass_primitive_mexFunction(int32_T nlhs, mxArray *plhs[6],
+void unsafe_pass_primitive_mexFunction(int32_T nlhs, mxArray *plhs[4],
                                        int32_T nrhs, const mxArray *prhs[7]);
 
 void unsafe_pass_primitivej0_mexFunction(int32_T nlhs, mxArray *plhs[3],

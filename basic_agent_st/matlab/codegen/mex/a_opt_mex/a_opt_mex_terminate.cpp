@@ -55,10 +55,6 @@ void a_opt_mex_atexit()
   covrtFreeInstanceData(&emlrtCoverageInstance);
   // Free instance data
   covrtFreeInstanceData(&emlrtCoverageInstance);
-  // Free instance data
-  covrtFreeInstanceData(&emlrtCoverageInstance);
-  // Free instance data
-  covrtFreeInstanceData(&emlrtCoverageInstance);
   emlrtLeaveRtStackR2012b(&st);
   emlrtDestroyRootTLS(&emlrtRootTLSGlobal);
   emlrtExitTimeCleanup(&emlrtContextGlobal);

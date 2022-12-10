@@ -21,110 +21,105 @@ static emlrtRSInfo d_emlrtRSI{
     5,                // lineNo
     "pass_primitive", // fcnName
     "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-    "ento\\Master degree\\2nd year\\Intelligent vehicles and autonomous "
-    "driving\\Au"
-    "tonomous_driving_simulator\\basic_agent_st\\matlab\\pass_primitive.m" // pathName
+    "ento\\Autonomous_driving_simulator\\basic_agent_st\\matlab\\pass_"
+    "primitive.m" // pathName
 };
 
 static emlrtRSInfo e_emlrtRSI{
     6,                // lineNo
     "pass_primitive", // fcnName
     "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-    "ento\\Master degree\\2nd year\\Intelligent vehicles and autonomous "
-    "driving\\Au"
-    "tonomous_driving_simulator\\basic_agent_st\\matlab\\pass_primitive.m" // pathName
+    "ento\\Autonomous_driving_simulator\\basic_agent_st\\matlab\\pass_"
+    "primitive.m" // pathName
 };
 
 static emlrtRSInfo f_emlrtRSI{
     8,                // lineNo
     "pass_primitive", // fcnName
     "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-    "ento\\Master degree\\2nd year\\Intelligent vehicles and autonomous "
-    "driving\\Au"
-    "tonomous_driving_simulator\\basic_agent_st\\matlab\\pass_primitive.m" // pathName
+    "ento\\Autonomous_driving_simulator\\basic_agent_st\\matlab\\pass_"
+    "primitive.m" // pathName
 };
 
 static emlrtRSInfo g_emlrtRSI{
     9,                // lineNo
     "pass_primitive", // fcnName
     "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-    "ento\\Master degree\\2nd year\\Intelligent vehicles and autonomous "
-    "driving\\Au"
-    "tonomous_driving_simulator\\basic_agent_st\\matlab\\pass_primitive.m" // pathName
+    "ento\\Autonomous_driving_simulator\\basic_agent_st\\matlab\\pass_"
+    "primitive.m" // pathName
 };
 
 static emlrtRSInfo h_emlrtRSI{
     11,               // lineNo
     "pass_primitive", // fcnName
     "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-    "ento\\Master degree\\2nd year\\Intelligent vehicles and autonomous "
-    "driving\\Au"
-    "tonomous_driving_simulator\\basic_agent_st\\matlab\\pass_primitive.m" // pathName
+    "ento\\Autonomous_driving_simulator\\basic_agent_st\\matlab\\pass_"
+    "primitive.m" // pathName
 };
 
 static emlrtRSInfo i_emlrtRSI{
     12,               // lineNo
     "pass_primitive", // fcnName
     "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-    "ento\\Master degree\\2nd year\\Intelligent vehicles and autonomous "
-    "driving\\Au"
-    "tonomous_driving_simulator\\basic_agent_st\\matlab\\pass_primitive.m" // pathName
+    "ento\\Autonomous_driving_simulator\\basic_agent_st\\matlab\\pass_"
+    "primitive.m" // pathName
 };
 
 static emlrtRSInfo j_emlrtRSI{
     16,               // lineNo
     "pass_primitive", // fcnName
     "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-    "ento\\Master degree\\2nd year\\Intelligent vehicles and autonomous "
-    "driving\\Au"
-    "tonomous_driving_simulator\\basic_agent_st\\matlab\\pass_primitive.m" // pathName
+    "ento\\Autonomous_driving_simulator\\basic_agent_st\\matlab\\pass_"
+    "primitive.m" // pathName
 };
 
 static emlrtRSInfo k_emlrtRSI{
     31,               // lineNo
     "pass_primitive", // fcnName
     "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-    "ento\\Master degree\\2nd year\\Intelligent vehicles and autonomous "
-    "driving\\Au"
-    "tonomous_driving_simulator\\basic_agent_st\\matlab\\pass_primitive.m" // pathName
+    "ento\\Autonomous_driving_simulator\\basic_agent_st\\matlab\\pass_"
+    "primitive.m" // pathName
 };
 
 static emlrtRSInfo l_emlrtRSI{
     32,               // lineNo
     "pass_primitive", // fcnName
     "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-    "ento\\Master degree\\2nd year\\Intelligent vehicles and autonomous "
-    "driving\\Au"
-    "tonomous_driving_simulator\\basic_agent_st\\matlab\\pass_primitive.m" // pathName
+    "ento\\Autonomous_driving_simulator\\basic_agent_st\\matlab\\pass_"
+    "primitive.m" // pathName
 };
 
 static emlrtRSInfo m_emlrtRSI{
     33,               // lineNo
     "pass_primitive", // fcnName
     "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-    "ento\\Master degree\\2nd year\\Intelligent vehicles and autonomous "
-    "driving\\Au"
-    "tonomous_driving_simulator\\basic_agent_st\\matlab\\pass_primitive.m" // pathName
+    "ento\\Autonomous_driving_simulator\\basic_agent_st\\matlab\\pass_"
+    "primitive.m" // pathName
 };
 
 static emlrtRSInfo n_emlrtRSI{
     34,               // lineNo
     "pass_primitive", // fcnName
     "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-    "ento\\Master degree\\2nd year\\Intelligent vehicles and autonomous "
-    "driving\\Au"
-    "tonomous_driving_simulator\\basic_agent_st\\matlab\\pass_primitive.m" // pathName
+    "ento\\Autonomous_driving_simulator\\basic_agent_st\\matlab\\pass_"
+    "primitive.m" // pathName
+};
+
+static emlrtRSInfo p_emlrtRSI{
+    8,                 // lineNo
+    "finalOptTimeVel", // fcnName
+    "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
+    "ento\\Autonomous_driving_simulator\\basic_agent_"
+    "st\\matlab\\finalOptTimeVel.m" // pathName
 };
 
 // Function Definitions
 void pass_primitive(const emlrtStack *sp, real_T a0, real_T v0, real_T sf,
                     real_T v_min, real_T v_max, real_T t_min, real_T t_max,
-                    real_T m1[6], real_T m2[6])
+                    real_T m1[6], real_T m2[6], real_T *t1, real_T *t2)
 {
   emlrtStack b_st;
   emlrtStack st;
-  real_T t_bar;
-  real_T v_bar;
   st.prev = sp;
   st.tls = sp->tls;
   b_st.prev = &st;
@@ -134,10 +129,11 @@ void pass_primitive(const emlrtStack *sp, real_T a0, real_T v0, real_T sf,
   if (covrtLogIf(&emlrtCoverageInstance, 1, 0, 0, a0 >= 0.0)) {
     covrtLogBasicBlock(&emlrtCoverageInstance, 1, 0);
     st.site = &d_emlrtRSI;
-    t_bar = finalOptTime(&st, v0, a0, sf, v_min);
+    *t2 = finalOptTime(&st, v0, a0, sf, v_min);
     st.site = &e_emlrtRSI;
-    v_bar = finalOptTime(&st, v0, a0, sf, v_max);
+    *t1 = finalOptTime(&st, v0, a0, sf, v_max);
   } else {
+    real_T v_bar;
     covrtLogBasicBlock(&emlrtCoverageInstance, 1, 1);
     st.site = &f_emlrtRSI;
     covrtLogFcn(&emlrtCoverageInstance, 3, 0);
@@ -154,7 +150,7 @@ void pass_primitive(const emlrtStack *sp, real_T a0, real_T v0, real_T sf,
           "Coder:toolbox:ElFunDomainError", 3, 4, 4, "sqrt");
     }
     v_bar = muDoubleScalarSqrt(v_bar);
-    t_bar = -(3.872983346207417 * v_bar) / a0;
+    *t2 = -(3.872983346207417 * v_bar) / a0;
     st.site = &g_emlrtRSI;
     covrtLogFcn(&emlrtCoverageInstance, 4, 0);
     covrtLogBasicBlock(&emlrtCoverageInstance, 4, 0);
@@ -162,17 +158,16 @@ void pass_primitive(const emlrtStack *sp, real_T a0, real_T v0, real_T sf,
     //     VF_BAR = finalOptVel(V0,A0,SF,T)
     //     This function was generated by the Symbolic Math Toolbox version 9.1.
     //     29-Nov-2022 16:34:32
-    v_bar =
-        ((sf * -15.0 + t_bar * v0 * 7.0) + t_bar * t_bar * a0) * -0.125 / t_bar;
+    v_bar = ((sf * -15.0 + *t2 * v0 * 7.0) + *t2 * *t2 * a0) * -0.125 / *t2;
     if (covrtLogCond(&emlrtCoverageInstance, 1, 0, 0, v_bar < v_min) &&
         covrtLogCond(&emlrtCoverageInstance, 1, 0, 1, v_min < v_max)) {
       covrtLogMcdc(&emlrtCoverageInstance, 1, 0, 0, true);
       covrtLogIf(&emlrtCoverageInstance, 1, 0, 1, true);
       covrtLogBasicBlock(&emlrtCoverageInstance, 1, 2);
       st.site = &h_emlrtRSI;
-      t_bar = finalOptTime(&st, v0, a0, sf, v_min);
+      *t2 = finalOptTime(&st, v0, a0, sf, v_min);
       st.site = &i_emlrtRSI;
-      v_bar = finalOptTime(&st, v0, a0, sf, v_max);
+      *t1 = finalOptTime(&st, v0, a0, sf, v_max);
     } else {
       covrtLogMcdc(&emlrtCoverageInstance, 1, 0, 0, false);
       covrtLogIf(&emlrtCoverageInstance, 1, 0, 1, false);
@@ -182,13 +177,13 @@ void pass_primitive(const emlrtStack *sp, real_T a0, real_T v0, real_T sf,
         covrtLogIf(&emlrtCoverageInstance, 1, 0, 2, true);
         covrtLogBasicBlock(&emlrtCoverageInstance, 1, 3);
         st.site = &j_emlrtRSI;
-        v_bar = finalOptTime(&st, v0, a0, sf, v_max);
+        *t1 = finalOptTime(&st, v0, a0, sf, v_max);
       } else {
         covrtLogMcdc(&emlrtCoverageInstance, 1, 0, 1, false);
         covrtLogIf(&emlrtCoverageInstance, 1, 0, 2, false);
         covrtLogBasicBlock(&emlrtCoverageInstance, 1, 4);
-        t_bar = 0.0;
-        v_bar = 0.0;
+        *t2 = 0.0;
+        *t1 = 0.0;
       }
     }
   }
@@ -201,11 +196,11 @@ void pass_primitive(const emlrtStack *sp, real_T a0, real_T v0, real_T sf,
     covrtLogMcdc(&emlrtCoverageInstance, 1, 0, 2, false);
     covrtLogIf(&emlrtCoverageInstance, 1, 0, 3, false);
     covrtLogBasicBlock(&emlrtCoverageInstance, 1, 6);
-    v_bar = muDoubleScalarMax(v_bar, t_min);
-    t_bar = muDoubleScalarMin(t_bar, t_max);
+    *t1 = muDoubleScalarMax(*t1, t_min);
+    *t2 = muDoubleScalarMin(*t2, t_max);
   }
-  if (covrtLogCond(&emlrtCoverageInstance, 1, 0, 6, v_bar > 0.0) &&
-      covrtLogCond(&emlrtCoverageInstance, 1, 0, 7, v_bar <= t_bar)) {
+  if (covrtLogCond(&emlrtCoverageInstance, 1, 0, 6, *t1 > 0.0) &&
+      covrtLogCond(&emlrtCoverageInstance, 1, 0, 7, *t1 <= *t2)) {
     covrtLogMcdc(&emlrtCoverageInstance, 1, 0, 3, true);
     covrtLogIf(&emlrtCoverageInstance, 1, 0, 4, true);
     covrtLogBasicBlock(&emlrtCoverageInstance, 1, 7);
@@ -225,14 +220,14 @@ void pass_primitive(const emlrtStack *sp, real_T a0, real_T v0, real_T sf,
     //     29-Nov-2022 16:34:32
     st.site = &m_emlrtRSI;
     evalPrimitiveCoeffs(v0, a0, sf,
-                        ((sf * -15.0 + v_bar * v0 * 7.0) + v_bar * v_bar * a0) *
-                            -0.125 / v_bar,
-                        v_bar, m1);
+                        ((sf * -15.0 + *t1 * v0 * 7.0) + *t1 * *t1 * a0) *
+                            -0.125 / *t1,
+                        *t1, m1);
     st.site = &n_emlrtRSI;
     evalPrimitiveCoeffs(v0, a0, sf,
-                        ((sf * -15.0 + t_bar * v0 * 7.0) + t_bar * t_bar * a0) *
-                            -0.125 / t_bar,
-                        t_bar, m2);
+                        ((sf * -15.0 + *t2 * v0 * 7.0) + *t2 * *t2 * a0) *
+                            -0.125 / *t2,
+                        *t2, m2);
   } else {
     covrtLogMcdc(&emlrtCoverageInstance, 1, 0, 3, false);
     covrtLogIf(&emlrtCoverageInstance, 1, 0, 4, false);
@@ -241,6 +236,8 @@ void pass_primitive(const emlrtStack *sp, real_T a0, real_T v0, real_T sf,
       m1[i] = 0.0;
       m2[i] = 0.0;
     }
+    *t1 = 0.0;
+    *t2 = 0.0;
   }
 }
 

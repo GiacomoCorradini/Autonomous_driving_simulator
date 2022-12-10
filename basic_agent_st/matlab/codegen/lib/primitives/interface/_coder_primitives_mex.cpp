@@ -5,7 +5,7 @@
 // File: _coder_primitives_mex.cpp
 //
 // MATLAB Coder version            : 5.4
-// C/C++ source code generated on  : 02-Dec-2022 09:30:20
+// C/C++ source code generated on  : 06-Dec-2022 22:21:22
 //
 
 // Include Files
@@ -106,12 +106,12 @@ void unsafe_a_opt_mexFunction(int32_T nlhs, mxArray *plhs[1], int32_T nrhs,
 
 //
 // Arguments    : int32_T nlhs
-//                mxArray *plhs[6]
+//                mxArray *plhs[4]
 //                int32_T nrhs
 //                const mxArray *prhs[7]
 // Return Type  : void
 //
-void unsafe_pass_primitive_mexFunction(int32_T nlhs, mxArray *plhs[6],
+void unsafe_pass_primitive_mexFunction(int32_T nlhs, mxArray *plhs[4],
                                        int32_T nrhs, const mxArray *prhs[7])
 {
   emlrtStack st{
@@ -119,7 +119,7 @@ void unsafe_pass_primitive_mexFunction(int32_T nlhs, mxArray *plhs[6],
       nullptr, // tls
       nullptr  // prev
   };
-  const mxArray *outputs[6];
+  const mxArray *outputs[4];
   int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   // Check for proper number of arguments.
@@ -127,7 +127,7 @@ void unsafe_pass_primitive_mexFunction(int32_T nlhs, mxArray *plhs[6],
     emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 7, 4,
                         14, "pass_primitive");
   }
-  if (nlhs > 6) {
+  if (nlhs > 4) {
     emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 14,
                         "pass_primitive");
   }

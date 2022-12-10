@@ -2,7 +2,7 @@
 ## Makefile generated for component 'primitives'. 
 ## 
 ## Makefile     : primitives_rtw.mk
-## Generated on : Wed Nov 30 12:01:19 2022
+## Generated on : Tue Dec 06 22:21:35 2022
 ## Final product: ./primitives.lib
 ## Product type : static-library
 ## 
@@ -24,7 +24,7 @@ MAKEFILE                  = primitives_rtw.mk
 MATLAB_ROOT               = C:/PROGRA~1/MATLAB/R2022a
 MATLAB_BIN                = C:/PROGRA~1/MATLAB/R2022a/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
-START_DIR                 = C:/Users/corra/Desktop/UNIVER~1/MASTER~1/2NDYEA~1/INTELL~1/AUTONO~2/BASIC_~1/matlab
+START_DIR                 = C:/Users/corra/Desktop/UNIVER~1/AUTONO~1/BASIC_~1/matlab
 TGT_FCN_LIB               = ISO_C++11
 SOLVER_OBJ                = 
 CLASSIC_INTERFACE         = 0
