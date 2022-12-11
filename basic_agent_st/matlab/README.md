@@ -12,5 +12,5 @@ Run the code generation of the following functions:
 * stop_primitivej0.m
 * pass_primitive.m
 * pass_primitivej0.m
-* j_opt
-* v_opt
+* j_opt.m
+* v_opt.m
