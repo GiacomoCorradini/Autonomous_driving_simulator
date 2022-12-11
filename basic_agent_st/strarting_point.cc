@@ -122,7 +122,7 @@ int main(int argc, const char * argv[]) {
             logger.log_var(filename, "TrafficLight", in->TrfLightCurrState);
 
             // ADD AGENT CODE HERE
-/*
+
             double v0 = in->VLgtFild;
             double a0 = in->ALgtFild;
             double lookahead = std::max(50.0,v0*5.0);
@@ -150,22 +150,18 @@ int main(int argc, const char * argv[]) {
                 pass_primitive(a0,v0,lookahead,v_r,v_r,0.0,0.0,m1,m2,&T1,&T2);
                 copy_m(m_star, m1);
             } else {
-                double Trf1 = in->TrfLightFirstTimeToChange;
-                double Trf2 = in->TrfLightSecondTimeToChange;
-                double Trf3 = in->TrfLightThirdTimeToChange;
-
                 switch (in->TrfLightCurrState) {
                     case 1:
                         T_green = 0.0;
-                        T_red = Trf1 - T_in;
+                        T_red = in->TrfLightFirstTimeToChange - T_in;
                         break;
                     case 2:
-                        T_green = Trf2 + T_s;
-                        T_red = Trf3 - T_in;
+                        T_green = in->TrfLightSecondTimeToChange + T_s;
+                        T_red = in->TrfLightThirdTimeToChange - T_in;
                         break;
                     case 3:
-                        T_green = Trf1 + T_s;
-                        T_red = Trf2 - T_in;
+                        T_green = in->TrfLightFirstTimeToChange + T_s;
+                        T_red = in->TrfLightSecondTimeToChange - T_in;
                         break;
                     default:
                         break;
@@ -195,7 +191,7 @@ int main(int argc, const char * argv[]) {
                     }
                 }
             }
-*/
+/*
             // ADD AGENT OLD CODE HERE
 
             double v0 = in->VLgtFild;
@@ -263,7 +259,7 @@ int main(int argc, const char * argv[]) {
                     }
                 }
             }
-
+*/
             // Integrated jerk - trapezoidal - with internal a0
             double a0_bar = a0;
             double req_acc = a0 + DT/2.0 * (j_opt(0.0,m_star) + j_opt(DT,m_star));
