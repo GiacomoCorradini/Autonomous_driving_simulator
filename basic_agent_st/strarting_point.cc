@@ -19,7 +19,7 @@ extern "C" {
 #include "primitives.h"
 // --- MATLAB PRIMITIVES INCLUDE ---
 
-#define DEFAULT_SERVER_IP  "127.0.1.1"
+#define DEFAULT_SERVER_IP  "127.0.0.1"
 #define SERVER_PORT             30000  // Server port
 #define DT 0.05
 
@@ -307,6 +307,7 @@ int main(int argc, const char * argv[]) {
             printLogVar(message_id, "Status", in->Status);
             printLogVar(message_id, "Time", num_seconds);
             printLogVar(message_id, "CycleNumber", in->CycleNumber);
+            printLogVar(message_id, "TrafficLight", in->TrfLightCurrState);
             printLogVar(message_id, "Actual velocity", in->VLgtFild);
             printLogVar(message_id, "Actual acceleration", in->ALgtFild);
             printLogVar(message_id, "Requested acceleration", req_pedal);

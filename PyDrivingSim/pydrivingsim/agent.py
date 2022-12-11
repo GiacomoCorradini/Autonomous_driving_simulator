@@ -34,7 +34,7 @@ class Agent():
         self.sim_call_freq = self.__metadata["dt"] / World().get_dt()
         self.num_of_step = 0
 
-        IP = [127, 0, 1, 1]  # Remote usage
+        IP = [127, 0, 0, 1]  # Remote usage
         PORT = 30000  # Default port for agent_test
         log_enable = 0  # The log can be True only in local usage
         type_of_log = 0  # Different level of log
