@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 
 extern "C" {
     #include "screen_print_c.h"
