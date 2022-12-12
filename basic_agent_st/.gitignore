@@ -24,3 +24,4 @@ matlab/j_opt.m
 matlab/s_opt.m
 matlab/v_opt.m
 matlab/totalCost.m
+*.asv

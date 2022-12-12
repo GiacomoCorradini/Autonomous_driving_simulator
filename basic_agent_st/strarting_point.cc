@@ -1,7 +1,3 @@
-//
-// Created by Gastone Pietro Rosati Papini on 10/08/22.
-//
-
 #include <stdio.h>
 #include <math.h>
 #include <vector>
@@ -32,42 +28,10 @@ void intHandler(int signal) {
 
 // STATIC FUNCTION
 
-static void copy_m(double m1[6], double m2[6]){
-  for(int i = 0; i < 6; i++){
-    m1[i] = m2[i];
-  }
-}
-
-static int check_0(double m[6]){
-  int tmp = 0;
-  for(int i = 0; i < 6; i++){
-    if(m[i] != 0) tmp += 1;
-  }
-  return tmp;
-}
-
-static double j_opt(double t, double m[6]){
-    double jerk = m[3] + m[4] * t + 1.0/2.0 * m[5] * pow(t,2);
-    return jerk;
-}
-
-static double v_opt(double t, double m[6]){
-    double vel = m[1] + m[2] * t + 1.0/2.0 * m[3] * pow(t,2) + 1.0/6.0 * m[4] * pow(t,3) + 1.0/24.0 * m[5] * pow(t,4);
-    return vel;
-}
-
-double max_max(double a1, double a2, double a3){
-  double max;
-  if(a1 < a2){
-      if(a2 < a3) max = a3;
-      else max = a2;
-  } else {
-      if(a1 < a3) max = a3;
-      else max = a1;
-  }
-
-  return max;
-}
+static void copy_m(double m1[6], double m2[6]);
+static int check_0(double m[6]);
+static double j_opt(double t, double m[6]);
+static double v_opt(double t, double m[6]);
 
 int main(int argc, const char * argv[]) {
     logger.enable(true);
@@ -114,14 +78,14 @@ int main(int argc, const char * argv[]) {
             manoeuvre_msg.data_struct.CycleNumber = in->CycleNumber;
             manoeuvre_msg.data_struct.Status = in->Status;
 
-            // Example of using log
+            // Log_vars
             logger.log_var(filename, "Cycle", in->CycleNumber);
             logger.log_var(filename, "Time", num_seconds);
             logger.log_var(filename, "Vel_0", in->VLgtFild);
             logger.log_var(filename, "Acc_0", in->ALgtFild);
             logger.log_var(filename, "TrafficLight", in->TrfLightCurrState);
 
-            // ADD AGENT CODE HERE
+            // Main loop agent code
 
             double v0 = in->VLgtFild;
             double a0 = in->ALgtFild;
@@ -191,85 +155,17 @@ int main(int argc, const char * argv[]) {
                     }
                 }
             }
-/*
-            // ADD AGENT OLD CODE HERE
 
-            double v0 = in->VLgtFild;
-            double a0 = in->ALgtFild;
-            double lookahead = max_max(50.0,v0*10.0,v0*v0);
-            double v_r = fmin(in->RequestedCruisingSpeed, in->AdasisSpeedLimitValues[0]);
-            double T_s = 0.5;
-            double v_min = 5.0;
-            double x_s = v_r * T_s;
-            double x_stop;
-            double T_p = x_s / v_min;
-            double T_red;
-            double T_green;
-            double x_f;
-            double m_star[6], m1[6], m2[6];
-            double T1, T2, smax, v1, v2;
-
-            if(in->NrTrfLights != 0){
-                x_f = in->TrfLightDist - x_s;
-                x_stop = in->TrfLightDist - (x_s / 2.0);
-            }
-
-            if(in->NrTrfLights == 0 || x_f >= lookahead){
-                pass_primitive(a0,v0,lookahead,v_r,v_r,0.0,0.0,m1,m2,&T1,&T2);
-                copy_m(m_star, m1);
-            } else {
-                double Trf1 = in->TrfLightFirstTimeToChange;
-                double Trf2 = in->TrfLightSecondTimeToChange;
-                double Trf3 = in->TrfLightThirdTimeToChange;
-
-                switch (in->TrfLightCurrState) {
-                    case 1:
-                        T_green = 0.0;
-                        T_red = Trf1;
-                        break;
-                    case 2:
-                        T_green = Trf2;
-                        T_red = Trf3;
-                        break;
-                    case 3:
-                        T_green = Trf1;
-                        T_red = Trf2;
-                        break;
-                    default:
-                        break;
-                }
-
-                if(in->TrfLightCurrState == 1 && in->TrfLightDist <= x_s){
-                    pass_primitive(a0,v0,lookahead,v_r,v_r,0.0,0.0,m1,m2,&T1,&T2);
-                    copy_m(m_star, m1);
-                } else {
-                    pass_primitive(a0,v0,x_f,v_min,v_r,T_green,T_red - T_s - T_p,m1,m2,&T1,&T2);
-                    if(check_0(m1) == 0 && check_0(m2) == 0){
-                        stop_primitive(v0,a0,x_stop,m_star,&T1,&smax);
-                    } else {
-                        if((m1[2] < 0 && m2[2] > 0) || (m1[2] > 0 && m2[2] < 0)){
-                            pass_primitivej0(v0,a0,x_f,v_min,v_r,m_star,&T1,&v1);
-                        } else {
-                            if(abs(m1[2]) < abs(m2[2])){
-                                copy_m(m_star, m1);
-                            } else {
-                                copy_m(m_star, m2);
-                            }
-                        }
-                    }
-                }
-            }
-*/
             // Integrated jerk - trapezoidal - with internal a0
             double a0_bar = a0;
             double req_acc = a0 + DT/2.0 * (j_opt(0.0,m_star) + j_opt(DT,m_star));
             a0_bar = req_acc;
 
-
+/*
             // Include saturation
-            //double a_saturate = 2.0;
-            //req_acc = std::min(std::max(req_acc, -a_saturate), a_saturate);
-
+            double a_saturate = 2.0;
+            req_acc = std::min(std::max(req_acc, -a_saturate), a_saturate);
+*/
             // ADD LOW LEVEL CONTROL
             static double integral = 0.0;
             double P_gain = 0.2;
@@ -292,6 +188,11 @@ int main(int argc, const char * argv[]) {
 
             logger.log_var(filename, "Vel_req", v_req);
             logger.log_var(filename, "Acc_req", req_pedal);
+            logger.log_var(filename, "T_green", T_green);
+            logger.log_var(filename, "T_red", T_red);
+            logger.log_var(filename, "T1", &T1);
+            logger.log_var(filename, "T2", &T2);
+            logger.log_var(filename, "TrfLightDist",in->TrfLightDist);
 
             logger.log_var(filename, "c1", m_star[1]);
             logger.log_var(filename, "c2", m_star[2]);
@@ -325,4 +226,28 @@ int main(int argc, const char * argv[]) {
     // Close the server of the agent
     server_agent_close();
     return 0;
+}
+
+static void copy_m(double m1[6], double m2[6]){
+  for(int i = 0; i < 6; i++){
+    m1[i] = m2[i];
+  }
+}
+
+static int check_0(double m[6]){
+  int tmp = 0;
+  for(int i = 0; i < 6; i++){
+    if(m[i] != 0) tmp += 1;
+  }
+  return tmp;
+}
+
+static double j_opt(double t, double m[6]){
+    double jerk = m[3] + m[4] * t + 1.0/2.0 * m[5] * pow(t,2);
+    return jerk;
+}
+
+static double v_opt(double t, double m[6]){
+    double vel = m[1] + m[2] * t + 1.0/2.0 * m[3] * pow(t,2) + 1.0/6.0 * m[4] * pow(t,3) + 1.0/24.0 * m[5] * pow(t,4);
+    return vel;
 }
