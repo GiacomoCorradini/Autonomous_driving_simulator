@@ -2,13 +2,13 @@
 // Academic License - for use in teaching, academic research, and meeting
 // course requirements at degree granting institutions only.  Not for
 // government, commercial, or other organizational use.
-// File: _coder_primitives_api.cpp
 //
-// MATLAB Coder version            : 5.4
-// C/C++ source code generated on  : 06-Dec-2022 22:21:22
+// _coder_primitives_api.cpp
+//
+// Code generation for function 'a_opt'
 //
 
-// Include Files
+// Include files
 #include "_coder_primitives_api.h"
 #include "_coder_primitives_mex.h"
 
@@ -18,7 +18,7 @@ emlrtCTX emlrtRootTLSGlobal{nullptr};
 emlrtContext emlrtContextGlobal{
     true,                                                 // bFirstTime
     false,                                                // bInitialized
-    131626U,                                              // fVersionInfo
+    131627U,                                              // fVersionInfo
     nullptr,                                              // fErrorFunction
     "primitives",                                         // fFunctionName
     nullptr,                                              // fRTCallStack
@@ -42,30 +42,27 @@ static const mxArray *emlrt_marshallOut(const real_T u[6]);
 static const mxArray *emlrt_marshallOut(const real_T u);
 
 // Function Definitions
-//
-// Arguments    : const emlrtStack *sp
-//                const mxArray *src
-//                const emlrtMsgIdentifier *msgId
-// Return Type  : real_T
-//
 static real_T b_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
                                  const emlrtMsgIdentifier *msgId)
 {
   static const int32_T dims{0};
   real_T ret;
-  emlrtCheckBuiltInR2012b((emlrtCTX)sp, msgId, src, (const char_T *)"double",
-                          false, 0U, (void *)&dims);
+  emlrtCheckBuiltInR2012b((emlrtConstCTX)sp, msgId, src, "double", false, 0U,
+                          (const void *)&dims);
   ret = *static_cast<real_T *>(emlrtMxGetData(src));
   emlrtDestroyArray(&src);
   return ret;
 }
 
-//
-// Arguments    : const emlrtStack *sp
-//                const mxArray *t
-//                const char_T *identifier
-// Return Type  : real_T
-//
+static real_T emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
+                               const emlrtMsgIdentifier *parentId)
+{
+  real_T y;
+  y = b_emlrt_marshallIn(sp, emlrtAlias(u), parentId);
+  emlrtDestroyArray(&u);
+  return y;
+}
+
 static real_T emlrt_marshallIn(const emlrtStack *sp, const mxArray *t,
                                const char_T *identifier)
 {
@@ -79,25 +76,6 @@ static real_T emlrt_marshallIn(const emlrtStack *sp, const mxArray *t,
   return y;
 }
 
-//
-// Arguments    : const emlrtStack *sp
-//                const mxArray *u
-//                const emlrtMsgIdentifier *parentId
-// Return Type  : real_T
-//
-static real_T emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
-                               const emlrtMsgIdentifier *parentId)
-{
-  real_T y;
-  y = b_emlrt_marshallIn(sp, emlrtAlias(u), parentId);
-  emlrtDestroyArray(&u);
-  return y;
-}
-
-//
-// Arguments    : const real_T u[6]
-// Return Type  : const mxArray *
-//
 static const mxArray *emlrt_marshallOut(const real_T u[6])
 {
   static const int32_T iv[2]{0, 0};
@@ -112,10 +90,6 @@ static const mxArray *emlrt_marshallOut(const real_T u[6])
   return y;
 }
 
-//
-// Arguments    : const real_T u
-// Return Type  : const mxArray *
-//
 static const mxArray *emlrt_marshallOut(const real_T u)
 {
   const mxArray *m;
@@ -126,11 +100,6 @@ static const mxArray *emlrt_marshallOut(const real_T u)
   return y;
 }
 
-//
-// Arguments    : const mxArray * const prhs[7]
-//                const mxArray **plhs
-// Return Type  : void
-//
 void a_opt_api(const mxArray *const prhs[7], const mxArray **plhs)
 {
   emlrtStack st{
@@ -160,14 +129,8 @@ void a_opt_api(const mxArray *const prhs[7], const mxArray **plhs)
   *plhs = emlrt_marshallOut(t);
 }
 
-//
-// Arguments    : const mxArray * const prhs[7]
-//                int32_T nlhs
-//                const mxArray *plhs[4]
-// Return Type  : void
-//
 void pass_primitive_api(const mxArray *const prhs[7], int32_T nlhs,
-                        const mxArray *plhs[4])
+                        const mxArray *plhs[6])
 {
   emlrtStack st{
       nullptr, // site
@@ -197,7 +160,7 @@ void pass_primitive_api(const mxArray *const prhs[7], int32_T nlhs,
   t_min = emlrt_marshallIn(&st, emlrtAliasP(prhs[5]), "t_min");
   t_max = emlrt_marshallIn(&st, emlrtAliasP(prhs[6]), "t_max");
   // Invoke the target function
-  pass_primitive(a0, v0, sf, v_min, v_max, t_min, t_max, *m1, *m2, &t1, &t2);
+  pass_primitive(a0, v0, sf, &v_min, &v_max, t_min, t_max, *m1, *m2, &t1, &t2);
   // Marshall function outputs
   plhs[0] = emlrt_marshallOut(*m1);
   if (nlhs > 1) {
@@ -209,14 +172,14 @@ void pass_primitive_api(const mxArray *const prhs[7], int32_T nlhs,
   if (nlhs > 3) {
     plhs[3] = emlrt_marshallOut(t2);
   }
+  if (nlhs > 4) {
+    plhs[4] = emlrt_marshallOut(v_min);
+  }
+  if (nlhs > 5) {
+    plhs[5] = emlrt_marshallOut(v_max);
+  }
 }
 
-//
-// Arguments    : const mxArray * const prhs[5]
-//                int32_T nlhs
-//                const mxArray *plhs[3]
-// Return Type  : void
-//
 void pass_primitivej0_api(const mxArray *const prhs[5], int32_T nlhs,
                           const mxArray *plhs[3])
 {
@@ -253,10 +216,6 @@ void pass_primitivej0_api(const mxArray *const prhs[5], int32_T nlhs,
   }
 }
 
-//
-// Arguments    : void
-// Return Type  : void
-//
 void primitives_atexit()
 {
   emlrtStack st{
@@ -267,17 +226,12 @@ void primitives_atexit()
   mexFunctionCreateRootTLS();
   st.tls = emlrtRootTLSGlobal;
   emlrtEnterRtStackR2012b(&st);
-  emlrtLeaveRtStackR2012b(&st);
   emlrtDestroyRootTLS(&emlrtRootTLSGlobal);
   primitives_xil_terminate();
   primitives_xil_shutdown();
   emlrtExitTimeCleanup(&emlrtContextGlobal);
 }
 
-//
-// Arguments    : void
-// Return Type  : void
-//
 void primitives_initialize()
 {
   emlrtStack st{
@@ -292,28 +246,11 @@ void primitives_initialize()
   emlrtFirstTimeR2012b(emlrtRootTLSGlobal);
 }
 
-//
-// Arguments    : void
-// Return Type  : void
-//
 void primitives_terminate()
 {
-  emlrtStack st{
-      nullptr, // site
-      nullptr, // tls
-      nullptr  // prev
-  };
-  st.tls = emlrtRootTLSGlobal;
-  emlrtLeaveRtStackR2012b(&st);
   emlrtDestroyRootTLS(&emlrtRootTLSGlobal);
 }
 
-//
-// Arguments    : const mxArray * const prhs[3]
-//                int32_T nlhs
-//                const mxArray *plhs[3]
-// Return Type  : void
-//
 void stop_primitive_api(const mxArray *const prhs[3], int32_T nlhs,
                         const mxArray *plhs[3])
 {
@@ -346,12 +283,6 @@ void stop_primitive_api(const mxArray *const prhs[3], int32_T nlhs,
   }
 }
 
-//
-// Arguments    : const mxArray * const prhs[2]
-//                int32_T nlhs
-//                const mxArray *plhs[3]
-// Return Type  : void
-//
 void stop_primitivej0_api(const mxArray *const prhs[2], int32_T nlhs,
                           const mxArray *plhs[3])
 {
@@ -382,11 +313,6 @@ void stop_primitivej0_api(const mxArray *const prhs[2], int32_T nlhs,
   }
 }
 
-//
-// Arguments    : const mxArray * const prhs[7]
-//                const mxArray **plhs
-// Return Type  : void
-//
 void v_opt_api(const mxArray *const prhs[7], const mxArray **plhs)
 {
   emlrtStack st{
@@ -416,8 +342,4 @@ void v_opt_api(const mxArray *const prhs[7], const mxArray **plhs)
   *plhs = emlrt_marshallOut(t);
 }
 
-//
-// File trailer for _coder_primitives_api.cpp
-//
-// [EOF]
-//
+// End of code generation (_coder_primitives_api.cpp)

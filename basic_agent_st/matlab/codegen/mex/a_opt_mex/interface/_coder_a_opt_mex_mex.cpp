@@ -64,7 +64,6 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
   a_opt_mex_initialize();
   st.tls = emlrtRootTLSGlobal;
   try {
-    emlrtShouldCleanupOnError((emlrtCTX *)emlrtRootTLSGlobal, false);
     // Dispatch the entry-point.
     switch (emlrtGetEntryPointIndexR2016a(
         &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 6)) {
@@ -98,12 +97,11 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
 emlrtCTX mexFunctionCreateRootTLS()
 {
   emlrtCreateRootTLSR2022a(&emlrtRootTLSGlobal, &emlrtContextGlobal, nullptr, 1,
-                           (void *)&emlrtExceptionBridge,
-                           (const char_T *)"windows-1252", true);
+                           (void *)&emlrtExceptionBridge, "UTF-8", true);
   return emlrtRootTLSGlobal;
 }
 
-void pass_primitive_mexFunction(int32_T nlhs, mxArray *plhs[4], int32_T nrhs,
+void pass_primitive_mexFunction(int32_T nlhs, mxArray *plhs[6], int32_T nrhs,
                                 const mxArray *prhs[7])
 {
   emlrtStack st{
@@ -111,15 +109,15 @@ void pass_primitive_mexFunction(int32_T nlhs, mxArray *plhs[4], int32_T nrhs,
       nullptr, // tls
       nullptr  // prev
   };
-  const mxArray *outputs[4];
-  int32_T b_nlhs;
+  const mxArray *outputs[6];
+  int32_T i;
   st.tls = emlrtRootTLSGlobal;
   // Check for proper number of arguments.
   if (nrhs != 7) {
     emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 7, 4,
                         14, "pass_primitive");
   }
-  if (nlhs > 4) {
+  if (nlhs > 6) {
     emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 14,
                         "pass_primitive");
   }
@@ -127,11 +125,11 @@ void pass_primitive_mexFunction(int32_T nlhs, mxArray *plhs[4], int32_T nrhs,
   pass_primitive_api(prhs, nlhs, outputs);
   // Copy over outputs to the caller.
   if (nlhs < 1) {
-    b_nlhs = 1;
+    i = 1;
   } else {
-    b_nlhs = nlhs;
+    i = nlhs;
   }
-  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
+  emlrtReturnArrays(i, &plhs[0], &outputs[0]);
 }
 
 void pass_primitivej0_mexFunction(int32_T nlhs, mxArray *plhs[3], int32_T nrhs,
@@ -143,7 +141,7 @@ void pass_primitivej0_mexFunction(int32_T nlhs, mxArray *plhs[3], int32_T nrhs,
       nullptr  // prev
   };
   const mxArray *outputs[3];
-  int32_T b_nlhs;
+  int32_T i;
   st.tls = emlrtRootTLSGlobal;
   // Check for proper number of arguments.
   if (nrhs != 5) {
@@ -158,11 +156,11 @@ void pass_primitivej0_mexFunction(int32_T nlhs, mxArray *plhs[3], int32_T nrhs,
   pass_primitivej0_api(prhs, nlhs, outputs);
   // Copy over outputs to the caller.
   if (nlhs < 1) {
-    b_nlhs = 1;
+    i = 1;
   } else {
-    b_nlhs = nlhs;
+    i = nlhs;
   }
-  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
+  emlrtReturnArrays(i, &plhs[0], &outputs[0]);
 }
 
 void stop_primitive_mexFunction(int32_T nlhs, mxArray *plhs[3], int32_T nrhs,
@@ -174,7 +172,7 @@ void stop_primitive_mexFunction(int32_T nlhs, mxArray *plhs[3], int32_T nrhs,
       nullptr  // prev
   };
   const mxArray *outputs[3];
-  int32_T b_nlhs;
+  int32_T i;
   st.tls = emlrtRootTLSGlobal;
   // Check for proper number of arguments.
   if (nrhs != 3) {
@@ -189,11 +187,11 @@ void stop_primitive_mexFunction(int32_T nlhs, mxArray *plhs[3], int32_T nrhs,
   stop_primitive_api(prhs, nlhs, outputs);
   // Copy over outputs to the caller.
   if (nlhs < 1) {
-    b_nlhs = 1;
+    i = 1;
   } else {
-    b_nlhs = nlhs;
+    i = nlhs;
   }
-  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
+  emlrtReturnArrays(i, &plhs[0], &outputs[0]);
 }
 
 void stop_primitivej0_mexFunction(int32_T nlhs, mxArray *plhs[3], int32_T nrhs,
@@ -205,7 +203,7 @@ void stop_primitivej0_mexFunction(int32_T nlhs, mxArray *plhs[3], int32_T nrhs,
       nullptr  // prev
   };
   const mxArray *outputs[3];
-  int32_T b_nlhs;
+  int32_T i;
   st.tls = emlrtRootTLSGlobal;
   // Check for proper number of arguments.
   if (nrhs != 2) {
@@ -220,11 +218,11 @@ void stop_primitivej0_mexFunction(int32_T nlhs, mxArray *plhs[3], int32_T nrhs,
   stop_primitivej0_api(prhs, nlhs, outputs);
   // Copy over outputs to the caller.
   if (nlhs < 1) {
-    b_nlhs = 1;
+    i = 1;
   } else {
-    b_nlhs = nlhs;
+    i = nlhs;
   }
-  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
+  emlrtReturnArrays(i, &plhs[0], &outputs[0]);
 }
 
 void v_opt_mexFunction(int32_T nlhs, mxArray *plhs[1], int32_T nrhs,

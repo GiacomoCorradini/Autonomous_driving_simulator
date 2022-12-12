@@ -2,10 +2,10 @@
 // Academic License - for use in teaching, academic research, and meeting
 // course requirements at degree granting institutions only.  Not for
 // government, commercial, or other organizational use.
-// File: rtwtypes.h
 //
-// MATLAB Coder version            : 5.4
-// C/C++ source code generated on  : 06-Dec-2022 22:21:22
+// rtwtypes.h
+//
+// Code generation for function 'a_opt'
 //
 
 #ifndef RTWTYPES_H
@@ -37,12 +37,8 @@
 #endif
 #endif
 
-// Include Files
+// Include files
 #include "tmwtypes.h"
 
 #endif
-//
-// File trailer for rtwtypes.h
-//
-// [EOF]
-//
+// End of code generation (rtwtypes.h)

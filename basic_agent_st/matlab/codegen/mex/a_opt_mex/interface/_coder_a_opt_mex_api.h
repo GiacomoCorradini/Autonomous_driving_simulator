@@ -24,7 +24,7 @@
 void a_opt_api(const mxArray *const prhs[7], const mxArray **plhs);
 
 void pass_primitive_api(const mxArray *const prhs[7], int32_T nlhs,
-                        const mxArray *plhs[4]);
+                        const mxArray *plhs[6]);
 
 void pass_primitivej0_api(const mxArray *const prhs[5], int32_T nlhs,
                           const mxArray *plhs[3]);

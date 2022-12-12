@@ -2,15 +2,15 @@
 // Academic License - for use in teaching, academic research, and meeting
 // course requirements at degree granting institutions only.  Not for
 // government, commercial, or other organizational use.
-// File: rtGetNaN.cpp
 //
-// MATLAB Coder version            : 5.4
-// C/C++ source code generated on  : 06-Dec-2022 22:21:22
+// rtGetNaN.cpp
+//
+// Code generation for function 'a_opt'
 //
 
 // Abstract:
 //       MATLAB for code generation function to initialize non-finite, NaN
-// Include Files
+// Include files
 #include "rtGetNaN.h"
 #include "rt_nonfinite.h"
 
@@ -34,8 +34,4 @@ real32_T rtGetNaNF(void)
   return rtNaNF;
 }
 
-//
-// File trailer for rtGetNaN.cpp
-//
-// [EOF]
-//
+// End of code generation (rtGetNaN.cpp)

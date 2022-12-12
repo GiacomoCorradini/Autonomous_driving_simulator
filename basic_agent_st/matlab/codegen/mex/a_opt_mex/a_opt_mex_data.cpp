@@ -18,7 +18,7 @@ emlrtCTX emlrtRootTLSGlobal{nullptr};
 emlrtContext emlrtContextGlobal{
     true,                                                 // bFirstTime
     false,                                                // bInitialized
-    131626U,                                              // fVersionInfo
+    131627U,                                              // fVersionInfo
     nullptr,                                              // fErrorFunction
     "a_opt_mex",                                          // fFunctionName
     nullptr,                                              // fRTCallStack
@@ -28,11 +28,10 @@ emlrtContext emlrtContextGlobal{
 };
 
 emlrtRTEInfo emlrtRTEI{
-    13,     // lineNo
-    9,      // colNo
-    "sqrt", // fName
-    "C:\\Program "
-    "Files\\MATLAB\\R2022a\\toolbox\\eml\\lib\\matlab\\elfun\\sqrt.m" // pName
+    13,                                                            // lineNo
+    9,                                                             // colNo
+    "sqrt",                                                        // fName
+    "/usr/local/MATLAB/R2022b/toolbox/eml/lib/matlab/elfun/sqrt.m" // pName
 };
 
 covrtInstance emlrtCoverageInstance;

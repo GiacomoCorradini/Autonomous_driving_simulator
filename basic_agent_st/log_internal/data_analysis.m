@@ -6,56 +6,102 @@ close all
 data = readtable("Example1.csv");
 
 %% Read data
+
 time = table2array(data(:,2));
-vel_0 = table2array(data(:,3));
-acc_0 = table2array(data(:,4));
+vel_act = table2array(data(:,3));
+acc_act = table2array(data(:,4));
 phase = table2array(data(:,5));
 vel_req = table2array(data(:,6));
 acc_req = table2array(data(:,7));
 t_green = table2array(data(:,8));
 t_red = table2array(data(:,9));
-TrfLightDist = table2array(data(1,12)) - table2array(data(:,12));
+t1 = table2array(data(:,10));
+t2 = table2array(data(:,11));
+v_min = table2array(data(:,12));
+v_max = table2array(data(:,13));
+TrfLightDist = table2array(data(1,14)) - table2array(data(:,14));
+c1 = table2array(data(:,15));
+c2 = table2array(data(:,16));
+c3 = table2array(data(:,17));
+c4 = table2array(data(:,18));
+c5 = table2array(data(:,19));
 
-%% Time domain
+%% Plot: velocity & acceleration
+
+% Time domain
 figure
-tiledlayout(2,4)
+tiledlayout(4,4)
 nexttile([2 2])
 hold on
-plot(time, vel_0)
+plot(time, vel_act)
 plot(time, vel_req)
+plot(time, v_min)
+plot(time, v_max)
 plot(time, phase, 'r')
 xlabel 'time (s)'
 ylabel 'velocity (km/h)'
-title 'Velocity profile'
+title 'Velocity profile vs time'
 legend('velocity init','velocity req','TrafficLight')
 nexttile([2 2])
 hold on
-plot(time, acc_0)
+plot(time, acc_act)
 plot(time, acc_req)
 plot(time, phase, 'r')
 xlabel 'time (s)'
 ylabel 'acceleration (m/s^2)'
-title 'Acceleration profile'
+title 'Acceleration profile vs time'
 legend('acceleration init','acceleration req','TrafficLight')
 
-%% Space domain
-figure
-tiledlayout(2,4)
+% Space domain
 nexttile([2 2])
 hold on
-plot(TrfLightDist, vel_0)
+plot(TrfLightDist, vel_act)
 plot(TrfLightDist, vel_req)
+plot(TrfLightDist, v_min)
+plot(TrfLightDist, v_max)
 plot(TrfLightDist, phase, 'r')
-xlabel 'time (s)'
+xline(162,'--r',{'Traffic Light'})
+xlabel 'Distance (m)'
 ylabel 'velocity (km/h)'
-title 'Velocity profile'
+title 'Velocity profile vs distance'
 legend('velocity init','velocity req','TrafficLight')
 nexttile([2 2])
 hold on
-plot(TrfLightDist, acc_0)
+plot(TrfLightDist, acc_act)
 plot(TrfLightDist, acc_req)
 plot(TrfLightDist, phase, 'r')
-xlabel 'time (s)'
+xline(162,'--r',{'Traffic Light'})
+xlabel 'Distance (m)'
 ylabel 'acceleration (m/s^2)'
-title 'Acceleration profile'
+title 'Acceleration profile vs distance'
 legend('acceleration init','acceleration req','TrafficLight')
+
+%% Plot: time
+
+figure
+%tiledlayout(4,4)
+%nexttile([2 2])
+hold on
+plot(TrfLightDist, t_green)
+plot(TrfLightDist, t_red)
+plot(TrfLightDist, phase, 'r')
+xline(162,'--r',{'Traffic Light'})
+xlabel 'Distance (m)'
+ylabel 'time (s)'
+title 'TIme vs space'
+legend('T green','T red','TrafficLight')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

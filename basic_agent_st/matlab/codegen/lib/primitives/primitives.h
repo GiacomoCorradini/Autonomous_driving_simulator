@@ -2,16 +2,16 @@
 // Academic License - for use in teaching, academic research, and meeting
 // course requirements at degree granting institutions only.  Not for
 // government, commercial, or other organizational use.
-// File: primitives.h
 //
-// MATLAB Coder version            : 5.4
-// C/C++ source code generated on  : 06-Dec-2022 22:21:22
+// primitives.h
+//
+// Code generation for function 'primitives'
 //
 
 #ifndef PRIMITIVES_H
 #define PRIMITIVES_H
 
-// Include Files
+// Include files
 #include "rtwtypes.h"
 #include <cstddef>
 #include <cstdlib>
@@ -20,8 +20,8 @@
 extern double a_opt(double t, double v0, double a0, double sf, double vf,
                     double af, double T);
 
-extern void pass_primitive(double a0, double v0, double sf, double v_min,
-                           double v_max, double t_min, double t_max,
+extern void pass_primitive(double a0, double v0, double sf, double *v_min,
+                           double *v_max, double t_min, double t_max,
                            double m1[6], double m2[6], double *t1, double *t2);
 
 extern void pass_primitivej0(double v0, double a0, double sf, double v_min,
@@ -42,8 +42,4 @@ extern double v_opt(double t, double v0, double a0, double sf, double vf,
                     double af, double T);
 
 #endif
-//
-// File trailer for primitives.h
-//
-// [EOF]
-//
+// End of code generation (primitives.h)

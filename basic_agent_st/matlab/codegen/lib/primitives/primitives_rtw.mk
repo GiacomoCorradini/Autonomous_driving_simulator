@@ -2,8 +2,8 @@
 ## Makefile generated for component 'primitives'. 
 ## 
 ## Makefile     : primitives_rtw.mk
-## Generated on : Tue Dec 06 22:21:35 2022
-## Final product: ./primitives.lib
+## Generated on : Mon Dec 12 18:09:07 2022
+## Final product: ./primitives.a
 ## Product type : static-library
 ## 
 ###########################################################################
@@ -15,34 +15,30 @@
 # Macro Descriptions:
 # PRODUCT_NAME            Name of the system to build
 # MAKEFILE                Name of this makefile
-# COMPILER_COMMAND_FILE   Compiler command listing model reference header paths
-# CMD_FILE                Command file
 # MODELLIB                Static library target
 
 PRODUCT_NAME              = primitives
 MAKEFILE                  = primitives_rtw.mk
-MATLAB_ROOT               = C:/PROGRA~1/MATLAB/R2022a
-MATLAB_BIN                = C:/PROGRA~1/MATLAB/R2022a/bin
-MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
-START_DIR                 = C:/Users/corra/Desktop/UNIVER~1/AUTONO~1/BASIC_~1/matlab
+MATLAB_ROOT               = /usr/local/MATLAB/R2022b
+MATLAB_BIN                = /usr/local/MATLAB/R2022b/bin
+MATLAB_ARCH_BIN           = $(MATLAB_BIN)/glnxa64
+START_DIR                 = /home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab
 TGT_FCN_LIB               = ISO_C++11
 SOLVER_OBJ                = 
 CLASSIC_INTERFACE         = 0
 MODEL_HAS_DYNAMICALLY_LOADED_SFCNS = 
 RELATIVE_PATH_TO_ANCHOR   = ../../..
-COMPILER_COMMAND_FILE     = primitives_rtw_comp.rsp
-CMD_FILE                  = primitives_rtw.rsp
 C_STANDARD_OPTS           = -fwrapv
 CPP_STANDARD_OPTS         = -fwrapv
-MODELLIB                  = primitives.lib
+MODELLIB                  = primitives.a
 
 ###########################################################################
 ## TOOLCHAIN SPECIFICATIONS
 ###########################################################################
 
-# Toolchain Name:          MinGW64 | gmake (64-bit Windows)
-# Supported Version(s):    6.x
-# ToolchainInfo Version:   2022a
+# Toolchain Name:          GNU gcc/g++ | gmake (64-bit Linux)
+# Supported Version(s):    
+# ToolchainInfo Version:   2022b
 # Specification Revision:  1.0
 # 
 #-------------------------------------------
@@ -51,47 +47,38 @@ MODELLIB                  = primitives.lib
 
 # C_STANDARD_OPTS
 # CPP_STANDARD_OPTS
-# MINGW_ROOT
-# MINGW_C_STANDARD_OPTS
 
 #-----------
 # MACROS
 #-----------
 
-WARN_FLAGS            = -Wall -W -Wwrite-strings -Winline -Wstrict-prototypes -Wnested-externs -Wpointer-arith -Wcast-align
-WARN_FLAGS_MAX        = $(WARN_FLAGS) -Wcast-qual -Wshadow
-CPP_WARN_FLAGS        = -Wall -W -Wwrite-strings -Winline -Wpointer-arith -Wcast-align
-CPP_WARN_FLAGS_MAX    = $(CPP_WARN_FLAGS) -Wcast-qual -Wshadow
-MW_EXTERNLIB_DIR      = $(MATLAB_ROOT)/extern/lib/win64/mingw64
-SHELL                 = %SystemRoot%/system32/cmd.exe
+WARN_FLAGS         = -Wall -W -Wwrite-strings -Winline -Wstrict-prototypes -Wnested-externs -Wpointer-arith -Wcast-align
+WARN_FLAGS_MAX     = $(WARN_FLAGS) -Wcast-qual -Wshadow
+CPP_WARN_FLAGS     = -Wall -W -Wwrite-strings -Winline -Wpointer-arith -Wcast-align
+CPP_WARN_FLAGS_MAX = $(CPP_WARN_FLAGS) -Wcast-qual -Wshadow
 
 TOOLCHAIN_SRCS = 
 TOOLCHAIN_INCS = 
-TOOLCHAIN_LIBS = -lws2_32
+TOOLCHAIN_LIBS = 
 
 #------------------------
 # BUILD TOOL COMMANDS
 #------------------------
 
 # C Compiler: GNU C Compiler
-CC_PATH = $(MINGW_ROOT)
-CC = "$(CC_PATH)/gcc"
+CC = gcc
 
 # Linker: GNU Linker
-LD_PATH = $(MINGW_ROOT)
-LD = "$(LD_PATH)/g++"
+LD = g++
 
 # C++ Compiler: GNU C++ Compiler
-CPP_PATH = $(MINGW_ROOT)
-CPP = "$(CPP_PATH)/g++"
+CPP = g++
 
 # C++ Linker: GNU C++ Linker
-CPP_LD_PATH = $(MINGW_ROOT)
-CPP_LD = "$(CPP_LD_PATH)/g++"
+CPP_LD = g++
 
 # Archiver: GNU Archiver
-AR_PATH = $(MINGW_ROOT)
-AR = "$(AR_PATH)/ar"
+AR = ar
 
 # MEX Tool: MEX Tool
 MEX_PATH = $(MATLAB_ARCH_BIN)
@@ -104,7 +91,7 @@ DOWNLOAD =
 EXECUTE = $(PRODUCT)
 
 # Builder: GMAKE Utility
-MAKE_PATH = %MATLAB%/bin/win64
+MAKE_PATH = %MATLAB%/bin/glnxa64
 MAKE = "$(MAKE_PATH)/gmake"
 
 
@@ -123,9 +110,9 @@ OUTPUT_FLAG         = -o
 ARDEBUG             =
 STATICLIB_OUTPUT_FLAG =
 MEX_DEBUG           = -g
-RM                  = @del
+RM                  = @rm -f
 ECHO                = @echo
-MV                  = @move
+MV                  = @mv
 RUN                 =
 
 #--------------------------------------
@@ -133,23 +120,21 @@ RUN                 =
 #--------------------------------------
 
 ARFLAGS              = ruvs
-CFLAGS               = -c $(MINGW_C_STANDARD_OPTS) -m64 \
+CFLAGS               = -c $(C_STANDARD_OPTS) -fPIC \
                        -O3 -fno-loop-optimize -fno-aggressive-loop-optimizations
-CPPFLAGS             = -c $(CPP_STANDARD_OPTS) -m64 \
+CPPFLAGS             = -c $(CPP_STANDARD_OPTS) -fPIC \
                        -O3 -fno-loop-optimize -fno-aggressive-loop-optimizations
-CPP_LDFLAGS          =  -static -m64
-CPP_SHAREDLIB_LDFLAGS  = -shared -Wl,--no-undefined \
-                         -Wl,--out-implib,$(notdir $(basename $(PRODUCT))).lib
+CPP_LDFLAGS          =
+CPP_SHAREDLIB_LDFLAGS  = -shared -Wl,--no-undefined
 DOWNLOAD_FLAGS       =
 EXECUTE_FLAGS        =
-LDFLAGS              =  -static -m64
+LDFLAGS              =
 MEX_CPPFLAGS         =
 MEX_CPPLDFLAGS       =
 MEX_CFLAGS           =
 MEX_LDFLAGS          =
 MAKE_FLAGS           = -f $(MAKEFILE)
-SHAREDLIB_LDFLAGS    = -shared -Wl,--no-undefined \
-                       -Wl,--out-implib,$(notdir $(basename $(PRODUCT))).lib
+SHAREDLIB_LDFLAGS    = -shared -Wl,--no-undefined
 
 
 
@@ -157,7 +142,7 @@ SHAREDLIB_LDFLAGS    = -shared -Wl,--no-undefined \
 ## OUTPUT INFO
 ###########################################################################
 
-PRODUCT = ./primitives.lib
+PRODUCT = ./primitives.a
 PRODUCT_TYPE = "static-library"
 BUILD_TYPE = "Static Library"
 
@@ -165,7 +150,7 @@ BUILD_TYPE = "Static Library"
 ## INCLUDE PATHS
 ###########################################################################
 
-INCLUDES_BUILDINFO = 
+INCLUDES_BUILDINFO = -I$(START_DIR)/codegen/lib/primitives -I$(START_DIR) -I$(MATLAB_ROOT)/extern/include
 
 INCLUDES = $(INCLUDES_BUILDINFO)
 
@@ -173,11 +158,10 @@ INCLUDES = $(INCLUDES_BUILDINFO)
 ## DEFINES
 ###########################################################################
 
-DEFINES_ = -D__USE_MINGW_ANSI_STDIO=1
 DEFINES_CUSTOM = 
 DEFINES_STANDARD = -DMODEL=primitives
 
-DEFINES = $(DEFINES_) $(DEFINES_CUSTOM) $(DEFINES_STANDARD)
+DEFINES = $(DEFINES_CUSTOM) $(DEFINES_STANDARD)
 
 ###########################################################################
 ## SOURCE FILES
@@ -191,7 +175,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj primitives.obj
+OBJS = rt_nonfinite.o rtGetNaN.o rtGetInf.o primitives.o
 
 ALL_OBJS = $(OBJS)
 
@@ -211,7 +195,7 @@ LIBS =
 ## SYSTEM LIBRARIES
 ###########################################################################
 
-SYSTEM_LIBS = 
+SYSTEM_LIBS =  -lm -lstdc++
 
 ###########################################################################
 ## ADDITIONAL TOOLCHAIN FLAGS
@@ -221,7 +205,7 @@ SYSTEM_LIBS =
 # C Compiler
 #---------------
 
-CFLAGS_BASIC = $(DEFINES) $(INCLUDES) @$(COMPILER_COMMAND_FILE)
+CFLAGS_BASIC = $(DEFINES) $(INCLUDES)
 
 CFLAGS += $(CFLAGS_BASIC)
 
@@ -229,33 +213,13 @@ CFLAGS += $(CFLAGS_BASIC)
 # C++ Compiler
 #-----------------
 
-CPPFLAGS_BASIC = $(DEFINES) $(INCLUDES) @$(COMPILER_COMMAND_FILE)
+CPPFLAGS_BASIC = $(DEFINES) $(INCLUDES)
 
 CPPFLAGS += $(CPPFLAGS_BASIC)
-
-#---------------------
-# MEX C++ Compiler
-#---------------------
-
-MEX_CPP_Compiler_BASIC =  @$(COMPILER_COMMAND_FILE)
-
-MEX_CPPFLAGS += $(MEX_CPP_Compiler_BASIC)
-
-#-----------------
-# MEX Compiler
-#-----------------
-
-MEX_Compiler_BASIC =  @$(COMPILER_COMMAND_FILE)
-
-MEX_CFLAGS += $(MEX_Compiler_BASIC)
 
 ###########################################################################
 ## INLINED COMMANDS
 ###########################################################################
-
-
-MINGW_C_STANDARD_OPTS = $(C_STANDARD_OPTS)
-
 
 ###########################################################################
 ## PHONY TARGETS
@@ -290,7 +254,7 @@ execute : download
 
 $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 	@echo "### Creating static library "$(PRODUCT)" ..."
-	$(AR) $(ARFLAGS)  $(PRODUCT) @$(CMD_FILE)
+	$(AR) $(ARFLAGS)  $(PRODUCT) $(OBJS)
 	@echo "### Created: $(PRODUCT)"
 
 
@@ -302,51 +266,51 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 # SOURCE-TO-OBJECT
 #---------------------
 
-%.obj : %.c
+%.o : %.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : %.cpp
+%.o : %.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.c
+%.o : $(RELATIVE_PATH_TO_ANCHOR)/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.cpp
+%.o : $(RELATIVE_PATH_TO_ANCHOR)/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/codegen/lib/primitives/%.c
+%.o : $(START_DIR)/codegen/lib/primitives/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/codegen/lib/primitives/%.cpp
+%.o : $(START_DIR)/codegen/lib/primitives/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/%.c
+%.o : $(START_DIR)/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/%.cpp
+%.o : $(START_DIR)/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-rt_nonfinite.obj : $(START_DIR)/codegen/lib/primitives/rt_nonfinite.cpp
+rt_nonfinite.o : $(START_DIR)/codegen/lib/primitives/rt_nonfinite.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-rtGetNaN.obj : $(START_DIR)/codegen/lib/primitives/rtGetNaN.cpp
+rtGetNaN.o : $(START_DIR)/codegen/lib/primitives/rtGetNaN.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-rtGetInf.obj : $(START_DIR)/codegen/lib/primitives/rtGetInf.cpp
+rtGetInf.o : $(START_DIR)/codegen/lib/primitives/rtGetInf.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-primitives.obj : $(START_DIR)/codegen/lib/primitives/primitives.cpp
+primitives.o : $(START_DIR)/codegen/lib/primitives/primitives.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
@@ -354,7 +318,7 @@ primitives.obj : $(START_DIR)/codegen/lib/primitives/primitives.cpp
 ## DEPENDENCIES
 ###########################################################################
 
-$(ALL_OBJS) : rtw_proj.tmw $(COMPILER_COMMAND_FILE) $(MAKEFILE)
+$(ALL_OBJS) : rtw_proj.tmw $(MAKEFILE)
 
 
 ###########################################################################
@@ -391,8 +355,8 @@ info :
 
 clean : 
 	$(ECHO) "### Deleting all derived files..."
-	$(RM) $(subst /,\,$(PRODUCT))
-	$(RM) $(subst /,\,$(ALL_OBJS))
+	$(RM) $(PRODUCT)
+	$(RM) $(ALL_OBJS)
 	$(ECHO) "### Deleted all derived files."
 
 

@@ -2,10 +2,10 @@
 // Academic License - for use in teaching, academic research, and meeting
 // course requirements at degree granting institutions only.  Not for
 // government, commercial, or other organizational use.
-// File: main.h
 //
-// MATLAB Coder version            : 5.4
-// C/C++ source code generated on  : 06-Dec-2022 22:21:22
+// main.h
+//
+// Code generation for function 'main'
 //
 
 /*************************************************************************/
@@ -36,7 +36,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-// Include Files
+// Include files
 #include "rtwtypes.h"
 #include <cstddef>
 #include <cstdlib>
@@ -44,9 +44,17 @@
 // Function Declarations
 extern int main(int argc, char **argv);
 
+extern void main_a_opt();
+
+extern void main_pass_primitive();
+
+extern void main_pass_primitivej0();
+
+extern void main_stop_primitive();
+
+extern void main_stop_primitivej0();
+
+extern void main_v_opt();
+
 #endif
-//
-// File trailer for main.h
-//
-// [EOF]
-//
+// End of code generation (main.h)

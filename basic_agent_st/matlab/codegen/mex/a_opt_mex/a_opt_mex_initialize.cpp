@@ -29,18 +29,18 @@ static void a_opt_mex_once()
   const int32_T postfix_exprs_6_1[3]{0, 1, -3};
   const int32_T postfix_exprs_9_0[3]{0, 1, -2};
   const int32_T cond_ends_11_0[2]{107, 119};
-  const int32_T cond_ends_1_0[2]{337, 356};
-  const int32_T cond_ends_1_1[2]{502, 521};
-  const int32_T cond_ends_1_2[2]{738, 752};
-  const int32_T cond_ends_1_3[2]{892, 906};
+  const int32_T cond_ends_1_0[2]{351, 370};
+  const int32_T cond_ends_1_1[2]{516, 535};
+  const int32_T cond_ends_1_2[2]{752, 766};
+  const int32_T cond_ends_1_3[2]{906, 920};
   const int32_T cond_ends_6_0[2]{213, 231};
   const int32_T cond_ends_6_1[2]{395, 413};
   const int32_T cond_ends_9_0[2]{98, 111};
   const int32_T cond_starts_11_0[2]{101, 113};
-  const int32_T cond_starts_1_0[2]{324, 343};
-  const int32_T cond_starts_1_1[2]{489, 508};
-  const int32_T cond_starts_1_2[2]{728, 742};
-  const int32_T cond_starts_1_3[2]{886, 898};
+  const int32_T cond_starts_1_0[2]{338, 357};
+  const int32_T cond_starts_1_1[2]{503, 522};
+  const int32_T cond_starts_1_2[2]{742, 756};
+  const int32_T cond_starts_1_3[2]{900, 912};
   const int32_T cond_starts_6_0[2]{201, 219};
   const int32_T cond_starts_6_1[2]{383, 401};
   const int32_T cond_starts_9_0[2]{91, 104};
@@ -48,11 +48,10 @@ static void a_opt_mex_once()
   // Allocate instance data
   covrtAllocateInstanceData(&emlrtCoverageInstance);
   // Initialize Coverage Information
-  covrtScriptInit(
-      &emlrtCoverageInstance,
-      "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-      "ento\\Autonomous_driving_simulator\\basic_agent_st\\matlab\\a_opt.m",
-      0U, 1U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U);
+  covrtScriptInit(&emlrtCoverageInstance,
+                  "/home/giacomo/University/Autonomous_driving_simulator/"
+                  "basic_agent_st/matlab/a_opt.m",
+                  0U, 1U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U);
   // Initialize Function Information
   covrtFcnInit(&emlrtCoverageInstance, 0U, 0U, "a_opt", 0, -1, 464);
   // Initialize Basic Block Information
@@ -68,45 +67,40 @@ static void a_opt_mex_once()
   covrtAllocateInstanceData(&emlrtCoverageInstance);
   // Initialize Coverage Information
   covrtScriptInit(&emlrtCoverageInstance,
-                  "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-                  "ento\\Autonomous_driving_simulator\\basic_agent_"
-                  "st\\matlab\\pass_primitive.m",
+                  "/home/giacomo/University/Autonomous_driving_simulator/"
+                  "basic_agent_st/matlab/pass_primitive.m",
                   1U, 1U, 9U, 5U, 0U, 0U, 0U, 0U, 0U, 8U, 4U);
   // Initialize Function Information
-  covrtFcnInit(&emlrtCoverageInstance, 1U, 0U, "pass_primitive", 32, -1, 1243);
+  covrtFcnInit(&emlrtCoverageInstance, 1U, 0U, "pass_primitive", 32, -1, 1257);
   // Initialize Basic Block Information
-  covrtBasicBlockInit(&emlrtCoverageInstance, 1U, 8U, 1119, -1, 1234);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 1U, 7U, 916, -1, 1101);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 1U, 6U, 812, -1, 867);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 1U, 5U, 761, -1, 794);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 1U, 4U, 643, -1, 684);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 1U, 3U, 539, -1, 609);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 1U, 2U, 370, -1, 459);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 1U, 1U, 235, -1, 311);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 1U, 0U, 132, -1, 217);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 1U, 8U, 1133, -1, 1248);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 1U, 7U, 930, -1, 1115);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 1U, 6U, 826, -1, 881);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 1U, 5U, 775, -1, 808);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 1U, 4U, 657, -1, 698);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 1U, 3U, 553, -1, 623);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 1U, 2U, 384, -1, 473);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 1U, 1U, 249, -1, 325);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 1U, 0U, 146, -1, 231);
   // Initialize If Information
-  covrtIfInit(&emlrtCoverageInstance, 1U, 0U, 113, 123, 222, 720);
-  covrtIfInit(&emlrtCoverageInstance, 1U, 1U, 320, 357, 468, 712);
-  covrtIfInit(&emlrtCoverageInstance, 1U, 2U, 485, 522, 622, 700);
-  covrtIfInit(&emlrtCoverageInstance, 1U, 3U, 725, 752, 799, 877);
-  covrtIfInit(&emlrtCoverageInstance, 1U, 4U, 882, 907, 1106, 1243);
+  covrtIfInit(&emlrtCoverageInstance, 1U, 0U, 127, 137, 236, 734);
+  covrtIfInit(&emlrtCoverageInstance, 1U, 1U, 334, 371, 482, 726);
+  covrtIfInit(&emlrtCoverageInstance, 1U, 2U, 499, 536, 636, 714);
+  covrtIfInit(&emlrtCoverageInstance, 1U, 3U, 739, 766, 813, 891);
+  covrtIfInit(&emlrtCoverageInstance, 1U, 4U, 896, 921, 1120, 1257);
   // Initialize MCDC Information
-  covrtMcdcInit(&emlrtCoverageInstance, 1U, 0U, 323, 357, 2, 0,
-                *(int32_T(*)[2]) & cond_starts_1_0[0],
-                *(int32_T(*)[2]) & cond_ends_1_0[0], 3,
-                *(int32_T(*)[3]) & postfix_exprs_1_0[0]);
-  covrtMcdcInit(&emlrtCoverageInstance, 1U, 1U, 488, 522, 2, 2,
-                *(int32_T(*)[2]) & cond_starts_1_1[0],
-                *(int32_T(*)[2]) & cond_ends_1_1[0], 3,
-                *(int32_T(*)[3]) & postfix_exprs_1_1[0]);
-  covrtMcdcInit(&emlrtCoverageInstance, 1U, 2U, 728, 752, 2, 4,
-                *(int32_T(*)[2]) & cond_starts_1_2[0],
-                *(int32_T(*)[2]) & cond_ends_1_2[0], 3,
-                *(int32_T(*)[3]) & postfix_exprs_1_2[0]);
-  covrtMcdcInit(&emlrtCoverageInstance, 1U, 3U, 885, 907, 2, 6,
-                *(int32_T(*)[2]) & cond_starts_1_3[0],
-                *(int32_T(*)[2]) & cond_ends_1_3[0], 3,
-                *(int32_T(*)[3]) & postfix_exprs_1_3[0]);
+  covrtMcdcInit(&emlrtCoverageInstance, 1U, 0U, 337, 371, 2, 0,
+                &cond_starts_1_0[0], &cond_ends_1_0[0], 3,
+                &postfix_exprs_1_0[0]);
+  covrtMcdcInit(&emlrtCoverageInstance, 1U, 1U, 502, 536, 2, 2,
+                &cond_starts_1_1[0], &cond_ends_1_1[0], 3,
+                &postfix_exprs_1_1[0]);
+  covrtMcdcInit(&emlrtCoverageInstance, 1U, 2U, 742, 766, 2, 4,
+                &cond_starts_1_2[0], &cond_ends_1_2[0], 3,
+                &postfix_exprs_1_2[0]);
+  covrtMcdcInit(&emlrtCoverageInstance, 1U, 3U, 899, 921, 2, 6,
+                &cond_starts_1_3[0], &cond_ends_1_3[0], 3,
+                &postfix_exprs_1_3[0]);
   // Initialize For Information
   // Initialize While Information
   // Initialize Switch Information
@@ -116,9 +110,8 @@ static void a_opt_mex_once()
   covrtAllocateInstanceData(&emlrtCoverageInstance);
   // Initialize Coverage Information
   covrtScriptInit(&emlrtCoverageInstance,
-                  "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-                  "ento\\Autonomous_driving_simulator\\basic_agent_"
-                  "st\\matlab\\finalOptTime.m",
+                  "/home/giacomo/University/Autonomous_driving_simulator/"
+                  "basic_agent_st/matlab/finalOptTime.m",
                   2U, 1U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U);
   // Initialize Function Information
   covrtFcnInit(&emlrtCoverageInstance, 2U, 0U, "finalOptTime", 0, -1, 302);
@@ -135,9 +128,8 @@ static void a_opt_mex_once()
   covrtAllocateInstanceData(&emlrtCoverageInstance);
   // Initialize Coverage Information
   covrtScriptInit(&emlrtCoverageInstance,
-                  "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-                  "ento\\Autonomous_driving_simulator\\basic_agent_"
-                  "st\\matlab\\finalOptTimeVel.m",
+                  "/home/giacomo/University/Autonomous_driving_simulator/"
+                  "basic_agent_st/matlab/finalOptTimeVel.m",
                   3U, 1U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U);
   // Initialize Function Information
   covrtFcnInit(&emlrtCoverageInstance, 3U, 0U, "finalOptTimeVel", 0, -1, 237);
@@ -154,9 +146,8 @@ static void a_opt_mex_once()
   covrtAllocateInstanceData(&emlrtCoverageInstance);
   // Initialize Coverage Information
   covrtScriptInit(&emlrtCoverageInstance,
-                  "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-                  "ento\\Autonomous_driving_simulator\\basic_agent_"
-                  "st\\matlab\\finalOptVel.m",
+                  "/home/giacomo/University/Autonomous_driving_simulator/"
+                  "basic_agent_st/matlab/finalOptVel.m",
                   4U, 1U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U);
   // Initialize Function Information
   covrtFcnInit(&emlrtCoverageInstance, 4U, 0U, "finalOptVel", 0, -1, 258);
@@ -173,10 +164,8 @@ static void a_opt_mex_once()
   covrtAllocateInstanceData(&emlrtCoverageInstance);
   // Initialize Coverage Information
   covrtScriptInit(&emlrtCoverageInstance,
-                  "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-                  "ento\\Autonomous_driving_simulator\\basic_agent_"
-                  "st\\matlab\\evalPrimitiveCoeff"
-                  "s.m",
+                  "/home/giacomo/University/Autonomous_driving_simulator/"
+                  "basic_agent_st/matlab/evalPrimitiveCoeffs.m",
                   5U, 1U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U);
   // Initialize Function Information
   covrtFcnInit(&emlrtCoverageInstance, 5U, 0U, "evalPrimitiveCoeffs", 0, -1,
@@ -194,9 +183,8 @@ static void a_opt_mex_once()
   covrtAllocateInstanceData(&emlrtCoverageInstance);
   // Initialize Coverage Information
   covrtScriptInit(&emlrtCoverageInstance,
-                  "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-                  "ento\\Autonomous_driving_simulator\\basic_agent_"
-                  "st\\matlab\\pass_primitivej0.m",
+                  "/home/giacomo/University/Autonomous_driving_simulator/"
+                  "basic_agent_st/matlab/pass_primitivej0.m",
                   6U, 1U, 5U, 2U, 0U, 0U, 0U, 0U, 0U, 4U, 2U);
   // Initialize Function Information
   covrtFcnInit(&emlrtCoverageInstance, 6U, 0U, "pass_primitivej0", 44, -1, 609);
@@ -211,13 +199,11 @@ static void a_opt_mex_once()
   covrtIfInit(&emlrtCoverageInstance, 6U, 1U, 379, 414, 511, 601);
   // Initialize MCDC Information
   covrtMcdcInit(&emlrtCoverageInstance, 6U, 0U, 200, 232, 2, 0,
-                *(int32_T(*)[2]) & cond_starts_6_0[0],
-                *(int32_T(*)[2]) & cond_ends_6_0[0], 3,
-                *(int32_T(*)[3]) & postfix_exprs_6_0[0]);
+                &cond_starts_6_0[0], &cond_ends_6_0[0], 3,
+                &postfix_exprs_6_0[0]);
   covrtMcdcInit(&emlrtCoverageInstance, 6U, 1U, 382, 414, 2, 2,
-                *(int32_T(*)[2]) & cond_starts_6_1[0],
-                *(int32_T(*)[2]) & cond_ends_6_1[0], 3,
-                *(int32_T(*)[3]) & postfix_exprs_6_1[0]);
+                &cond_starts_6_1[0], &cond_ends_6_1[0], 3,
+                &postfix_exprs_6_1[0]);
   // Initialize For Information
   // Initialize While Information
   // Initialize Switch Information
@@ -227,9 +213,8 @@ static void a_opt_mex_once()
   covrtAllocateInstanceData(&emlrtCoverageInstance);
   // Initialize Coverage Information
   covrtScriptInit(&emlrtCoverageInstance,
-                  "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-                  "ento\\Autonomous_driving_simulator\\basic_agent_"
-                  "st\\matlab\\finalOptTimej0.m",
+                  "/home/giacomo/University/Autonomous_driving_simulator/"
+                  "basic_agent_st/matlab/finalOptTimej0.m",
                   7U, 1U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U);
   // Initialize Function Information
   covrtFcnInit(&emlrtCoverageInstance, 7U, 0U, "finalOptTimej0", 0, -1, 370);
@@ -246,9 +231,8 @@ static void a_opt_mex_once()
   covrtAllocateInstanceData(&emlrtCoverageInstance);
   // Initialize Coverage Information
   covrtScriptInit(&emlrtCoverageInstance,
-                  "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-                  "ento\\Autonomous_driving_simulator\\basic_agent_"
-                  "st\\matlab\\finalOptVelj0.m",
+                  "/home/giacomo/University/Autonomous_driving_simulator/"
+                  "basic_agent_st/matlab/finalOptVelj0.m",
                   8U, 1U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U);
   // Initialize Function Information
   covrtFcnInit(&emlrtCoverageInstance, 8U, 0U, "finalOptVelj0", 0, -1, 269);
@@ -265,9 +249,8 @@ static void a_opt_mex_once()
   covrtAllocateInstanceData(&emlrtCoverageInstance);
   // Initialize Coverage Information
   covrtScriptInit(&emlrtCoverageInstance,
-                  "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-                  "ento\\Autonomous_driving_simulator\\basic_agent_"
-                  "st\\matlab\\stop_primitive.m",
+                  "/home/giacomo/University/Autonomous_driving_simulator/"
+                  "basic_agent_st/matlab/stop_primitive.m",
                   9U, 1U, 4U, 2U, 0U, 0U, 0U, 0U, 0U, 2U, 1U);
   // Initialize Function Information
   covrtFcnInit(&emlrtCoverageInstance, 9U, 0U, "stop_primitive", 33, -1, 514);
@@ -281,9 +264,8 @@ static void a_opt_mex_once()
   covrtIfInit(&emlrtCoverageInstance, 9U, 1U, 190, 214, 297, 452);
   // Initialize MCDC Information
   covrtMcdcInit(&emlrtCoverageInstance, 9U, 0U, 90, 112, 2, 0,
-                *(int32_T(*)[2]) & cond_starts_9_0[0],
-                *(int32_T(*)[2]) & cond_ends_9_0[0], 3,
-                *(int32_T(*)[3]) & postfix_exprs_9_0[0]);
+                &cond_starts_9_0[0], &cond_ends_9_0[0], 3,
+                &postfix_exprs_9_0[0]);
   // Initialize For Information
   // Initialize While Information
   // Initialize Switch Information
@@ -293,9 +275,8 @@ static void a_opt_mex_once()
   covrtAllocateInstanceData(&emlrtCoverageInstance);
   // Initialize Coverage Information
   covrtScriptInit(&emlrtCoverageInstance,
-                  "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-                  "ento\\Autonomous_driving_simulator\\basic_agent_"
-                  "st\\matlab\\finalOptTimeStop.m",
+                  "/home/giacomo/University/Autonomous_driving_simulator/"
+                  "basic_agent_st/matlab/finalOptTimeStop.m",
                   10U, 1U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U);
   // Initialize Function Information
   covrtFcnInit(&emlrtCoverageInstance, 10U, 0U, "finalOptTimeStop", 0, -1, 264);
@@ -312,9 +293,8 @@ static void a_opt_mex_once()
   covrtAllocateInstanceData(&emlrtCoverageInstance);
   // Initialize Coverage Information
   covrtScriptInit(&emlrtCoverageInstance,
-                  "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-                  "ento\\Autonomous_driving_simulator\\basic_agent_"
-                  "st\\matlab\\stop_primitivej0.m",
+                  "/home/giacomo/University/Autonomous_driving_simulator/"
+                  "basic_agent_st/matlab/stop_primitivej0.m",
                   11U, 1U, 2U, 1U, 0U, 0U, 0U, 0U, 0U, 2U, 1U);
   // Initialize Function Information
   covrtFcnInit(&emlrtCoverageInstance, 11U, 0U, "stop_primitivej0", 45, -1,
@@ -326,9 +306,8 @@ static void a_opt_mex_once()
   covrtIfInit(&emlrtCoverageInstance, 11U, 0U, 97, 120, 256, 327);
   // Initialize MCDC Information
   covrtMcdcInit(&emlrtCoverageInstance, 11U, 0U, 100, 120, 2, 0,
-                *(int32_T(*)[2]) & cond_starts_11_0[0],
-                *(int32_T(*)[2]) & cond_ends_11_0[0], 3,
-                *(int32_T(*)[3]) & postfix_exprs_11_0[0]);
+                &cond_starts_11_0[0], &cond_ends_11_0[0], 3,
+                &postfix_exprs_11_0[0]);
   // Initialize For Information
   // Initialize While Information
   // Initialize Switch Information
@@ -338,10 +317,8 @@ static void a_opt_mex_once()
   covrtAllocateInstanceData(&emlrtCoverageInstance);
   // Initialize Coverage Information
   covrtScriptInit(&emlrtCoverageInstance,
-                  "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-                  "ento\\Autonomous_driving_simulator\\basic_agent_"
-                  "st\\matlab\\finalOptTimeStopj0"
-                  ".m",
+                  "/home/giacomo/University/Autonomous_driving_simulator/"
+                  "basic_agent_st/matlab/finalOptTimeStopj0.m",
                   12U, 1U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U);
   // Initialize Function Information
   covrtFcnInit(&emlrtCoverageInstance, 12U, 0U, "finalOptTimeStopj0", 0, -1,
@@ -359,9 +336,8 @@ static void a_opt_mex_once()
   covrtAllocateInstanceData(&emlrtCoverageInstance);
   // Initialize Coverage Information
   covrtScriptInit(&emlrtCoverageInstance,
-                  "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-                  "ento\\Autonomous_driving_simulator\\basic_agent_"
-                  "st\\matlab\\finalOptPosj0.m",
+                  "/home/giacomo/University/Autonomous_driving_simulator/"
+                  "basic_agent_st/matlab/finalOptPosj0.m",
                   13U, 1U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U);
   // Initialize Function Information
   covrtFcnInit(&emlrtCoverageInstance, 13U, 0U, "finalOptPosj0", 0, -1, 237);
@@ -377,11 +353,10 @@ static void a_opt_mex_once()
   // Allocate instance data
   covrtAllocateInstanceData(&emlrtCoverageInstance);
   // Initialize Coverage Information
-  covrtScriptInit(
-      &emlrtCoverageInstance,
-      "C:\\Users\\corra\\Desktop\\Universit\xc3\xa0 Tr"
-      "ento\\Autonomous_driving_simulator\\basic_agent_st\\matlab\\v_opt.m",
-      14U, 1U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U);
+  covrtScriptInit(&emlrtCoverageInstance,
+                  "/home/giacomo/University/Autonomous_driving_simulator/"
+                  "basic_agent_st/matlab/v_opt.m",
+                  14U, 1U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U);
   // Initialize Function Information
   covrtFcnInit(&emlrtCoverageInstance, 14U, 0U, "v_opt", 0, -1, 484);
   // Initialize Basic Block Information
@@ -404,8 +379,8 @@ void a_opt_mex_initialize()
       nullptr  // prev
   };
   mexFunctionCreateRootTLS();
-  emlrtBreakCheckR2012bFlagVar = emlrtGetBreakCheckFlagAddressR2012b();
   st.tls = emlrtRootTLSGlobal;
+  emlrtBreakCheckR2012bFlagVar = emlrtGetBreakCheckFlagAddressR2022b(&st);
   emlrtClearAllocCountR2012b(&st, false, 0U, nullptr);
   emlrtEnterRtStackR2012b(&st);
   if (emlrtFirstTimeR2012b(emlrtRootTLSGlobal)) {

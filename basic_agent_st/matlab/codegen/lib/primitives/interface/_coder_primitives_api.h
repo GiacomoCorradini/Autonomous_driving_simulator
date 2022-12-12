@@ -2,16 +2,16 @@
 // Academic License - for use in teaching, academic research, and meeting
 // course requirements at degree granting institutions only.  Not for
 // government, commercial, or other organizational use.
-// File: _coder_primitives_api.h
 //
-// MATLAB Coder version            : 5.4
-// C/C++ source code generated on  : 06-Dec-2022 22:21:22
+// _coder_primitives_api.h
+//
+// Code generation for function 'a_opt'
 //
 
 #ifndef _CODER_PRIMITIVES_API_H
 #define _CODER_PRIMITIVES_API_H
 
-// Include Files
+// Include files
 #include "emlrt.h"
 #include "tmwtypes.h"
 #include <algorithm>
@@ -27,12 +27,12 @@ real_T a_opt(real_T t, real_T v0, real_T a0, real_T sf, real_T vf, real_T af,
 
 void a_opt_api(const mxArray *const prhs[7], const mxArray **plhs);
 
-void pass_primitive(real_T a0, real_T v0, real_T sf, real_T v_min, real_T v_max,
-                    real_T t_min, real_T t_max, real_T m1[6], real_T m2[6],
-                    real_T *t1, real_T *t2);
+void pass_primitive(real_T a0, real_T v0, real_T sf, real_T *v_min,
+                    real_T *v_max, real_T t_min, real_T t_max, real_T m1[6],
+                    real_T m2[6], real_T *t1, real_T *t2);
 
 void pass_primitive_api(const mxArray *const prhs[7], int32_T nlhs,
-                        const mxArray *plhs[4]);
+                        const mxArray *plhs[6]);
 
 void pass_primitivej0(real_T v0, real_T a0, real_T sf, real_T v_min,
                       real_T v_max, real_T m[6], real_T *tfj0, real_T *vfj0);
@@ -68,8 +68,4 @@ real_T v_opt(real_T t, real_T v0, real_T a0, real_T sf, real_T vf, real_T af,
 void v_opt_api(const mxArray *const prhs[7], const mxArray **plhs);
 
 #endif
-//
-// File trailer for _coder_primitives_api.h
-//
-// [EOF]
-//
+// End of code generation (_coder_primitives_api.h)

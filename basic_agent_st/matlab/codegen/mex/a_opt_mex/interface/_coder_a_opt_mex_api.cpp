@@ -39,8 +39,8 @@ static real_T b_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
 {
   static const int32_T dims{0};
   real_T ret;
-  emlrtCheckBuiltInR2012b((emlrtCTX)sp, msgId, src, (const char_T *)"double",
-                          false, 0U, (void *)&dims);
+  emlrtCheckBuiltInR2012b((emlrtConstCTX)sp, msgId, src, "double", false, 0U,
+                          (const void *)&dims);
   ret = *static_cast<real_T *>(emlrtMxGetData(src));
   emlrtDestroyArray(&src);
   return ret;
@@ -122,7 +122,7 @@ void a_opt_api(const mxArray *const prhs[7], const mxArray **plhs)
 }
 
 void pass_primitive_api(const mxArray *const prhs[7], int32_T nlhs,
-                        const mxArray *plhs[4])
+                        const mxArray *plhs[6])
 {
   emlrtStack st{
       nullptr, // site
@@ -152,7 +152,7 @@ void pass_primitive_api(const mxArray *const prhs[7], int32_T nlhs,
   t_min = emlrt_marshallIn(&st, emlrtAliasP(prhs[5]), "t_min");
   t_max = emlrt_marshallIn(&st, emlrtAliasP(prhs[6]), "t_max");
   // Invoke the target function
-  pass_primitive(&st, a0, v0, sf, v_min, v_max, t_min, t_max, *m1, *m2, &t1,
+  pass_primitive(&st, a0, v0, sf, &v_min, &v_max, t_min, t_max, *m1, *m2, &t1,
                  &t2);
   // Marshall function outputs
   plhs[0] = emlrt_marshallOut(*m1);
@@ -164,6 +164,12 @@ void pass_primitive_api(const mxArray *const prhs[7], int32_T nlhs,
   }
   if (nlhs > 3) {
     plhs[3] = emlrt_marshallOut(t2);
+  }
+  if (nlhs > 4) {
+    plhs[4] = emlrt_marshallOut(v_min);
+  }
+  if (nlhs > 5) {
+    plhs[5] = emlrt_marshallOut(v_max);
   }
 }
 

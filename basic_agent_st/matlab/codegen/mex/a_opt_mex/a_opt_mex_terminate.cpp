@@ -55,20 +55,12 @@ void a_opt_mex_atexit()
   covrtFreeInstanceData(&emlrtCoverageInstance);
   // Free instance data
   covrtFreeInstanceData(&emlrtCoverageInstance);
-  emlrtLeaveRtStackR2012b(&st);
   emlrtDestroyRootTLS(&emlrtRootTLSGlobal);
   emlrtExitTimeCleanup(&emlrtContextGlobal);
 }
 
 void a_opt_mex_terminate()
 {
-  emlrtStack st{
-      nullptr, // site
-      nullptr, // tls
-      nullptr  // prev
-  };
-  st.tls = emlrtRootTLSGlobal;
-  emlrtLeaveRtStackR2012b(&st);
   emlrtDestroyRootTLS(&emlrtRootTLSGlobal);
 }
 

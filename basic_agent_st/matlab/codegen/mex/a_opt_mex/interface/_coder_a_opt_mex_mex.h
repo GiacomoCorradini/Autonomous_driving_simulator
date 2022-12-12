@@ -29,7 +29,7 @@ MEXFUNCTION_LINKAGE void mexFunction(int32_T nlhs, mxArray *plhs[],
 
 emlrtCTX mexFunctionCreateRootTLS();
 
-void pass_primitive_mexFunction(int32_T nlhs, mxArray *plhs[4], int32_T nrhs,
+void pass_primitive_mexFunction(int32_T nlhs, mxArray *plhs[6], int32_T nrhs,
                                 const mxArray *prhs[7]);
 
 void pass_primitivej0_mexFunction(int32_T nlhs, mxArray *plhs[3], int32_T nrhs,

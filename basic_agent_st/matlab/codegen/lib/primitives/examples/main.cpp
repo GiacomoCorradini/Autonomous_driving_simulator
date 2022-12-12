@@ -2,10 +2,10 @@
 // Academic License - for use in teaching, academic research, and meeting
 // course requirements at degree granting institutions only.  Not for
 // government, commercial, or other organizational use.
-// File: main.cpp
 //
-// MATLAB Coder version            : 5.4
-// C/C++ source code generated on  : 06-Dec-2022 22:21:22
+// main.cpp
+//
+// Code generation for function 'main'
 //
 
 /*************************************************************************/
@@ -33,7 +33,7 @@
 /*                                                                       */
 /*************************************************************************/
 
-// Include Files
+// Include files
 #include "main.h"
 #include "primitives.h"
 #include "rt_nonfinite.h"
@@ -41,125 +41,12 @@
 // Function Declarations
 static double argInit_real_T();
 
-static void main_a_opt();
-
-static void main_pass_primitive();
-
-static void main_pass_primitivej0();
-
-static void main_stop_primitive();
-
-static void main_stop_primitivej0();
-
-static void main_v_opt();
-
 // Function Definitions
-//
-// Arguments    : void
-// Return Type  : double
-//
 static double argInit_real_T()
 {
   return 0.0;
 }
 
-//
-// Arguments    : void
-// Return Type  : void
-//
-static void main_a_opt()
-{
-  double t_tmp;
-  // Initialize function 'a_opt' input arguments.
-  t_tmp = argInit_real_T();
-  // Call the entry-point 'a_opt'.
-  t_tmp = a_opt(t_tmp, t_tmp, t_tmp, t_tmp, t_tmp, t_tmp, t_tmp);
-}
-
-//
-// Arguments    : void
-// Return Type  : void
-//
-static void main_pass_primitive()
-{
-  double m1[6];
-  double m2[6];
-  double a0_tmp;
-  double t1;
-  double t2;
-  // Initialize function 'pass_primitive' input arguments.
-  a0_tmp = argInit_real_T();
-  // Call the entry-point 'pass_primitive'.
-  pass_primitive(a0_tmp, a0_tmp, a0_tmp, a0_tmp, a0_tmp, a0_tmp, a0_tmp, m1, m2,
-                 &t1, &t2);
-}
-
-//
-// Arguments    : void
-// Return Type  : void
-//
-static void main_pass_primitivej0()
-{
-  double m[6];
-  double tfj0;
-  double v0_tmp;
-  double vfj0;
-  // Initialize function 'pass_primitivej0' input arguments.
-  v0_tmp = argInit_real_T();
-  // Call the entry-point 'pass_primitivej0'.
-  pass_primitivej0(v0_tmp, v0_tmp, v0_tmp, v0_tmp, v0_tmp, m, &tfj0, &vfj0);
-}
-
-//
-// Arguments    : void
-// Return Type  : void
-//
-static void main_stop_primitive()
-{
-  double m[6];
-  double smax;
-  double tf;
-  double v0_tmp;
-  // Initialize function 'stop_primitive' input arguments.
-  v0_tmp = argInit_real_T();
-  // Call the entry-point 'stop_primitive'.
-  stop_primitive(v0_tmp, v0_tmp, v0_tmp, m, &tf, &smax);
-}
-
-//
-// Arguments    : void
-// Return Type  : void
-//
-static void main_stop_primitivej0()
-{
-  double m[6];
-  double T;
-  double smax;
-  double v0_tmp;
-  // Initialize function 'stop_primitivej0' input arguments.
-  v0_tmp = argInit_real_T();
-  // Call the entry-point 'stop_primitivej0'.
-  stop_primitivej0(v0_tmp, v0_tmp, m, &T, &smax);
-}
-
-//
-// Arguments    : void
-// Return Type  : void
-//
-static void main_v_opt()
-{
-  double t_tmp;
-  // Initialize function 'v_opt' input arguments.
-  t_tmp = argInit_real_T();
-  // Call the entry-point 'v_opt'.
-  t_tmp = v_opt(t_tmp, t_tmp, t_tmp, t_tmp, t_tmp, t_tmp, t_tmp);
-}
-
-//
-// Arguments    : int argc
-//                char **argv
-// Return Type  : int
-//
 int main(int, char **)
 {
   // The initialize function is being called automatically from your entry-point
@@ -178,8 +65,76 @@ int main(int, char **)
   return 0;
 }
 
-//
-// File trailer for main.cpp
-//
-// [EOF]
-//
+void main_a_opt()
+{
+  double t_tmp;
+  // Initialize function 'a_opt' input arguments.
+  t_tmp = argInit_real_T();
+  // Call the entry-point 'a_opt'.
+  t_tmp = a_opt(t_tmp, t_tmp, t_tmp, t_tmp, t_tmp, t_tmp, t_tmp);
+}
+
+void main_pass_primitive()
+{
+  double m1[6];
+  double m2[6];
+  double a0_tmp;
+  double t1;
+  double t2;
+  double v_max;
+  double v_min;
+  // Initialize function 'pass_primitive' input arguments.
+  a0_tmp = argInit_real_T();
+  // Call the entry-point 'pass_primitive'.
+  v_min = a0_tmp;
+  v_max = a0_tmp;
+  pass_primitive(a0_tmp, a0_tmp, a0_tmp, &v_min, &v_max, a0_tmp, a0_tmp, m1, m2,
+                 &t1, &t2);
+}
+
+void main_pass_primitivej0()
+{
+  double m[6];
+  double tfj0;
+  double v0_tmp;
+  double vfj0;
+  // Initialize function 'pass_primitivej0' input arguments.
+  v0_tmp = argInit_real_T();
+  // Call the entry-point 'pass_primitivej0'.
+  pass_primitivej0(v0_tmp, v0_tmp, v0_tmp, v0_tmp, v0_tmp, m, &tfj0, &vfj0);
+}
+
+void main_stop_primitive()
+{
+  double m[6];
+  double smax;
+  double tf;
+  double v0_tmp;
+  // Initialize function 'stop_primitive' input arguments.
+  v0_tmp = argInit_real_T();
+  // Call the entry-point 'stop_primitive'.
+  stop_primitive(v0_tmp, v0_tmp, v0_tmp, m, &tf, &smax);
+}
+
+void main_stop_primitivej0()
+{
+  double m[6];
+  double T;
+  double smax;
+  double v0_tmp;
+  // Initialize function 'stop_primitivej0' input arguments.
+  v0_tmp = argInit_real_T();
+  // Call the entry-point 'stop_primitivej0'.
+  stop_primitivej0(v0_tmp, v0_tmp, m, &T, &smax);
+}
+
+void main_v_opt()
+{
+  double t_tmp;
+  // Initialize function 'v_opt' input arguments.
+  t_tmp = argInit_real_T();
+  // Call the entry-point 'v_opt'.
+  t_tmp = v_opt(t_tmp, t_tmp, t_tmp, t_tmp, t_tmp, t_tmp, t_tmp);
+}
+
+// End of code generation (main.cpp)

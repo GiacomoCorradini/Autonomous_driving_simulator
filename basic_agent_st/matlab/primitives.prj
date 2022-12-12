@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2021a">
-  <configuration build-checksum="3923875729" file="C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\primitives.prj" location="C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab" name="primitives" target="target.unifiedcoder" target-name="MATLAB Coder">
+  <configuration build-checksum="286079380" file="/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/primitives.prj" location="/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab" name="primitives" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
       <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
@@ -32,6 +32,7 @@
       <param.FilePartitionMethod>option.FilePartitionMethod.MapMFileToCFile</param.FilePartitionMethod>
       <param.GenerateComments>true</param.GenerateComments>
       <param.MATLABSourceComments>false</param.MATLABSourceComments>
+      <param.MATLABSourceCommentLineNumbers>true</param.MATLABSourceCommentLineNumbers>
       <param.CodeFormattingTool>option.CodeFormattingTool.Auto</param.CodeFormattingTool>
       <param.ReservedNameArray />
       <param.CppStyleConst>true</param.CppStyleConst>
@@ -40,6 +41,7 @@
       <param.ReportPotentialDifferences>false</param.ReportPotentialDifferences>
       <param.GenerateReport>true</param.GenerateReport>
       <param.HighlightImplicitExpansionIssues>true</param.HighlightImplicitExpansionIssues>
+      <param.HighlightLoopControlIssues>false</param.HighlightLoopControlIssues>
       <param.LaunchReport>false</param.LaunchReport>
       <param.ReportInfoVarName />
       <param.DefaultTestFile />
@@ -114,6 +116,7 @@
         <param.FilePartitionMethod />
         <param.GenerateComments />
         <param.MATLABSourceComments />
+        <param.MATLABSourceCommentLineNumbers />
         <param.CodeFormattingTool />
         <param.ReservedNameArray />
         <param.CppStyleConst />
@@ -122,6 +125,7 @@
         <param.ReportPotentialDifferences />
         <param.GenerateReport />
         <param.HighlightImplicitExpansionIssues />
+        <param.HighlightLoopControlIssues />
         <param.LaunchReport />
         <param.ReportInfoVarName />
         <param.DefaultTestFile />
@@ -197,7 +201,9 @@
       <param.GenerateComments>true</param.GenerateComments>
       <param.CommentStyle>option.CommentStyle.Auto</param.CommentStyle>
       <param.MATLABSourceComments>false</param.MATLABSourceComments>
+      <param.MATLABSourceCommentLineNumbers>true</param.MATLABSourceCommentLineNumbers>
       <param.MATLABFcnDesc>true</param.MATLABFcnDesc>
+      <param.ReqsInCode>false</param.ReqsInCode>
       <param.ConvertIfToSwitch>false</param.ConvertIfToSwitch>
       <param.PreserveExternInFcnDecls>true</param.PreserveExternInFcnDecls>
       <param.EnableSignedLeftShifts>true</param.EnableSignedLeftShifts>
@@ -245,6 +251,7 @@
       <param.GenerateCodeReplacementReport>false</param.GenerateCodeReplacementReport>
       <param.HighlightPotentialDataTypeIssues>false</param.HighlightPotentialDataTypeIssues>
       <param.HighlightImplicitExpansionIssues>true</param.HighlightImplicitExpansionIssues>
+      <param.HighlightLoopControlIssues>false</param.HighlightLoopControlIssues>
       <param.LaunchReport>false</param.LaunchReport>
       <param.ReportInfoVarName />
       <param.SILDebugging>false</param.SILDebugging>
@@ -284,7 +291,7 @@
       <param.HardwareSizeChar.Production>8</param.HardwareSizeChar.Production>
       <param.HardwareSizeShort.Production>16</param.HardwareSizeShort.Production>
       <param.HardwareSizeInt.Production>32</param.HardwareSizeInt.Production>
-      <param.HardwareSizeLong.Production>32</param.HardwareSizeLong.Production>
+      <param.HardwareSizeLong.Production>64</param.HardwareSizeLong.Production>
       <param.HardwareSizeLongLong.Production>64</param.HardwareSizeLongLong.Production>
       <param.HardwareSizeFloat.Production>32</param.HardwareSizeFloat.Production>
       <param.HardwareSizeDouble.Production>64</param.HardwareSizeDouble.Production>
@@ -305,7 +312,7 @@
       <param.HardwareSizeChar.Target>8</param.HardwareSizeChar.Target>
       <param.HardwareSizeShort.Target>16</param.HardwareSizeShort.Target>
       <param.HardwareSizeInt.Target>32</param.HardwareSizeInt.Target>
-      <param.HardwareSizeLong.Target>32</param.HardwareSizeLong.Target>
+      <param.HardwareSizeLong.Target>64</param.HardwareSizeLong.Target>
       <param.HardwareSizeLongLong.Target>64</param.HardwareSizeLongLong.Target>
       <param.HardwareSizeFloat.Target>32</param.HardwareSizeFloat.Target>
       <param.HardwareSizeDouble.Target>64</param.HardwareSizeDouble.Target>
@@ -357,7 +364,7 @@
       <param.GenerateDefaultInSwitch>false</param.GenerateDefaultInSwitch>
       <param.EnableTraceability>true</param.EnableTraceability>
       <param.SILPILVerbosity>option.SILPILVerbosity.off</param.SILPILVerbosity>
-      <param.UseECoderFeatures>true</param.UseECoderFeatures>
+      <param.UseECoderFeatures>false</param.UseECoderFeatures>
       <param.EnableGitSupport>false</param.EnableGitSupport>
       <param.EnableAutoCommit>true</param.EnableAutoCommit>
       <param.RepositoryStyle>option.RepositoryStyle.Auto</param.RepositoryStyle>
@@ -400,7 +407,9 @@
         <param.GenerateComments />
         <param.CommentStyle />
         <param.MATLABSourceComments />
+        <param.MATLABSourceCommentLineNumbers />
         <param.MATLABFcnDesc />
+        <param.ReqsInCode />
         <param.ConvertIfToSwitch />
         <param.PreserveExternInFcnDecls />
         <param.EnableSignedLeftShifts />
@@ -448,6 +457,7 @@
         <param.GenerateCodeReplacementReport />
         <param.HighlightPotentialDataTypeIssues />
         <param.HighlightImplicitExpansionIssues />
+        <param.HighlightLoopControlIssues />
         <param.LaunchReport />
         <param.ReportInfoVarName />
         <param.SILDebugging />
@@ -486,7 +496,6 @@
         <param.HardwareSizeChar.Production />
         <param.HardwareSizeShort.Production />
         <param.HardwareSizeInt.Production />
-        <param.HardwareSizeLong.Production />
         <param.HardwareSizeLongLong.Production />
         <param.HardwareSizeFloat.Production />
         <param.HardwareSizeDouble.Production />
@@ -500,7 +509,6 @@
         <param.HardwareSizeChar.Target />
         <param.HardwareSizeShort.Target />
         <param.HardwareSizeInt.Target />
-        <param.HardwareSizeLong.Target />
         <param.HardwareSizeLongLong.Target />
         <param.HardwareSizeFloat.Target />
         <param.HardwareSizeDouble.Target />
@@ -572,9 +580,9 @@
     </param.TestSnippets>
     <param.ExternalFcnMajority>column</param.ExternalFcnMajority>
     <param.UseGlobals>option.UseGlobals.No</param.UseGlobals>
-    <param.outputfile>${PROJECT_ROOT}\codegen\lib\primitives\primitives.lib</param.outputfile>
+    <param.outputfile>${PROJECT_ROOT}/codegen/lib/primitives/primitives.a</param.outputfile>
     <param.version>R2012a</param.version>
-    <param.HasECoderFeatures>true</param.HasECoderFeatures>
+    <param.HasECoderFeatures>false</param.HasECoderFeatures>
     <param.HasGpuCoder>false</param.HasGpuCoder>
     <var.HasNeuralNetworkToolbox>false</var.HasNeuralNetworkToolbox>
     <param.newGlobals>
@@ -600,15 +608,15 @@
     <var.DismissScreener>false</var.DismissScreener>
     <param.unifiedParamStorage />
     <param.hdlParamStorage />
-    <var.gc.lastOutputRoot>codegen\lib\primitives</var.gc.lastOutputRoot>
+    <var.gc.lastOutputRoot>codegen/lib/primitives</var.gc.lastOutputRoot>
     <var.gc.lastOutputType>C_CODE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>3956050325</var.gc.preBuildChecksum>
-    <var.cfi.lastOutputRoot>codegen\mex\a_opt_mex</var.cfi.lastOutputRoot>
-    <var.cfi.preBuildChecksum>3304000429</var.cfi.preBuildChecksum>
+    <var.gc.preBuildChecksum>2252530488</var.gc.preBuildChecksum>
+    <var.cfi.lastOutputRoot>codegen/mex/a_opt_mex</var.cfi.lastOutputRoot>
+    <var.cfi.preBuildChecksum>1490615956</var.cfi.preBuildChecksum>
     <var.lastCfiTestSnippet>a_opt(1.1,1.1,1.1,1.1,1.1,1.1,1.1)</var.lastCfiTestSnippet>
     <var.outdatedOnRestore>false</var.outdatedOnRestore>
-    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\a_opt.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\evalPrimitiveCoeffs.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\finalOptPosj0.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\finalOptTime.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\finalOptTimej0.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\finalOptTimeStop.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\finalOptTimeStopj0.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\finalOptTimeVel.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\finalOptVel.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\finalOptVelj0.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\pass_primitive.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\pass_primitivej0.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\stop_primitive.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\stop_primitivej0.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\v_opt.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;813420198&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
-    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\a_opt.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\evalPrimitiveCoeffs.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\finalOptPosj0.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\finalOptTime.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\finalOptTimej0.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\finalOptTimeStop.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\finalOptTimeStopj0.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\finalOptTimeVel.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\finalOptVel.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\finalOptVelj0.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\pass_primitive.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\pass_primitivej0.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\stop_primitive.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\stop_primitivej0.m&lt;/file&gt;&lt;file&gt;C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\v_opt.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
+    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/a_opt.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/evalPrimitiveCoeffs.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/finalOptPosj0.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/finalOptTime.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/finalOptTimeStop.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/finalOptTimeStopj0.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/finalOptTimeVel.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/finalOptTimej0.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/finalOptVel.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/finalOptVelj0.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/pass_primitive.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/pass_primitivej0.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/stop_primitive.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/stop_primitivej0.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/v_opt.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;2964828682&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
+    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/a_opt.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/evalPrimitiveCoeffs.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/finalOptPosj0.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/finalOptTime.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/finalOptTimeStop.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/finalOptTimeStopj0.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/finalOptTimeVel.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/finalOptTimej0.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/finalOptVel.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/finalOptVelj0.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/pass_primitive.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/pass_primitivej0.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/stop_primitive.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/stop_primitivej0.m&lt;/file&gt;&lt;file&gt;/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/v_opt.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
     <param.forceMexBuild>false</param.forceMexBuild>
     <param.NoDefaultJIT>false</param.NoDefaultJIT>
     <param.configImportActive>false</param.configImportActive>
@@ -616,7 +624,7 @@
     <var.notGpuCoder>true</var.notGpuCoder>
     <var.boundToGui>true</var.boundToGui>
     <var.isConfigDialog>false</var.isConfigDialog>
-    <var.ecoderEnabled>true</var.ecoderEnabled>
+    <var.ecoderEnabled>false</var.ecoderEnabled>
     <param.AlwaysGenerateTypedefGuards>false</param.AlwaysGenerateTypedefGuards>
     <param.RemoveDuplicateFunctionsAndTypes>true</param.RemoveDuplicateFunctionsAndTypes>
     <param.EnableStructExplosion>true</param.EnableStructExplosion>
@@ -625,7 +633,7 @@
     <param.mex.outputfile>a_opt_mex</param.mex.outputfile>
     <param.grt.outputfile>primitives</param.grt.outputfile>
     <param.artifact>option.target.artifact.lib</param.artifact>
-    <param.outputfile>${PROJECT_ROOT}\codegen\lib\primitives\primitives.lib</param.outputfile>
+    <param.outputfile>${PROJECT_ROOT}/codegen/lib/primitives/primitives.a</param.outputfile>
     <param.CppNamespace />
     <param.CppPackagesToNamespaces>true</param.CppPackagesToNamespaces>
     <param.CppNamespaceForMathworksCode>coder</param.CppNamespaceForMathworksCode>
@@ -854,28 +862,28 @@
       <param.FixedPointUseDesignRanges />
     </unset>
     <fileset.entrypoints>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}\a_opt.m">
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}/a_opt.m">
         <Marker>1669743415107</Marker>
       </file>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}\pass_primitive.m">
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}/pass_primitive.m">
         <Marker>1669743414702</Marker>
       </file>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}\pass_primitivej0.m">
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}/pass_primitivej0.m">
         <Marker>1669743414901</Marker>
       </file>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}\stop_primitive.m">
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}/stop_primitive.m">
         <Marker>1669743403807</Marker>
       </file>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}\stop_primitivej0.m">
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}/stop_primitivej0.m">
         <Marker>1669743414501</Marker>
       </file>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}\v_opt.m">
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}/v_opt.m">
         <Marker>1669743415213</Marker>
       </file>
     </fileset.entrypoints>
     <fileset.testbench />
     <fileset.inputtypes>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}\a_opt.m">
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}/a_opt.m">
         <Inputs fileName="a_opt.m" functionName="a_opt">
           <Input Name="t" typeId="0" />
           <Input Name="v0" typeId="0" />
@@ -897,7 +905,7 @@
           </idpTable>
         </Inputs>
       </file>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}\pass_primitive.m">
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}/pass_primitive.m">
         <Inputs fileName="pass_primitive.m" functionName="pass_primitive">
           <Input Name="a0" typeId="0" />
           <Input Name="v0" typeId="0" />
@@ -919,7 +927,7 @@
           </idpTable>
         </Inputs>
       </file>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}\pass_primitivej0.m">
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}/pass_primitivej0.m">
         <Inputs fileName="pass_primitivej0.m" functionName="pass_primitivej0">
           <Input Name="v0" typeId="0" />
           <Input Name="a0" typeId="0" />
@@ -939,7 +947,7 @@
           </idpTable>
         </Inputs>
       </file>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}\stop_primitive.m">
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}/stop_primitive.m">
         <Inputs fileName="stop_primitive.m" functionName="stop_primitive">
           <Input Name="v0" typeId="0" />
           <Input Name="a0" typeId="0" />
@@ -957,7 +965,7 @@
           </idpTable>
         </Inputs>
       </file>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}\stop_primitivej0.m">
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}/stop_primitivej0.m">
         <Inputs fileName="stop_primitivej0.m" functionName="stop_primitivej0">
           <Input Name="v0" typeId="0" />
           <Input Name="a0" typeId="0" />
@@ -974,7 +982,7 @@
           </idpTable>
         </Inputs>
       </file>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}\v_opt.m">
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}/v_opt.m">
         <Inputs fileName="v_opt.m" functionName="v_opt">
           <Input Name="t" typeId="0" />
           <Input Name="v0" typeId="0" />
@@ -998,39 +1006,33 @@
       </file>
     </fileset.inputtypes>
     <build-deliverables>
-      <file location="${PROJECT_ROOT}\codegen\lib\primitives" name="primitives.lib" optional="false">C:\Users\corra\Desktop\Università Trento\Autonomous_driving_simulator\basic_agent_st\matlab\codegen\lib\primitives\primitives.lib</file>
+      <file location="${PROJECT_ROOT}/codegen/lib/primitives" name="primitives.a" optional="false">/home/giacomo/University/Autonomous_driving_simulator/basic_agent_st/matlab/codegen/lib/primitives/primitives.a</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2022a</root>
+      <root>/usr/local/MATLAB/R2022b</root>
       <toolboxes>
         <toolbox name="matlabcoder" />
-        <toolbox name="embeddedcoder" />
       </toolboxes>
       <toolbox>
         <matlabcoder>
           <enabled>true</enabled>
         </matlabcoder>
       </toolbox>
-      <toolbox>
-        <embeddedcoder>
-          <enabled>true</enabled>
-        </embeddedcoder>
-      </toolbox>
     </matlab>
     <platform>
-      <unix>false</unix>
+      <unix>true</unix>
       <mac>false</mac>
-      <windows>true</windows>
+      <windows>false</windows>
       <win2k>false</win2k>
       <winxp>false</winxp>
       <vista>false</vista>
-      <linux>false</linux>
+      <linux>true</linux>
       <solaris>false</solaris>
-      <osver>10.0</osver>
+      <osver>5.15.0-56-generic</osver>
       <os32>false</os32>
       <os64>true</os64>
-      <arch>win64</arch>
+      <arch>glnxa64</arch>
       <matlab>true</matlab>
     </platform>
   </configuration>
