@@ -30,8 +30,8 @@ void intHandler(int signal) {
 
 static void copy_m(double m1[6], double m2[6]);
 static int check_0(double m[6]);
-static double j_opt(double t, double m[6]);
-static double v_opt(double t, double m[6]);
+static double jEval(double t, double m[6]);
+static double v_requested(double t, double m[6]);
 
 int main(int argc, const char * argv[]) {
     logger.enable(true);
@@ -110,20 +110,15 @@ int main(int argc, const char * argv[]) {
                 switch (in->TrfLightCurrState) {
                     case 1:
                         T_green = 0.0;
-                        //T_red = in->TrfLightFirstTimeToChange - T_in;
-                        T_red = in->TrfLightFirstTimeToChange - T_s;
+                        T_red = in->TrfLightFirstTimeToChange - T_in;
                         break;
                     case 2:
-                        //T_green = in->TrfLightSecondTimeToChange + T_s;
-                        //T_red = in->TrfLightThirdTimeToChange - T_in;
-                        T_green = in->TrfLightSecondTimeToChange + T_in;
-                        T_red = in->TrfLightThirdTimeToChange - T_s;
+                        T_green = in->TrfLightSecondTimeToChange + T_s;
+                        T_red = in->TrfLightThirdTimeToChange - T_in;
                         break;
                     case 3:
-                        //T_green = in->TrfLightFirstTimeToChange + T_s;
-                        //T_red = in->TrfLightSecondTimeToChange - T_in;
-                        T_green = in->TrfLightFirstTimeToChange + T_in;
-                        T_red = in->TrfLightSecondTimeToChange - T_s;
+                        T_green = in->TrfLightFirstTimeToChange + T_s;
+                        T_red = in->TrfLightSecondTimeToChange - T_in;
                         break;
                     default:
                         break;
@@ -151,16 +146,19 @@ int main(int argc, const char * argv[]) {
             }
 
             // Integrated jerk - trapezoidal - with internal a0
-            double a0_bar = a0;
-            double req_acc = a0 + DT/2.0 * (j_opt(0.0,m_star) + j_opt(DT,m_star));
-            a0_bar = req_acc;
-            double v_req = v_opt(DT,m_star);
 
-/*
+            double req_acc = a0 + DT/2.0 * (jEval(0.0,m_star) + jEval(DT,m_star));
+            
+            //static double a0_bar = in->ALgtFild;
+            //double req_acc = a0_bar + DT/2.0 * (jEval(0.0,m_star) + jEval(DT,m_star));
+            //a0_bar = req_acc;
+            
+            double v_req = v_requested(DT,m_star);
+
             // Include saturation
-            double a_saturate = 2.0;
-            req_acc = std::min(std::max(req_acc, -a_saturate), a_saturate);
-*/
+            // double a_saturate = 2.0;
+            // req_acc = std::min(std::max(req_acc, -a_saturate), a_saturate);
+
             // ADD LOW LEVEL CONTROL
             static double integral = 0.0;
             double P_gain = 0.3;
@@ -169,13 +167,18 @@ int main(int argc, const char * argv[]) {
             double error = req_acc - a0;
             integral = integral + error * DT;
             req_pedal = P_gain * error + I_gain * integral;
-/*
+
             // Reset the memory
-            if(in->VLgtFild < 0.1 && a0_bar < 0 && integral < 0){
-                out->RequestedAcc = 0;
+
+            if(in->VLgtFild < 0.1 && jEval(0.0,m_star) > 0.0){
                 integral = 0.0;
             }
-*/
+
+            //if(in->VLgtFild < 0.1 && a0_bar < 0.0 && jEval(0.0,m_star) > 0.0){
+            //    a0_bar = 0.0;
+            //    integral = 0.0;
+            //}
+
             // Update output: requested acceleration
             out->RequestedAcc = req_pedal;
 
@@ -199,7 +202,6 @@ int main(int argc, const char * argv[]) {
             logger.log_var(filename, "c3", m_star[3]);
             logger.log_var(filename, "c4", m_star[4]);
             logger.log_var(filename, "c5", m_star[5]);
-
 
             // Write log
             logger.write_line(filename);
@@ -243,12 +245,12 @@ static int check_0(double m[6]){
   return tmp;
 }
 
-static double j_opt(double t, double m[6]){
+static double jEval(double t, double m[6]){
     double jerk = m[3] + m[4] * t + 1.0/2.0 * m[5] * pow(t,2);
     return jerk;
 }
 
-static double v_opt(double t, double m[6]){
+static double v_requested(double t, double m[6]){
     double vel = m[1] + m[2] * t + 1.0/2.0 * m[3] * pow(t,2) + 1.0/6.0 * m[4] * pow(t,3) + 1.0/24.0 * m[5] * pow(t,4);
     return vel;
 }

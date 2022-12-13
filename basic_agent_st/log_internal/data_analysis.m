@@ -41,7 +41,7 @@ plot(time, phase, 'r')
 xlabel 'time (s)'
 ylabel 'velocity (km/h)'
 title 'Velocity profile vs time'
-legend('velocity init','velocity req','TrafficLight')
+legend('velocity act','velocity req','TrafficLight')
 nexttile([2 2])
 hold on
 plot(time, acc_act)
@@ -50,7 +50,7 @@ plot(time, phase, 'r')
 xlabel 'time (s)'
 ylabel 'acceleration (m/s^2)'
 title 'Acceleration profile vs time'
-legend('acceleration init','acceleration req','TrafficLight')
+legend('acceleration act','acceleration req','TrafficLight')
 
 % Space domain
 nexttile([2 2])
@@ -64,7 +64,7 @@ xline(162,'--r',{'Traffic Light'})
 xlabel 'Distance (m)'
 ylabel 'velocity (km/h)'
 title 'Velocity profile vs distance'
-legend('velocity init','velocity req','TrafficLight')
+legend('velocity act','velocity req','TrafficLight')
 nexttile([2 2])
 hold on
 plot(TrfLightDist, acc_act)
@@ -74,7 +74,7 @@ xline(162,'--r',{'Traffic Light'})
 xlabel 'Distance (m)'
 ylabel 'acceleration (m/s^2)'
 title 'Acceleration profile vs distance'
-legend('acceleration init','acceleration req','TrafficLight')
+legend('acceleration act','acceleration req','TrafficLight')
 
 %% Plot: time
 
