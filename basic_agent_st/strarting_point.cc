@@ -26,12 +26,14 @@ void intHandler(int signal) {
     server_run = 0;
 }
 
-// STATIC FUNCTION
+// STATIC FUNCTION DECLARATION
 
 static void copy_m(double m1[6], double m2[6]);
 static int check_0(double m[6]);
 static double jEval(double t, double m[6]);
 static double v_requested(double t, double m[6]);
+
+// MAIN
 
 int main(int argc, const char * argv[]) {
     logger.enable(true);
@@ -146,18 +148,13 @@ int main(int argc, const char * argv[]) {
             }
 
             // Integrated jerk - trapezoidal - with internal a0
-
             double req_acc = a0 + DT/2.0 * (jEval(0.0,m_star) + jEval(DT,m_star));
             
-            //static double a0_bar = in->ALgtFild;
+            //static double a0_bar = 0.0;
             //double req_acc = a0_bar + DT/2.0 * (jEval(0.0,m_star) + jEval(DT,m_star));
             //a0_bar = req_acc;
             
             double v_req = v_requested(DT,m_star);
-
-            // Include saturation
-            // double a_saturate = 2.0;
-            // req_acc = std::min(std::max(req_acc, -a_saturate), a_saturate);
 
             // ADD LOW LEVEL CONTROL
             static double integral = 0.0;
@@ -169,7 +166,6 @@ int main(int argc, const char * argv[]) {
             req_pedal = P_gain * error + I_gain * integral;
 
             // Reset the memory
-
             if(in->VLgtFild < 0.1 && jEval(0.0,m_star) > 0.0){
                 integral = 0.0;
             }
@@ -230,6 +226,8 @@ int main(int argc, const char * argv[]) {
     server_agent_close();
     return 0;
 }
+
+// STATIC FUNCTION DEFINITION
 
 static void copy_m(double m1[6], double m2[6]){
   for(int i = 0; i < 6; i++){
