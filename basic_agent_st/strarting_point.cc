@@ -36,9 +36,10 @@ static double v_requested(double t, double m[6]);
 
 // MAIN
 using G2lib::real_type;
+using G2lib::int_type;
+using namespace std;
 int main(int argc, const char * argv[]) {
     logger.enable(true);
-
 
     // Messages variables
     scenario_msg_t scenario_msg;
