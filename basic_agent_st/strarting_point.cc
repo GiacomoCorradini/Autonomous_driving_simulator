@@ -10,6 +10,7 @@ extern "C" {
 #include "screen_print.h"
 #include "server_lib.h"
 #include "logvars.h"
+#include "Clothoids.hh"
 
 // --- MATLAB PRIMITIVES INCLUDE ---
 #include "primitives.h"
@@ -34,9 +35,10 @@ static double jEval(double t, double m[6]);
 static double v_requested(double t, double m[6]);
 
 // MAIN
-
+using G2lib::real_type;
 int main(int argc, const char * argv[]) {
     logger.enable(true);
+
 
     // Messages variables
     scenario_msg_t scenario_msg;
