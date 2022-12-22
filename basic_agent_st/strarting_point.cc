@@ -38,6 +38,7 @@ static double v_requested(double t, double m[6]);
 using G2lib::real_type;
 using G2lib::int_type;
 using namespace std;
+
 int main(int argc, const char * argv[]) {
     logger.enable(true);
 
