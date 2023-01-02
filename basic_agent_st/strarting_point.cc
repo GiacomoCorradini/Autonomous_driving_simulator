@@ -3,6 +3,8 @@
 #include <vector>
 #include <algorithm>
 #include <string.h>
+#include <vector>
+
 
 extern "C" {
 #include "screen_print_c.h"
@@ -11,6 +13,7 @@ extern "C" {
 #include "server_lib.h"
 #include "logvars.h"
 #include "Clothoids.hh"
+
 
 // --- MATLAB PRIMITIVES INCLUDE ---
 #include "primitives.h"
@@ -33,6 +36,7 @@ static void copy_m(double m1[6], double m2[6]);
 static int check_0(double m[6]);
 static double jEval(double t, double m[6]);
 static double v_requested(double t, double m[6]);
+static void vehicle_position(double x0, double x_act, double offL, double offR, double* X, double* Y);
 
 // MAIN
 using G2lib::real_type;
@@ -83,6 +87,46 @@ int main(int argc, const char * argv[]) {
             output_data_str *out = &manoeuvre_msg.data_struct;
             manoeuvre_msg.data_struct.CycleNumber = in->CycleNumber;
             manoeuvre_msg.data_struct.Status = in->Status;
+            static double pos0 = in->TrfLightDist; // initial distance of the traffic-light      
+            double X, Y;
+
+/* -------------------------------------------------------------------------------------------------------------- */
+            
+            // Clothoid for lateral control
+
+            double steer = in->SteerWhlAg;               // Actual steering wheel angle
+            double LatPosL = in->LatOffsLineL;           // Relative lateral position from left line
+            double LatPosR = in->LatOffsLineR;           // Relative lateral position from right line
+            double req_steer = -0.01;                    // Requested steering wheel angle
+            real_type P0x = X;                           // x coordinate of car posiotion
+            real_type P0y = Y;                           // y coordinate of car posiotion
+            real_type P0theta = Utils::m_pi_2;           // Default
+            real_type P1x;                               // x coordinate of point trajectory
+            real_type P1y;                               // y coordinate of point trajectory
+            real_type P1theta = Utils::m_pi_2;           // Default
+            G2lib::G2solve3arc C1;                       // Clothoid
+            vector<real_type> vec_x, vec_y;              // 
+            vector<real_type> vec_theta, vec_kappa;      // 
+            real_type x, y, theta, kappa;             
+
+            vehicle_position(pos0, in->TrfLightDist, LatPosL, LatPosR, &X, &Y);
+            C1.build(P0x, P0y, P0theta, 0, P1x, P1y, P1theta, 0);
+
+            for(int s = 0; s <= 100; s++){
+                C1.eval(s, theta, kappa, x, y);
+                vec_x.push_back(x);
+                vec_y.push_back(y);
+                vec_theta.push_back(theta);
+                vec_kappa.push_back(kappa);
+            }
+
+            // Update output: requested steering angle
+            out->RequestedSteerWhlAg = req_steer;
+
+/* -------------------------------------------------------------------------------------------------------------- */
+
+
+/* -------------------------------------------------------------------------------------------------------------- */
 
             // Main loop agent code
 
@@ -182,6 +226,8 @@ int main(int argc, const char * argv[]) {
             // Update output: requested acceleration
             out->RequestedAcc = req_pedal;
 
+/* -------------------------------------------------------------------------------------------------------------- */
+
             // Log_vars
             logger.log_var(filename, "N Cycle", in->CycleNumber);
             logger.log_var(filename, "Time", num_seconds);
@@ -214,7 +260,13 @@ int main(int argc, const char * argv[]) {
             printLogVar(message_id, "Dist to TrfLight", in->TrfLightDist);
             printLogVar(message_id, "Actual velocity", in->VLgtFild);
             printLogVar(message_id, "Actual acceleration", in->ALgtFild);
+            printLogVar(message_id, "Actual steering wheel", steer);
             printLogVar(message_id, "Requested acceleration", req_pedal);
+            //printLogVar(message_id, "Requested steering wheel", req_steer);
+
+            printLogVar(message_id, "Lateral position Left", LatPosL);
+            printLogVar(message_id, "Lateral position Right", LatPosR);
+
 
             // Send manoeuvre message to the environment
             if (server_send_to_client(server_run, message_id, &manoeuvre_msg.data_struct) == -1) {
@@ -255,4 +307,9 @@ static double jEval(double t, double m[6]){
 static double v_requested(double t, double m[6]){
     double vel = m[1] + m[2] * t + 1.0/2.0 * m[3] * pow(t,2) + 1.0/6.0 * m[4] * pow(t,3) + 1.0/24.0 * m[5] * pow(t,4);
     return vel;
+}
+
+static void vehicle_position(double x0, double x_act, double offL, double offR, double* X, double* Y){
+    *X = x0 - x_act;
+    *Y = offL;
 }
