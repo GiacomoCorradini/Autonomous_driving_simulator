@@ -87,16 +87,48 @@ int main(int argc, const char * argv[]) {
             output_data_str *out = &manoeuvre_msg.data_struct;
             manoeuvre_msg.data_struct.CycleNumber = in->CycleNumber;
             manoeuvre_msg.data_struct.Status = in->Status;
-            static double pos0 = in->TrfLightDist; // initial distance of the traffic-light      
-            double X, Y;
+/* -------------------------------------------------------------------------------------------------------------- */
+
+            //   _____ ____      _       _ _____ ____ _____ ___  ______   __
+            //  |_   _|  _ \    / \     | | ____/ ___|_   _/ _ \|  _ \ \ / /
+            //    | | | |_) |  / _ \ _  | |  _|| |     | || | | | |_) \ V / 
+            //    | | |  _ <  / ___ \ |_| | |__| |___  | || |_| |  _ < | |  
+            //    |_| |_| \_\/_/   \_\___/|_____\____| |_| \___/|_| \_\|_|  
+                                                                        
+            vector<std::pair<double, double>> trajectory;
+
+            // for (size_t i = 0; i < count; i++){
+            //     /* code */
+            // }
+
 
 /* -------------------------------------------------------------------------------------------------------------- */
-            
-            // Clothoid for lateral control
 
-            double steer = in->SteerWhlAg;               // Actual steering wheel angle
+            //    ____    _    ____    ____   ___  ____ ___ _____ ___ ___  _   _ 
+            //   / ___|  / \  |  _ \  |  _ \ / _ \/ ___|_ _|_   _|_ _/ _ \| \ | |
+            //  | |     / _ \ | |_) | | |_) | | | \___ \| |  | |  | | | | |  \| |
+            //  | |___ / ___ \|  _ <  |  __/| |_| |___) | |  | |  | | |_| | |\  |
+            //   \____/_/   \_\_| \_\ |_|    \___/|____/___| |_| |___\___/|_| \_|
+            
+            static double pos0 = in->TrfLightDist;       // initial distance of the traffic-light      
             double LatPosL = in->LatOffsLineL;           // Relative lateral position from left line
             double LatPosR = in->LatOffsLineR;           // Relative lateral position from right line
+            double yaw;  // TO UPDATE                                 
+            double X, Y;                                 // (X,Y) coordinate of the vehicle in the env
+
+            // compute vehicle position
+            vehicle_position(pos0, in->TrfLightDist, LatPosL, LatPosR, &X, &Y);
+                                                                  
+/* -------------------------------------------------------------------------------------------------------------- */
+            
+            //   _        _  _____ _____ ____      _    _        ____ ___  _   _ _____ ____   ___  _     
+            //  | |      / \|_   _| ____|  _ \    / \  | |      / ___/ _ \| \ | |_   _|  _ \ / _ \| |    
+            //  | |     / _ \ | | |  _| | |_) |  / _ \ | |     | |  | | | |  \| | | | | |_) | | | | |    
+            //  | |___ / ___ \| | | |___|  _ <  / ___ \| |___  | |__| |_| | |\  | | | |  _ <| |_| | |___ 
+            //  |_____/_/   \_\_| |_____|_| \_\/_/   \_\_____|  \____\___/|_| \_| |_| |_| \_\\___/|_____|
+                                                                                                      
+
+            double steer = in->SteerWhlAg;               // Actual steering wheel angle
             double req_steer = -0.01;                    // Requested steering wheel angle
             real_type P0x = X;                           // x coordinate of car posiotion
             real_type P0y = Y;                           // y coordinate of car posiotion
@@ -109,10 +141,10 @@ int main(int argc, const char * argv[]) {
             vector<real_type> vec_theta, vec_kappa;      // 
             real_type x, y, theta, kappa;             
 
-            vehicle_position(pos0, in->TrfLightDist, LatPosL, LatPosR, &X, &Y);
             C1.build(P0x, P0y, P0theta, 0, P1x, P1y, P1theta, 0);
 
-            for(int s = 0; s <= 100; s++){
+            for(int i = 0; i <= 100; i++){
+                real_type s = i * 0.05;
                 C1.eval(s, theta, kappa, x, y);
                 vec_x.push_back(x);
                 vec_y.push_back(y);
@@ -120,16 +152,24 @@ int main(int argc, const char * argv[]) {
                 vec_kappa.push_back(kappa);
             }
 
+            logger.log_var(filename, "vec_x", x);
+            logger.log_var(filename, "vec_y", y);
+            logger.log_var(filename, "vec_theta", theta);
+            logger.log_var(filename, "vec_kappa", kappa);
+
+
+
             // Update output: requested steering angle
             out->RequestedSteerWhlAg = req_steer;
 
 /* -------------------------------------------------------------------------------------------------------------- */
 
-
-/* -------------------------------------------------------------------------------------------------------------- */
-
-            // Main loop agent code
-
+            //   _     ___  _   _  ____ ___ _____ _   _ ____ ___ _   _    _    _        ____ ___  _   _ _____ ____   ___  _     
+            //  | |   / _ \| \ | |/ ___|_ _|_   _| | | |  _ \_ _| \ | |  / \  | |      / ___/ _ \| \ | |_   _|  _ \ / _ \| |    
+            //  | |  | | | |  \| | |  _ | |  | | | | | | | | | ||  \| | / _ \ | |     | |  | | | |  \| | | | | |_) | | | | |    
+            //  | |__| |_| | |\  | |_| || |  | | | |_| | |_| | || |\  |/ ___ \| |___  | |__| |_| | |\  | | | |  _ <| |_| | |___ 
+            //  |_____\___/|_| \_|\____|___| |_|  \___/|____/___|_| \_/_/   \_\_____|  \____\___/|_| \_| |_| |_| \_\\___/|_____|
+                                                                                                                             
             double v0 = in->VLgtFild;                  // actual longitudinal velocity
             double a0 = in->ALgtFild;                  // actual longitudinal acceleration
             double lookahead = std::max(50.0,v0*5.0);  // lookahead distance
@@ -228,6 +268,12 @@ int main(int argc, const char * argv[]) {
 
 /* -------------------------------------------------------------------------------------------------------------- */
 
+            //   ____ ___ ____  ____  _        _ __   __
+            //  |  _ \_ _/ ___||  _ \| |      / \\ \ / /
+            //  | | | | |\___ \| |_) | |     / _ \\ V / 
+            //  | |_| | | ___) |  __/| |___ / ___ \| |  
+            //  |____/___|____/|_|   |_____/_/   \_\_|  
+                                                     
             // Log_vars
             logger.log_var(filename, "N Cycle", in->CycleNumber);
             logger.log_var(filename, "Time", num_seconds);
@@ -283,7 +329,11 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 
-// STATIC FUNCTION DEFINITION
+//   ____ _____  _  _____ ___ ____   _____ _   _ _   _  ____ _____ ___ ___  _   _ 
+//  / ___|_   _|/ \|_   _|_ _/ ___| |  ___| | | | \ | |/ ___|_   _|_ _/ _ \| \ | |
+//  \___ \ | | / _ \ | |  | | |     | |_  | | | |  \| | |     | |  | | | | |  \| |
+//   ___) || |/ ___ \| |  | | |___  |  _| | |_| | |\  | |___  | |  | | |_| | |\  |
+//  |____/ |_/_/   \_\_| |___\____| |_|    \___/|_| \_|\____| |_| |___\___/|_| \_|
 
 static void copy_m(double m1[6], double m2[6]){
   for(int i = 0; i < 6; i++){
