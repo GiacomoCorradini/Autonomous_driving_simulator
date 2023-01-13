@@ -13,15 +13,11 @@ extern "C" {
 #include "server_lib.h"
 #include "logvars.h"
 #include "Clothoids.hh"
-
-
-// --- MATLAB PRIMITIVES INCLUDE ---
 #include "primitives.h"
-// --- MATLAB PRIMITIVES INCLUDE ---
 
-#define DEFAULT_SERVER_IP  "127.0.0.1"
-#define SERVER_PORT             30000  // Server port
-#define DT 0.05
+#define DEFAULT_SERVER_IP  "127.0.0.1"  // IP Address
+#define SERVER_PORT        30000        // Server port
+#define DT                 0.05         // Time step
 
 // Handler for CTRL-C
 #include <signal.h>
@@ -38,10 +34,12 @@ static double jEval(double t, double m[6]);
 static double v_requested(double t, double m[6]);
 static void vehicle_position(double x0, double x_act, double offL, double offR, double* X, double* Y);
 
-// MAIN
-using G2lib::real_type;
-using G2lib::int_type;
-using namespace std;
+//   __  __    _    ___ _   _ 
+//  |  \/  |  / \  |_ _| \ | |
+//  | |\/| | / _ \  | ||  \| |
+//  | |  | |/ ___ \ | || |\  |
+//  |_|  |_/_/   \_\___|_| \_|
+                           
 
 int main(int argc, const char * argv[]) {
     logger.enable(true);
@@ -87,6 +85,7 @@ int main(int argc, const char * argv[]) {
             output_data_str *out = &manoeuvre_msg.data_struct;
             manoeuvre_msg.data_struct.CycleNumber = in->CycleNumber;
             manoeuvre_msg.data_struct.Status = in->Status;
+
 /* -------------------------------------------------------------------------------------------------------------- */
 
             //   _____ ____      _       _ _____ ____ _____ ___  ______   __
@@ -94,30 +93,36 @@ int main(int argc, const char * argv[]) {
             //    | | | |_) |  / _ \ _  | |  _|| |     | || | | | |_) \ V / 
             //    | | |  _ <  / ___ \ |_| | |__| |___  | || |_| |  _ < | |  
             //    |_| |_| \_\/_/   \_\___/|_____\____| |_| \___/|_| \_\|_|  
-                                                                        
-            vector<std::pair<double, double>> trajectory;
 
-            // for (size_t i = 0; i < count; i++){
-            //     /* code */
-            // }
+            // TO DO                                                           
+            //vector<std::pair<double, double>> trajectory;
 
+            // JUST A TRY
+            std::vector<double> vector2(4000, 0.0);
 
 /* -------------------------------------------------------------------------------------------------------------- */
 
-            //    ____    _    ____    ____   ___  ____ ___ _____ ___ ___  _   _ 
-            //   / ___|  / \  |  _ \  |  _ \ / _ \/ ___|_ _|_   _|_ _/ _ \| \ | |
-            //  | |     / _ \ | |_) | | |_) | | | \___ \| |  | |  | | | | |  \| |
-            //  | |___ / ___ \|  _ <  |  __/| |_| |___) | |  | |  | | |_| | |\  |
-            //   \____/_/   \_\_| \_\ |_|    \___/|____/___| |_| |___\___/|_| \_|
+            //    ____    _    ____            ____   ___  ____ ___ _____ ___ ___  _   _ 
+            //   / ___|  / \  |  _ \          |  _ \ / _ \/ ___|_ _|_   _|_ _/ _ \| \ | |
+            //  | |     / _ \ | |_) |  _____  | |_) | | | \___ \| |  | |  | | | | |  \| |
+            //  | |___ / ___ \|  _ <  |_____| |  __/| |_| |___) | |  | |  | | |_| | |\  |
+            //   \____/_/   \_\_| \_\         |_|    \___/|____/___| |_| |___\___/|_| \_|
+                                                                          
             
             static double pos0 = in->TrfLightDist;       // initial distance of the traffic-light      
             double LatPosL = in->LatOffsLineL;           // Relative lateral position from left line
             double LatPosR = in->LatOffsLineR;           // Relative lateral position from right line
             double yaw;  // TO UPDATE                                 
-            double X, Y;                                 // (X,Y) coordinate of the vehicle in the env
+            double vehicle_X, vehicle_Y;                 // (X,Y) coordinate of the vehicle in the env
 
             // compute vehicle position
-            vehicle_position(pos0, in->TrfLightDist, LatPosL, LatPosR, &X, &Y);
+            vehicle_position(pos0, in->TrfLightDist, LatPosL, LatPosR, &vehicle_X, &vehicle_X);
+            /**
+             * Position of the vehicle
+             * X = distance from the start position of the car
+             * Y = distance from the left line
+             * YAW = Yaw rate from the horizontal
+            */
                                                                   
 /* -------------------------------------------------------------------------------------------------------------- */
             
@@ -127,18 +132,20 @@ int main(int argc, const char * argv[]) {
             //  | |___ / ___ \| | | |___|  _ <  / ___ \| |___  | |__| |_| | |\  | | | |  _ <| |_| | |___ 
             //  |_____/_/   \_\_| |_____|_| \_\/_/   \_\_____|  \____\___/|_| \_| |_| |_| \_\\___/|_____|
                                                                                                       
+            using G2lib::real_type;
+            using G2lib::int_type;
 
             double steer = in->SteerWhlAg;               // Actual steering wheel angle
             double req_steer = -0.01;                    // Requested steering wheel angle
-            real_type P0x = X;                           // x coordinate of car posiotion
-            real_type P0y = Y;                           // y coordinate of car posiotion
+            real_type P0x = vehicle_X;                   // x coordinate of car posiotion
+            real_type P0y = vehicle_X;                   // y coordinate of car posiotion
             real_type P0theta = Utils::m_pi_2;           // Default
             real_type P1x;                               // x coordinate of point trajectory
             real_type P1y;                               // y coordinate of point trajectory
             real_type P1theta = Utils::m_pi_2;           // Default
             G2lib::G2solve3arc C1;                       // Clothoid
-            vector<real_type> vec_x, vec_y;              // 
-            vector<real_type> vec_theta, vec_kappa;      // 
+            std::vector<real_type> vec_x, vec_y;         // 
+            std::vector<real_type> vec_theta, vec_kappa; // 
             real_type x, y, theta, kappa;             
 
             C1.build(P0x, P0y, P0theta, 0, P1x, P1y, P1theta, 0);
