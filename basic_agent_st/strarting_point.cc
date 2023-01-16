@@ -112,17 +112,21 @@ int main(int argc, const char * argv[]) {
             static double pos0 = in->TrfLightDist;       // initial distance of the traffic-light      
             double LatPosL = in->LatOffsLineL;           // Relative lateral position from left line
             double LatPosR = in->LatOffsLineR;           // Relative lateral position from right line
-            double yaw;  // TO UPDATE                                 
+            double yaw = in->LaneHeading;                // Attitude of the vehicle w.r.t straight road                
             double vehicle_X, vehicle_Y;                 // (X,Y) coordinate of the vehicle in the env
 
             // compute vehicle position
-            vehicle_position(pos0, in->TrfLightDist, LatPosL, LatPosR, &vehicle_X, &vehicle_X);
+            vehicle_position(pos0, in->TrfLightDist, LatPosL, LatPosR, &vehicle_X, &vehicle_Y);
             /**
              * Position of the vehicle
              * X = distance from the start position of the car
              * Y = distance from the left line
-             * YAW = Yaw rate from the horizontal
+             * YAW = Yaw angle from the horizontal axel
             */
+
+            printLogVar(message_id, "Vehicle X coordinate", vehicle_X);
+            printLogVar(message_id, "Vehicle Y coordinate", vehicle_Y);
+            printLogVar(message_id, "Vehicle Yaw coordinate", yaw);
                                                                   
 /* -------------------------------------------------------------------------------------------------------------- */
             
@@ -136,7 +140,7 @@ int main(int argc, const char * argv[]) {
             using G2lib::int_type;
 
             double steer = in->SteerWhlAg;               // Actual steering wheel angle
-            double req_steer = -0.01;                    // Requested steering wheel angle
+            double req_steer = 0.;                    // Requested steering wheel angle
             real_type P0x = vehicle_X;                   // x coordinate of car posiotion
             real_type P0y = vehicle_X;                   // y coordinate of car posiotion
             real_type P0theta = Utils::m_pi_2;           // Default
@@ -251,7 +255,14 @@ int main(int argc, const char * argv[]) {
             
             double v_req = v_requested(DT,m_star);
 
-            // ADD LOW LEVEL CONTROL
+/* -------------------------------------------------------------------------------------------------------------- */
+
+            //   _     _____        __    _     _______     _______ _           ____ ___  _   _ _____ ____   ___  _     
+            //  | |   / _ \ \      / /   | |   | ____\ \   / / ____| |         / ___/ _ \| \ | |_   _|  _ \ / _ \| |    
+            //  | |  | | | \ \ /\ / /____| |   |  _|  \ \ / /|  _| | |   _____| |  | | | |  \| | | | | |_) | | | | |    
+            //  | |__| |_| |\ V  V /_____| |___| |___  \ V / | |___| |__|_____| |__| |_| | |\  | | | |  _ <| |_| | |___ 
+            //  |_____\___/  \_/\_/      |_____|_____|  \_/  |_____|_____|     \____\___/|_| \_| |_| |_| \_\\___/|_____|
+                                                                                                                     
             static double integral = 0.0;
             double P_gain = 0.3;
             double I_gain = 1.0;
