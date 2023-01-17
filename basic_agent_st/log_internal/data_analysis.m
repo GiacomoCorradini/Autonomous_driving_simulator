@@ -4,6 +4,15 @@ close all
 
 %% Load data
 data = readtable("Example1.csv");
+path = readtable("Example2.csv");
+
+
+%% Path plot
+
+X0 = table2array(path(:,1));
+Y0 = table2array(path(:,2));
+figure
+plot(X0,Y0)
 
 %% Read data
 
