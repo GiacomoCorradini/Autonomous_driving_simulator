@@ -2,7 +2,7 @@
 bin
 build
 
-log_internal/Example*
+log_internal/*.csv
 
 matlab/*.asv
 cmake-build-release

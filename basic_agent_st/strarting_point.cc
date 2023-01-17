@@ -26,9 +26,6 @@ void intHandler(int signal) {
     server_run = 0;
 }
 
-using G2lib::real_type;
-using G2lib::int_type;
-
 // STATIC FUNCTION DECLARATION
 
 static void copy_m(double m1[6], double m2[6]);
@@ -54,7 +51,8 @@ int main(int argc, const char * argv[]) {
     size_t manoeuvre_msg_size = sizeof(manoeuvre_msg.data_buffer);
     uint32_t message_id = 0;
     std::string filename = "Example1";
-    std::string filename_path = "Trajectory";
+    std::string filename_path = "Example2";
+    static bool traj = false;
 
 #ifndef _MSC_VER
     // More portable way of supporting signals on UNIX
@@ -102,7 +100,6 @@ int main(int argc, const char * argv[]) {
             static double pos_X0 = 0.;     
             static double pos_Y0 = in->LatOffsLineL;
             static double yaw0 = in->LaneHeading;
-            bool traj = false;
 
             // Calculate the trajectory only at the beginning of the algorithm
             if(!traj){
@@ -110,11 +107,11 @@ int main(int argc, const char * argv[]) {
                 
                 G2lib::G2solve3arc CTrajectory;
                 CTrajectory.build(pos_X0, pos_Y0, yaw0, 0., 10., 0., 0., 0.);
-                std::vector<real_type> vec_x_0, vec_y_0;        
-                std::vector<real_type> vec_theta_0, vec_kappa_0; 
-                real_type x_0, y_0, theta_0, kappa_0;
+                std::vector<G2lib::real_type> vec_x_0, vec_y_0;        
+                std::vector<G2lib::real_type> vec_theta_0, vec_kappa_0;
+                G2lib::real_type x_0, y_0, theta_0, kappa_0;
                 for(int i = 0; i <= (CTrajectory.totalLength() / DT); i++){
-                    real_type s = i * 0.05;
+                    G2lib::real_type s = i * 0.05;
                     CTrajectory.eval(s, theta_0, kappa_0, x_0, y_0);
                     
                     vec_x_0.push_back(x_0);
@@ -131,23 +128,45 @@ int main(int argc, const char * argv[]) {
 
                 // Build line segment until the end
 
-                G2lib::LineSegment line;
-                real_type x_1, y_1;
-                std::vector<real_type> vec_x_1, vec_y_1;        
-                line.build_2P(10.,0.,180.,0.);
-                for(int i = 0; i <= (line.length() / DT); i++){
-                    real_type s = i * 0.05;
-                    line.eval(s, x_1, y_1);
+                // G2lib::LineSegment line;
+                // real_type x_1, y_1;
+                // std::vector<real_type> vec_x_1, vec_y_1;        
+                // line.build_2P(10.,0.,180.,0.);
+                // for(int i = 0; i <= (line.length() / DT); i++){
+                //     real_type s = i * 0.05;
+                //     line.eval(s, x_1, y_1);
+                    
+                //     vec_x_1.push_back(x_1);
+                //     vec_y_1.push_back(y_1);
+                    
+                //     logger.log_var(filename_path, "X0", vec_x_1[i]);
+                //     logger.log_var(filename_path, "Y0", vec_y_1[i]);
+                //     logger.write_line(filename_path);
+                // }
+
+                
+                G2lib::G2solve3arc line;
+                G2lib::real_type x_1, y_1, theta_1, kappa_1;
+                std::vector<G2lib::real_type> vec_x_1, vec_y_1; 
+                std::vector<G2lib::real_type> vec_theta_1, vec_kappa_1;
+                line.build(10., 0., 0., 0., 180., 0., 0., 0.);
+                for(int i = 0; i <= (line.totalLength() / DT); i++){
+                    G2lib::real_type s = i * 0.05;
+                    line.eval(s, theta_1, kappa_1, x_1, y_1);
                     
                     vec_x_1.push_back(x_1);
                     vec_y_1.push_back(y_1);
+                    vec_theta_1.push_back(theta_1);
+                    vec_kappa_1.push_back(kappa_1);
                     
                     logger.log_var(filename_path, "X0", vec_x_1[i]);
                     logger.log_var(filename_path, "Y0", vec_y_1[i]);
+                    logger.log_var(filename_path, "THETA0", vec_theta_1[i]);
+                    logger.log_var(filename_path, "K0", vec_kappa_1[i]);
                     logger.write_line(filename_path);
                 }
 
-                bool traj = true;
+                traj = true;
             }
 
 /* -------------------------------------------------------------------------------------------------------------- */
@@ -186,43 +205,45 @@ int main(int argc, const char * argv[]) {
             //  | |___ / ___ \| | | |___|  _ <  / ___ \| |___  | |__| |_| | |\  | | | |  _ <| |_| | |___ 
             //  |_____/_/   \_\_| |_____|_| \_\/_/   \_\_____|  \____\___/|_| \_| |_| |_| \_\\___/|_____|
                                                                                                       
+            double K_US = 0;                     // understeering gradient
             double steer = in->SteerWhlAg;               // Actual steering wheel angle
             double req_steer = 0;                    // Requested steering wheel angle
             double lookahead_lat = 10;
-            real_type P0x = vehicle_X;                   // x coordinate of car posiotion
-            real_type P0y = vehicle_X;                   // y coordinate of car posiotion
-            real_type P0theta = Utils::m_pi_2 + yaw;     // Default
-            real_type P1x;                               // x coordinate of point trajectory
-            real_type P1y;                               // y coordinate of point trajectory
-            real_type P1theta = Utils::m_pi_2;           // Default
+            G2lib::real_type P0x = vehicle_X;                   // x coordinate of car posiotion
+            G2lib::real_type P0y = vehicle_X;                   // y coordinate of car posiotion
+            G2lib::real_type P0theta = Utils::m_pi_2 + yaw;     // Default
+            G2lib::real_type P1x;                               // x coordinate of point trajectory
+            G2lib::real_type P1y;                               // y coordinate of point trajectory
+            G2lib::real_type P1theta = Utils::m_pi_2;           // Default
             G2lib::G2solve3arc C1;                       // Clothoid
-            std::vector<real_type> vec_x, vec_y;         // 
-            std::vector<real_type> vec_theta, vec_kappa; // 
-            real_type x, y, theta, kappa;
-
-            // Take a point from the reference trajectory
+            std::vector<G2lib::real_type> vec_x, vec_y;         // 
+            std::vector<G2lib::real_type> vec_theta, vec_kappa; // 
+            G2lib::real_type x, y, theta, kappa;
 
 
-            // Build the clothoid
-            C1.build(P0x, P0y, P0theta, 0, P1x, P1y, P1theta, 0);
+            // // Take a point from the reference trajectory
 
-            for(int i = 0; i <= lookahead_lat; i++){
-                real_type s = i * 0.05;
-                C1.eval(s, theta, kappa, x, y);
-                vec_x.push_back(x);
-                vec_y.push_back(y);
-                vec_theta.push_back(theta);
-                vec_kappa.push_back(kappa);
-            }
+            // // Build the clothoid
+            // C1.build(P0x, P0y, P0theta, 0, P1x, P1y, P1theta, 0);
 
-            printLogVar(message_id, "vec_x", x);
-            printLogVar(message_id, "vec_y", y);
-            printLogVar(message_id, "vec_theta", theta);
-            printLogVar(message_id, "vec_kappa", kappa);
+            // for(int i = 0; i <= lookahead_lat; i++){
+            //     real_type s = i * 0.05;
+            //     C1.eval(s, theta, kappa, x, y);
+            //     vec_x.push_back(x);
+            //     vec_y.push_back(y);
+            //     vec_theta.push_back(theta);
+            //     vec_kappa.push_back(kappa);
+            // }
+
+            // printLogVar(message_id, "vec_x", x);
+            // printLogVar(message_id, "vec_y", y);
+            // printLogVar(message_id, "vec_theta", theta);
+            // printLogVar(message_id, "vec_kappa", kappa);
 
             // Update output: requested steering angle
 
-            // req_steer = L * (K(S) + K_US*u^2)
+            req_steer = in->VehicleLen * (curvature + K_US*in->VLgtFild^2);
+
             out->RequestedSteerWhlAg = req_steer;
 
 /* -------------------------------------------------------------------------------------------------------------- */
