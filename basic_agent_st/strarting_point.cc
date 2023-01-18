@@ -103,69 +103,38 @@ int main(int argc, const char * argv[]) {
 
             // Calculate the trajectory only at the beginning of the algorithm
             if(!traj){
-                // Build the trajectory using the clothoids
-                
-                G2lib::G2solve3arc CTrajectory;
-                CTrajectory.build(pos_X0, pos_Y0, yaw0, 0., 10., 0., 0., 0.);
+
+                G2lib::ClothoidCurve CTrajectory;
+                G2lib::real_type x_0, y_0;
                 std::vector<G2lib::real_type> vec_x_0, vec_y_0;        
-                std::vector<G2lib::real_type> vec_theta_0, vec_kappa_0;
-                G2lib::real_type x_0, y_0, theta_0, kappa_0;
-                for(int i = 0; i <= (CTrajectory.totalLength() / DT); i++){
+                CTrajectory.build_G1(pos_X0, pos_Y0, yaw0, 10., 0., 0.);
+                for(int i = 0; i <= (CTrajectory.length() / DT); i++){
                     G2lib::real_type s = i * 0.05;
-                    CTrajectory.eval(s, theta_0, kappa_0, x_0, y_0);
-                    
+                    CTrajectory.eval(s, x_0, y_0);                 
+
                     vec_x_0.push_back(x_0);
                     vec_y_0.push_back(y_0);
-                    vec_theta_0.push_back(theta_0);
-                    vec_kappa_0.push_back(kappa_0);
                     
                     logger.log_var(filename_path, "X0", vec_x_0[i]);
                     logger.log_var(filename_path, "Y0", vec_y_0[i]);
-                    logger.log_var(filename_path, "THETA0", vec_theta_0[i]);
-                    logger.log_var(filename_path, "K0", vec_kappa_0[i]);
                     logger.write_line(filename_path);
                 }
 
-                // Build line segment until the end
-
-                // G2lib::LineSegment line;
-                // real_type x_1, y_1;
-                // std::vector<real_type> vec_x_1, vec_y_1;        
-                // line.build_2P(10.,0.,180.,0.);
-                // for(int i = 0; i <= (line.length() / DT); i++){
-                //     real_type s = i * 0.05;
-                //     line.eval(s, x_1, y_1);
-                    
-                //     vec_x_1.push_back(x_1);
-                //     vec_y_1.push_back(y_1);
-                    
-                //     logger.log_var(filename_path, "X0", vec_x_1[i]);
-                //     logger.log_var(filename_path, "Y0", vec_y_1[i]);
-                //     logger.write_line(filename_path);
-                // }
-
-                
-                G2lib::G2solve3arc line;
-                G2lib::real_type x_1, y_1, theta_1, kappa_1;
+                G2lib::ClothoidCurve line;
+                G2lib::real_type x_1, y_1;
                 std::vector<G2lib::real_type> vec_x_1, vec_y_1; 
-                std::vector<G2lib::real_type> vec_theta_1, vec_kappa_1;
-                line.build(10., 0., 0., 0., 180., 0., 0., 0.);
-                for(int i = 0; i <= (line.totalLength() / DT); i++){
+                line.build_G1(10., 0., 0., 180., 0., 0.);
+                for(int i = 0; i <= (line.length() / DT); i++){
                     G2lib::real_type s = i * 0.05;
-                    line.eval(s, theta_1, kappa_1, x_1, y_1);
+                    line.eval(s, x_1, y_1);
                     
                     vec_x_1.push_back(x_1);
                     vec_y_1.push_back(y_1);
-                    vec_theta_1.push_back(theta_1);
-                    vec_kappa_1.push_back(kappa_1);
                     
                     logger.log_var(filename_path, "X0", vec_x_1[i]);
                     logger.log_var(filename_path, "Y0", vec_y_1[i]);
-                    logger.log_var(filename_path, "THETA0", vec_theta_1[i]);
-                    logger.log_var(filename_path, "K0", vec_kappa_1[i]);
                     logger.write_line(filename_path);
                 }
-
                 traj = true;
             }
 
@@ -206,43 +175,31 @@ int main(int argc, const char * argv[]) {
             //  |_____/_/   \_\_| |_____|_| \_\/_/   \_\_____|  \____\___/|_| \_| |_| |_| \_\\___/|_____|
                                                                                                       
             double K_US = 0;                     // understeering gradient
-            double steer = in->SteerWhlAg;               // Actual steering wheel angle
             double req_steer = 0;                    // Requested steering wheel angle
-            double lookahead_lat = 10;
-            G2lib::real_type P0x = vehicle_X;                   // x coordinate of car posiotion
-            G2lib::real_type P0y = vehicle_X;                   // y coordinate of car posiotion
-            G2lib::real_type P0theta = Utils::m_pi_2 + yaw;     // Default
+            double lookahead_lat = 10;                  // [m]
+            double steer = in->SteerWhlAg;               // Actual steering wheel angle
+            
+            // car position
+            G2lib::real_type P0x = vehicle_X;                   // x coordinate of car
+            G2lib::real_type P0y = vehicle_X;                   // y coordinate of car
+            G2lib::real_type P0theta = yaw;                     // yaw angle of the car
+            
+            // Take a point from the reference trajectory
             G2lib::real_type P1x;                               // x coordinate of point trajectory
             G2lib::real_type P1y;                               // y coordinate of point trajectory
-            G2lib::real_type P1theta = Utils::m_pi_2;           // Default
-            G2lib::G2solve3arc C1;                       // Clothoid
+            G2lib::real_type P1theta;                           // Default
+            
+            G2lib::ClothoidCurve C1;                            // Clothoid
             std::vector<G2lib::real_type> vec_x, vec_y;         // 
             std::vector<G2lib::real_type> vec_theta, vec_kappa; // 
             G2lib::real_type x, y, theta, kappa;
 
-
-            // // Take a point from the reference trajectory
-
-            // // Build the clothoid
-            // C1.build(P0x, P0y, P0theta, 0, P1x, P1y, P1theta, 0);
-
-            // for(int i = 0; i <= lookahead_lat; i++){
-            //     real_type s = i * 0.05;
-            //     C1.eval(s, theta, kappa, x, y);
-            //     vec_x.push_back(x);
-            //     vec_y.push_back(y);
-            //     vec_theta.push_back(theta);
-            //     vec_kappa.push_back(kappa);
-            // }
-
-            // printLogVar(message_id, "vec_x", x);
-            // printLogVar(message_id, "vec_y", y);
-            // printLogVar(message_id, "vec_theta", theta);
-            // printLogVar(message_id, "vec_kappa", kappa);
+            // Build the clothoid
+            C1.build_G1(P0x, P0y, P0theta, P1x, P1y, P1theta);
+            double curvature = C1.kappaBegin();
 
             // Update output: requested steering angle
-
-            req_steer = in->VehicleLen * (curvature + K_US*in->VLgtFild^2);
+            req_steer = curvature * (in->VehicleLen + K_US*pow(in->VLgtFild,2));
 
             out->RequestedSteerWhlAg = req_steer;
 

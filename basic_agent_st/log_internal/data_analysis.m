@@ -21,6 +21,7 @@ vel_act = table2array(data(:,3));
 acc_act = table2array(data(:,4));
 phase = table2array(data(:,5));
 vel_req = table2array(data(:,6));
+
 acc_req = table2array(data(:,7));
 t_green = table2array(data(:,8));
 t_red = table2array(data(:,9));
