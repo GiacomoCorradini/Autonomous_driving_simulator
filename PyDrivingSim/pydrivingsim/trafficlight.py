@@ -5,10 +5,12 @@
 import pygame
 import random
 
-# red then green no stop
+# approach green no stop
 #random.seed(10)
+# approach yellow
+#random.seed(6)
 # stop with red
-#random.seed(1)
+#random.seed(2)
 
 from pydrivingsim import VirtualObject, World
 
