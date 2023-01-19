@@ -101,6 +101,8 @@ int main(int argc, const char * argv[]) {
             static double pos_Y0 = in->LatOffsLineL;
             static double yaw0 = in->LaneHeading;
 
+            G2lib::ClothoidList trajectory;
+
             // Calculate the trajectory only at the beginning of the algorithm
             if(!traj){
 
@@ -120,6 +122,8 @@ int main(int argc, const char * argv[]) {
                     logger.write_line(filename_path);
                 }
 
+                trajectory.push_back(CTrajectory);
+
                 G2lib::ClothoidCurve line;
                 G2lib::real_type x_1, y_1;
                 std::vector<G2lib::real_type> vec_x_1, vec_y_1; 
@@ -136,7 +140,12 @@ int main(int argc, const char * argv[]) {
                     logger.write_line(filename_path);
                 }
                 traj = true;
+
+                trajectory.push_back(line);
             }
+
+            // the coordinate of the trajectory are the same
+
 
 /* -------------------------------------------------------------------------------------------------------------- */
 
@@ -174,10 +183,10 @@ int main(int argc, const char * argv[]) {
             //  | |___ / ___ \| | | |___|  _ <  / ___ \| |___  | |__| |_| | |\  | | | |  _ <| |_| | |___ 
             //  |_____/_/   \_\_| |_____|_| \_\/_/   \_\_____|  \____\___/|_| \_| |_| |_| \_\\___/|_____|
                                                                                                       
-            double K_US = 0;                     // understeering gradient
-            double req_steer = 0;                    // Requested steering wheel angle
-            double lookahead_lat = 10;                  // [m]
-            double steer = in->SteerWhlAg;               // Actual steering wheel angle
+            double K_US = 0;                                    // understeering gradient
+            double req_steer = 0;                               // Requested steering wheel angle
+            double lookahead_lat = 10;                          // [m]
+            double steer = in->SteerWhlAg;                      // Actual steering wheel angle
             
             // car position
             G2lib::real_type P0x = vehicle_X;                   // x coordinate of car
@@ -190,9 +199,9 @@ int main(int argc, const char * argv[]) {
             G2lib::real_type P1theta;                           // Default
             
             G2lib::ClothoidCurve C1;                            // Clothoid
-            std::vector<G2lib::real_type> vec_x, vec_y;         // 
-            std::vector<G2lib::real_type> vec_theta, vec_kappa; // 
-            G2lib::real_type x, y, theta, kappa;
+            // std::vector<G2lib::real_type> vec_x, vec_y;         // 
+            // std::vector<G2lib::real_type> vec_theta, vec_kappa; // 
+            // G2lib::real_type x, y, theta, kappa;
 
             // Build the clothoid
             C1.build_G1(P0x, P0y, P0theta, P1x, P1y, P1theta);
@@ -201,7 +210,7 @@ int main(int argc, const char * argv[]) {
             // Update output: requested steering angle
             req_steer = curvature * (in->VehicleLen + K_US*pow(in->VLgtFild,2));
 
-            out->RequestedSteerWhlAg = req_steer;
+            //out->RequestedSteerWhlAg = req_steer;
 
 /* -------------------------------------------------------------------------------------------------------------- */
 
@@ -276,14 +285,6 @@ int main(int argc, const char * argv[]) {
                 }
             }
 
-            // Integrated jerk - trapezoidal - with internal a0
-            double req_acc = a0 + DT/2.0 * (jEval(0.0,m_star) + jEval(DT,m_star));
-            
-            //static double a0_bar = 0.0;
-            //double req_acc = a0_bar + DT/2.0 * (jEval(0.0,m_star) + jEval(DT,m_star));
-            //a0_bar = req_acc;
-            
-            double v_req = v_requested(DT,m_star);
 
 /* -------------------------------------------------------------------------------------------------------------- */
 
@@ -293,23 +294,37 @@ int main(int argc, const char * argv[]) {
             //  | |__| |_| |\ V  V /_____| |___| |___  \ V / | |___| |__|_____| |__| |_| | |\  | | | |  _ <| |_| | |___ 
             //  |_____\___/  \_/\_/      |_____|_____|  \_/  |_____|_____|     \____\___/|_| \_| |_| |_| \_\\___/|_____|
                                                                                                                      
+            // Integrated jerk - trapezoidal - with internal a0
+            static double a0_bar = 0.0;
+            double minAcc = -3;
+            double maxAcc = 3;
+
+            double j_req = (DT * (jEval(0.0,m_star) + jEval(DT,m_star)) * 0.5);
+
+            //double req_acc = a0 + j_req;            
+            double req_acc = a0_bar + j_req;
+
+            a0_bar = req_acc;
+            double v_req = v_requested(DT,m_star);
+            
+            // PID control
             static double integral = 0.0;
-            double P_gain = 0.3;
+            double P_gain = 0.1;
             double I_gain = 1.0;
             double req_pedal;
             double error = req_acc - a0;
-            integral = integral + error * DT;
+            integral = integral + (error * DT);
             req_pedal = P_gain * error + I_gain * integral;
 
             // Reset the memory
-            if(in->VLgtFild < 0.1 && jEval(0.0,m_star) > 0.0){
-                integral = 0.0;
-            }
+            // if(in->VLgtFild < 0.1 && j_req > 0.0){
+            //     integral = 0.0;
+            // }
 
-            //if(in->VLgtFild < 0.1 && a0_bar < 0.0 && jEval(0.0,m_star) > 0.0){
-            //    a0_bar = 0.0;
-            //    integral = 0.0;
-            //}
+            if(in->VLgtFild < 0.1 && a0_bar < 0.0 && j_req > 0.0){
+               a0_bar = 0.0;
+               integral = 0.0;
+            }
 
             // Update output: requested acceleration
             out->RequestedAcc = req_pedal;
