@@ -101,36 +101,61 @@ int main(int argc, const char * argv[]) {
             static double pos_Y0 = in->LatOffsLineL;
             static double yaw0 = in->LaneHeading;
 
-            G2lib::ClothoidList trajectory;
 
             // Calculate the trajectory only at the beginning of the algorithm
             if(!traj){
 
-                G2lib::ClothoidCurve CTrajectory;
-                G2lib::real_type x_0, y_0;
-                std::vector<G2lib::real_type> vec_x_0, vec_y_0;        
-                CTrajectory.build_G1(pos_X0, pos_Y0, yaw0, 10., 0., 0.);
-                for(int i = 0; i <= (CTrajectory.length() / DT); i++){
-                    G2lib::real_type s = i * 0.05;
-                    CTrajectory.eval(s, x_0, y_0);                 
+                // G2lib::ClothoidCurve CTrajectory;
+                // G2lib::real_type x_0, y_0;
+                // std::vector<G2lib::real_type> vec_x_0, vec_y_0;        
+                // CTrajectory.build_G1(pos_X0, pos_Y0, yaw0, 10., 0., 0.);
+                // for(int i = 0; i <= (CTrajectory.length() / DT); i++){
+                //     G2lib::real_type s = i * 0.05;
+                //     CTrajectory.eval(s, x_0, y_0);                 
 
-                    vec_x_0.push_back(x_0);
-                    vec_y_0.push_back(y_0);
+                //     vec_x_0.push_back(x_0);
+                //     vec_y_0.push_back(y_0);
                     
-                    logger.log_var(filename_path, "X0", vec_x_0[i]);
-                    logger.log_var(filename_path, "Y0", vec_y_0[i]);
-                    logger.write_line(filename_path);
+                //     logger.log_var(filename_path, "X0", vec_x_0[i]);
+                //     logger.log_var(filename_path, "Y0", vec_y_0[i]);
+                //     logger.write_line(filename_path);
+                // }
+
+                // G2lib::ClothoidCurve line;
+                // G2lib::real_type x_1, y_1;
+                // std::vector<G2lib::real_type> vec_x_1, vec_y_1; 
+                // line.build_G1(10., 0., 0., 180., 0., 0.);
+                // for(int i = 0; i <= (line.length() / DT); i++){
+                //     G2lib::real_type s = i * 0.05;
+                //     line.eval(s, x_1, y_1);
+                    
+                //     vec_x_1.push_back(x_1);
+                //     vec_y_1.push_back(y_1);
+                    
+                //     logger.log_var(filename_path, "X0", vec_x_1[i]);
+                //     logger.log_var(filename_path, "Y0", vec_y_1[i]);
+                //     logger.write_line(filename_path);
+                // }
+
+                // the coordinate of the trajectory are the same
+
+                G2lib::ClothoidList trajectory;
+                std::vector<G2lib::real_type> vec_x_0{1,2.304545,7.999777,8.19259,10.937444,18.488895,22.873348,22.92912,25.018649,34.975645,43.268101,43.775422,53.753729,57.120443,61.448158,69.306701,70.674435,79.498917};
+                std::vector<G2lib::real_type> vec_y_0{1,10.914543,19.134296,29.132437,38.748349,45.303926,54.291505,64.291349,74.070607,74.997007,69.408163,59.421040,60.079361,50.663138,41.648102,35.463985,25.557961,20.853867}; 
+
+                for(int i = 0; i < vec_x_0.size() - 1; i++){
+                    G2lib::LineSegment part_traj;
+                    part_traj.build_2P(vec_x_0[i], vec_y_0[i], vec_x_0[i + 1], vec_y_0[i + 1]);
+                    trajectory.push_back(part_traj);
+                    printLogVar(message_id, "X coordinate", vec_x_0[i]);
+                    printLogVar(message_id, "Y coordinate", vec_y_0[i]);
                 }
 
-                trajectory.push_back(CTrajectory);
-
-                G2lib::ClothoidCurve line;
                 G2lib::real_type x_1, y_1;
                 std::vector<G2lib::real_type> vec_x_1, vec_y_1; 
-                line.build_G1(10., 0., 0., 180., 0., 0.);
-                for(int i = 0; i <= (line.length() / DT); i++){
+                for(int i = 0; i <= (trajectory.length() / DT); i++){
                     G2lib::real_type s = i * 0.05;
-                    line.eval(s, x_1, y_1);
+                    trajectory.eval(s, x_1, y_1);
                     
                     vec_x_1.push_back(x_1);
                     vec_y_1.push_back(y_1);
@@ -139,14 +164,13 @@ int main(int argc, const char * argv[]) {
                     logger.log_var(filename_path, "Y0", vec_y_1[i]);
                     logger.write_line(filename_path);
                 }
-                traj = true;
 
-                trajectory.push_back(line);
+                traj = true;
             }
 
-            // the coordinate of the trajectory are the same
+            
 
-
+            return 0;
 /* -------------------------------------------------------------------------------------------------------------- */
 
             //    ____    _    ____            ____   ___  ____ ___ _____ ___ ___  _   _ 
