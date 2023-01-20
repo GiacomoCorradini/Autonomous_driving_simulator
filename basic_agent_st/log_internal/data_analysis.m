@@ -3,16 +3,26 @@ clear
 close all
 
 %% Load data
-data = readtable("Example1.csv");
-path = readtable("Example2.csv");
+data = readtable("Long_param.csv");
+path = readtable("Path.csv");
+traj = readtable("Trajectory.csv");
 
 
 %% Path plot
 
 X0 = table2array(path(:,1));
 Y0 = table2array(path(:,2));
-figure
+X1 = table2array(traj(:,1));
+Y1 = table2array(traj(:,2));
+
+figure, clf, hold on;
+axis equal
 plot(X0,Y0)
+plot(X1,Y1)
+xlabel 'x [m]'
+ylabel 'y [m]'
+title 'Reference vs Actual trajectory'
+legend('Reference trajectory','Actual trajectory')
 
 %% Read data
 
