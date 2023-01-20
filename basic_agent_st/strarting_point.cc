@@ -50,9 +50,11 @@ int main(int argc, const char * argv[]) {
     size_t scenario_msg_size = sizeof(scenario_msg.data_buffer);
     size_t manoeuvre_msg_size = sizeof(manoeuvre_msg.data_buffer);
     uint32_t message_id = 0;
-    std::string filename = "Example1";
-    std::string filename_path = "Example2";
+    std::string filename = "Long_param";
+    std::string filename_path = "Path";
+    std::string filename_traj = "Trajectory";
     static bool traj = false;
+    G2lib::ClothoidList trajectory;
 
 #ifndef _MSC_VER
     // More portable way of supporting signals on UNIX
@@ -104,51 +106,47 @@ int main(int argc, const char * argv[]) {
 
             // Calculate the trajectory only at the beginning of the algorithm
             if(!traj){
-
-                // G2lib::ClothoidCurve CTrajectory;
-                // G2lib::real_type x_0, y_0;
-                // std::vector<G2lib::real_type> vec_x_0, vec_y_0;        
-                // CTrajectory.build_G1(pos_X0, pos_Y0, yaw0, 10., 0., 0.);
-                // for(int i = 0; i <= (CTrajectory.length() / DT); i++){
-                //     G2lib::real_type s = i * 0.05;
-                //     CTrajectory.eval(s, x_0, y_0);                 
-
-                //     vec_x_0.push_back(x_0);
-                //     vec_y_0.push_back(y_0);
-                    
-                //     logger.log_var(filename_path, "X0", vec_x_0[i]);
-                //     logger.log_var(filename_path, "Y0", vec_y_0[i]);
-                //     logger.write_line(filename_path);
-                // }
-
+               
+                /* LINE */
+                
                 // G2lib::ClothoidCurve line;
-                // G2lib::real_type x_1, y_1;
-                // std::vector<G2lib::real_type> vec_x_1, vec_y_1; 
-                // line.build_G1(10., 0., 0., 180., 0., 0.);
+                // G2lib::real_type x_1, y_1, theta_1;
+                // std::vector<G2lib::real_type> vec_x_1, vec_y_1, vec_theta_1;
+                // line.build_G1(0., 2., 0., 180., 2., 0.);
                 // for(int i = 0; i <= (line.length() / DT); i++){
                 //     G2lib::real_type s = i * 0.05;
                 //     line.eval(s, x_1, y_1);
+                //     theta_1 = line.theta(s);
                     
                 //     vec_x_1.push_back(x_1);
                 //     vec_y_1.push_back(y_1);
+                //     vec_theta_1.push_back(theta_1);
                     
                 //     logger.log_var(filename_path, "X0", vec_x_1[i]);
                 //     logger.log_var(filename_path, "Y0", vec_y_1[i]);
+                //     logger.log_var(filename_path, "THETA0", vec_theta_1[i]);
                 //     logger.write_line(filename_path);
                 // }
 
-                // the coordinate of the trajectory are the same
+                //trajectory.push_back(line);
 
-                G2lib::ClothoidList trajectory;
-                std::vector<G2lib::real_type> vec_x_0{1,2.304545,7.999777,8.19259,10.937444,18.488895,22.873348,22.92912,25.018649,34.975645,43.268101,43.775422,53.753729,57.120443,61.448158,69.306701,70.674435,79.498917};
-                std::vector<G2lib::real_type> vec_y_0{1,10.914543,19.134296,29.132437,38.748349,45.303926,54.291505,64.291349,74.070607,74.997007,69.408163,59.421040,60.079361,50.663138,41.648102,35.463985,25.557961,20.853867}; 
+                /* TRAJECTORY MADE BY LINE SEGMENT */
+
+                std::vector<G2lib::real_type> vec_x_0{0.0,3.50000000000000,4.49998800000000,5.49290000000000,6.49285500000000,7.47746900000000,8.47746800000000,9.47746500000000,10.4764290000000,10.6396480000000,11.6395080000000,12.6394880000000,13.6394860000000,14.5206210000000,15.5204770000000,16.5204050000000,17.0638500000000,18.0637810000000,19.0632020000000,20.0631600000000,21.0328470000000,22.0326990000000,23.0324710000000,24.0317990000000,25.0314070000000,26.0303650000000,27.0295060000000,28.0293360000000,29.0285060000000,29.2837350000000,30.2834310000000,31.2832180000000,32.2814460000000,33.2814160000000,34.2813700000000,35.2811700000000,36.2810110000000,37.2808400000000,38.2807040000000,39.2807040000000,40.2803830000000,41.2749290000000,42.2723340000000,43.2712210000000,44.2708930000000,45.2706100000000,45.7268850000000,46.7264070000000,47.7263830000000,48.7263710000000,49.7239290000000,50.7238820000000,51.7230590000000,52.7230200000000,53.7028340000000,54.7028230000000,55.7027440000000,56.7023900000000,57.7021840000000,58.7021570000000,59.7019050000000,60.7019050000000,61.7016600000000,62.7010680000000,63.6951360000000,64.6890670000000,65.6883240000000,66.6876100000000,67.6873280000000,68.6853180000000,69.6850970000000,70.6849510000000,71.6831420000000,72.6831290000000,73.6775310000000,74.6767880000000,75.6761570000000,76.6749130000000,77.6719630000000,78.6719340000000,79.6714640000000,80.6710600000000,81.6708460000000,82.6707240000000,83.6707230000000,84.6706430000000,85.6706370000000,86.6612010000000,87.6609840000000,88.6609460000000,89.6482460000000,90.6478960000000,91.6471910000000,92.6471910000000,93.6469940000000,94.6449000000000,94.8012130000000,95.6217130000000,96.6216730000000,97.6171830000000,98.6164370000000,99.6156810000000,100.615674000000,101.613433000000,102.612750000000,103.612284000000,104.611846000000,105.609540000000,106.609433000000,107.605144000000,108.604985000000,109.604981000000,110.604932000000,111.604792000000,112.604679000000,113.603357000000,114.601286000000,115.601183000000,116.600241000000,117.600239000000,118.009578000000,119.007595000000,120.006732000000,121.006661000000,122.005401000000,123.004838000000,124.002580000000,125.002303000000,126.002302000000,127.000775000000,128.000453000000,128.999180000000,129.999135000000,130.997926000000,131.925020000000,132.924809000000,133.924268000000,134.923677000000,135.923515000000,136.922873000000,137.922818000000,138.922627000000,139.922421000000,140.922399000000,141.921292000000,142.918388000000,143.918354000000,144.917905000000,145.917644000000,146.914524000000,147.913969000000,148.913914000000,149.880210000000,150.873065000000,151.871740000000,152.869309000000,153.859191000000,154.532150000000,155.467670000000,156.460931000000,157.458458000000,158.452398000000,159.374537000000,160.374461000000,161.051641000000,161.402930000000,162.394052000000,162.928471000000,163.876389000000,164.876232000000,165.871104000000,166.871051000000,167.868589000000,168.844533000000,169.709425000000,170.708416000000,171.675559000000,172.656738000000,173.634737000000,174.562620000000,175.482881000000,176.421263000000,177.421089000000,177.554351000000,178.553641000000,179.124684000000,179.859213000000};
+                std::vector<G2lib::real_type> vec_y_0{0.0,0.0937500000000000,0.0887630000000000,0.207608000000000,0.217148000000000,0.391893000000000,0.390752000000000,0.388061000000000,0.433561000000000,1.42015100000000,1.43685600000000,1.44313000000000,1.44553300000000,1.91839700000000,1.93538900000000,1.92344100000000,2.76288600000000,2.75113500000000,2.71711700000000,2.70796300000000,2.95231300000000,2.96950500000000,2.94814000000000,2.91149800000000,2.88346700000000,2.92909000000000,2.88763100000000,2.86924500000000,2.82849700000000,1.86161700000000,1.88628000000000,1.86565100000000,1.92515600000000,1.91742400000000,1.92696800000000,1.94697300000000,1.92909900000000,1.94755500000000,1.96404700000000,1.96334400000000,1.93800700000000,2.04230500000000,1.97031600000000,1.92314000000000,1.94873700000000,1.97254900000000,2.86238800000000,2.83144900000000,2.82462900000000,2.81970000000000,2.74985300000000,2.75956000000000,2.71900300000000,2.72780300000000,2.52789000000000,2.53257300000000,2.54516300000000,2.51855700000000,2.49827000000000,2.49091000000000,2.46847000000000,2.46879400000000,2.49093800000000,2.45655900000000,2.34779900000000,2.23778700000000,2.19925200000000,2.16146300000000,2.13774600000000,2.07436400000000,2.05337400000000,2.07047400000000,2.01035100000000,2.01554800000000,1.90989200000000,1.87134200000000,1.90687200000000,1.95673300000000,1.87998300000000,1.87226700000000,1.84161400000000,1.87002300000000,1.84935700000000,1.86498400000000,1.86326100000000,1.85065200000000,1.85431800000000,1.71727100000000,1.69645600000000,1.70526900000000,1.86413300000000,1.83766900000000,1.80012600000000,1.80012300000000,1.78026700000000,1.71558900000000,0.727881000000000,0.156234000000000,0.165133000000000,0.259793000000000,0.298397000000000,0.337293000000000,0.340897000000000,0.407814000000000,0.444762000000000,0.475280000000000,0.504874000000000,0.572745000000000,0.558095000000000,0.650612000000000,0.632788000000000,0.629944000000000,0.620037000000000,0.636777000000000,0.651830000000000,0.703230000000000,0.767551000000000,0.753231000000000,0.796626000000000,0.794507000000000,1.70689000000000,1.76982900000000,1.81137700000000,1.79951100000000,1.84970600000000,1.81615200000000,1.74899100000000,1.77252900000000,1.77102400000000,1.82626800000000,1.80090200000000,1.85134700000000,1.86076500000000,1.81159900000000,1.43677100000000,1.45734100000000,1.49022100000000,1.52459900000000,1.50659300000000,1.54241100000000,1.55286200000000,1.57242900000000,1.59270400000000,1.59946100000000,1.55243900000000,1.47628000000000,1.46805300000000,1.49801500000000,1.47518100000000,1.55411800000000,1.58742200000000,1.59790100000000,1.85533500000000,1.97466700000000,2.02611400000000,2.09580700000000,1.95391700000000,1.21423700000000,0.860965000000000,0.976867000000000,1.04715600000000,1.15707600000000,1.54393500000000,1.53166100000000,0.795843000000000,1.73211000000000,1.86506400000000,1.01984400000000,1.33835800000000,1.32060400000000,1.21947200000000,1.20911000000000,1.27922800000000,1.49725200000000,1.99921000000000,2.04412200000000,1.78988900000000,1.98298900000000,2.19159700000000,1.81872500000000,2.21003100000000,2.55563100000000,2.57428000000000,1.58319900000000,1.62087200000000,0.799951000000000,0.121374000000000};
+                
+                // for(int i = 0; i < vec_x_0.size() - 1; i++){
+                //     G2lib::LineSegment part_traj;
+                //     part_traj.build_2P(vec_x_0[i], vec_y_0[i], vec_x_0[i + 1], vec_y_0[i + 1]);
+                //     trajectory.push_back(part_traj);
+                //     printLogVar(message_id, "X coordinate", vec_x_0[i]);
+                //     printLogVar(message_id, "Y coordinate", vec_y_0[i]);
+                // }
 
                 for(int i = 0; i < vec_x_0.size() - 1; i++){
-                    G2lib::LineSegment part_traj;
-                    part_traj.build_2P(vec_x_0[i], vec_y_0[i], vec_x_0[i + 1], vec_y_0[i + 1]);
+                    G2lib::ClothoidCurve part_traj;
+                    part_traj.build_G1(vec_x_0[i], vec_y_0[i], 0., vec_x_0[i + 1], vec_y_0[i + 1], 0.);
                     trajectory.push_back(part_traj);
-                    printLogVar(message_id, "X coordinate", vec_x_0[i]);
-                    printLogVar(message_id, "Y coordinate", vec_y_0[i]);
                 }
 
                 G2lib::real_type x_1, y_1;
@@ -160,17 +158,14 @@ int main(int argc, const char * argv[]) {
                     vec_x_1.push_back(x_1);
                     vec_y_1.push_back(y_1);
                     
-                    logger.log_var(filename_path, "X0", vec_x_1[i]);
-                    logger.log_var(filename_path, "Y0", vec_y_1[i]);
+                    logger.log_var(filename_path, "X path", vec_x_1[i]);
+                    logger.log_var(filename_path, "Y path", vec_y_1[i]);
                     logger.write_line(filename_path);
                 }
 
                 traj = true;
             }
-
             
-
-            return 0;
 /* -------------------------------------------------------------------------------------------------------------- */
 
             //    ____    _    ____            ____   ___  ____ ___ _____ ___ ___  _   _ 
@@ -194,10 +189,6 @@ int main(int argc, const char * argv[]) {
              * Y = distance from the left line
              * YAW = Yaw angle from the horizontal axel
             */
-
-            printLogVar(message_id, "Vehicle X coordinate", vehicle_X);
-            printLogVar(message_id, "Vehicle Y coordinate", vehicle_Y);
-            printLogVar(message_id, "Vehicle Yaw coordinate", yaw);
                                                                   
 /* -------------------------------------------------------------------------------------------------------------- */
             
@@ -208,20 +199,31 @@ int main(int argc, const char * argv[]) {
             //  |_____/_/   \_\_| |_____|_| \_\/_/   \_\_____|  \____\___/|_| \_| |_| |_| \_\\___/|_____|
                                                                                                       
             double K_US = 0;                                    // understeering gradient
-            double req_steer = 0;                               // Requested steering wheel angle
-            double lookahead_lat = 10;                          // [m]
+            double req_steer_angle = 0;                               // Requested steering wheel angle
+            double lookahead_lat = 15;                          // [m]
             double steer = in->SteerWhlAg;                      // Actual steering wheel angle
             
             // car position
             G2lib::real_type P0x = vehicle_X;                   // x coordinate of car
-            G2lib::real_type P0y = vehicle_X;                   // y coordinate of car
+            G2lib::real_type P0y = vehicle_Y;                   // y coordinate of car
             G2lib::real_type P0theta = yaw;                     // yaw angle of the car
+
+            logger.log_var(filename_traj, "X vehicle", P0x);
+            logger.log_var(filename_traj, "Y vehicle", P0y);
             
             // Take a point from the reference trajectory
             G2lib::real_type P1x;                               // x coordinate of point trajectory
             G2lib::real_type P1y;                               // y coordinate of point trajectory
             G2lib::real_type P1theta;                           // Default
-            
+            G2lib::real_type variable_s, temp_1, temp_2;        
+
+            // evaluate the closest point on the trajectory considering the actual position of the vehicle
+            trajectory.closestPoint_ISO(P0x,P0y,P1x,P1y,variable_s,temp_1,temp_2);
+           
+            // calculate the lookahead point on the trajectory
+            trajectory.eval(variable_s + lookahead_lat, P1x, P1y);
+            P1theta = trajectory.theta(variable_s + lookahead_lat);
+
             G2lib::ClothoidCurve C1;                            // Clothoid
             // std::vector<G2lib::real_type> vec_x, vec_y;         // 
             // std::vector<G2lib::real_type> vec_theta, vec_kappa; // 
@@ -232,9 +234,7 @@ int main(int argc, const char * argv[]) {
             double curvature = C1.kappaBegin();
 
             // Update output: requested steering angle
-            req_steer = curvature * (in->VehicleLen + K_US*pow(in->VLgtFild,2));
-
-            //out->RequestedSteerWhlAg = req_steer;
+            req_steer_angle = curvature * (in->VehicleLen + K_US * pow(in->VLgtFild,2));
 
 /* -------------------------------------------------------------------------------------------------------------- */
 
@@ -309,6 +309,16 @@ int main(int argc, const char * argv[]) {
                 }
             }
 
+            // Integrated jerk - trapezoidal - with internal a0
+            static double a0_bar = 0.0;
+            double minAcc = -3;
+            double maxAcc = 3;
+
+            double j_req = (DT * (jEval(0.0,m_star) + jEval(DT,m_star)) * 0.5);
+            double req_acc = a0_bar + j_req;
+
+            a0_bar = req_acc;
+            double v_req = v_requested(DT,m_star);
 
 /* -------------------------------------------------------------------------------------------------------------- */
 
@@ -318,40 +328,35 @@ int main(int argc, const char * argv[]) {
             //  | |__| |_| |\ V  V /_____| |___| |___  \ V / | |___| |__|_____| |__| |_| | |\  | | | |  _ <| |_| | |___ 
             //  |_____\___/  \_/\_/      |_____|_____|  \_/  |_____|_____|     \____\___/|_| \_| |_| |_| \_\\___/|_____|
                                                                                                                      
-            // Integrated jerk - trapezoidal - with internal a0
-            static double a0_bar = 0.0;
-            double minAcc = -3;
-            double maxAcc = 3;
-
-            double j_req = (DT * (jEval(0.0,m_star) + jEval(DT,m_star)) * 0.5);
-
-            //double req_acc = a0 + j_req;            
-            double req_acc = a0_bar + j_req;
-
-            a0_bar = req_acc;
-            double v_req = v_requested(DT,m_star);
             
-            // PID control
-            static double integral = 0.0;
-            double P_gain = 0.1;
-            double I_gain = 1.0;
+            // PID longitudinal control
+            static double integral_long = 0.0;
+            double P_gain_long = 0.15;
+            double I_gain_long = 1.0;
             double req_pedal;
-            double error = req_acc - a0;
-            integral = integral + (error * DT);
-            req_pedal = P_gain * error + I_gain * integral;
+            double error_long = req_acc - a0;
+            integral_long = integral_long + (error_long * DT);
+            req_pedal = (P_gain_long * error_long) + (I_gain_long * integral_long);
 
             // Reset the memory
-            // if(in->VLgtFild < 0.1 && j_req > 0.0){
-            //     integral = 0.0;
-            // }
-
-            if(in->VLgtFild < 0.1 && a0_bar < 0.0 && j_req > 0.0){
+            if(in->VLgtFild < 0.15 && a0_bar < 0.0 && j_req > 0.0){
                a0_bar = 0.0;
-               integral = 0.0;
+               integral_long = 0.0;
             }
 
-            // Update output: requested acceleration
+            // PID longitudinal control
+            static double integral_lat = 0.0;
+            double P_gain_lat = 5.;
+            double I_gain_lat = 1.;
+            double req_steer;
+            double error_lat = req_steer_angle - steer;
+            integral_lat = integral_lat + (error_lat * DT);
+            req_steer = (P_gain_lat * error_lat) + (I_gain_lat * integral_lat);
+
+            // Update output: requested acceleration and requested steering angle
             out->RequestedAcc = req_pedal;
+            out->RequestedSteerWhlAg = req_steer;
+
 
 /* -------------------------------------------------------------------------------------------------------------- */
 
@@ -383,6 +388,7 @@ int main(int argc, const char * argv[]) {
             logger.log_var(filename, "c5", m_star[5]);
 
             // Write log
+            logger.write_line(filename_traj);
             logger.write_line(filename);
 
             // Screen print
@@ -390,14 +396,12 @@ int main(int argc, const char * argv[]) {
             printLogVar(message_id, "CycleNumber", in->CycleNumber);
             printLogVar(message_id, "Time", num_seconds);
             printLogVar(message_id, "TrafficLight", in->TrfLightCurrState);
-            printLogVar(message_id, "Dist to TrfLight", in->TrfLightDist);
             printLogVar(message_id, "Actual velocity", in->VLgtFild);
             printLogVar(message_id, "Actual acceleration", in->ALgtFild);
             printLogVar(message_id, "Actual steering wheel", steer);
-            printLogVar(message_id, "Requested acceleration", req_pedal);
-            printLogVar(message_id, "Requested steering wheel", req_steer);
-            printLogVar(message_id, "Lateral position Left", LatPosL);
-            printLogVar(message_id, "Lateral position Right", LatPosR);
+            printLogVar(message_id, "Vehicle X coordinate", vehicle_X);
+            printLogVar(message_id, "Vehicle Y coordinate", vehicle_Y);
+            printLogVar(message_id, "Vehicle Yaw coordinate", yaw);
 
 
             // Send manoeuvre message to the environment
