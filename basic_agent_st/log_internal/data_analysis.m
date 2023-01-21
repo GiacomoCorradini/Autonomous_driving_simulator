@@ -16,7 +16,7 @@ X1 = table2array(traj(:,1));
 Y1 = table2array(traj(:,2));
 
 figure, clf, hold on;
-axis equal
+%axis equal
 plot(X0,Y0)
 plot(X1,Y1)
 xlabel 'x [m]'

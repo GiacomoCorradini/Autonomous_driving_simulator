@@ -25,6 +25,7 @@ add_executable(basic_agent
         log/screen_print.c
         log/logvars.cc
         strarting_point.cc
+        # log/rrt_test.cc
 )
 
 
