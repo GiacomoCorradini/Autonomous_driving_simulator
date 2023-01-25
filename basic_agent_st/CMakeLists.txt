@@ -16,6 +16,8 @@ include_directories(
 
 link_directories(
         lib
+        Clothoids/lib/dll
+        Clothoids/lib3rd/dll
 )
 
 # ------------------------------- basic agent ------------------------------------
@@ -25,7 +27,6 @@ add_executable(basic_agent
         log/screen_print.c
         log/logvars.cc
         strarting_point.cc
-        # log/rrt_test.cc
 )
 
 
@@ -33,6 +34,7 @@ target_link_libraries(basic_agent agent_lib ${lib_ws32})
 target_link_libraries(basic_agent libClothoids_linux.so ${lib_ws32})
 target_link_libraries(basic_agent libquarticRootsFlocke_linux.so ${lib_ws32})
 target_link_libraries(basic_agent libUtils_linux.so ${lib_ws32})
+target_link_libraries(basic_agent ${CMAKE_DL_LIBS})
 
 target_compile_options(basic_agent
         PUBLIC -DNOT_INLINED -DSERVER
