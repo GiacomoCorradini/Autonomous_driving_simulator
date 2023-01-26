@@ -19,6 +19,11 @@ figure, clf, hold on;
 %axis equal
 plot(X0,Y0)
 plot(X1,Y1)
+
+rectangle("Position",[40 0.5 1.5 1])
+rectangle("Position",[60 2.5 1.5 1])
+rectangle("Position",[80 0.5 1.5 1])
+
 xlabel 'x [m]'
 ylabel 'y [m]'
 title 'Reference vs Actual trajectory'
