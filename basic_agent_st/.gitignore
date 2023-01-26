@@ -26,3 +26,5 @@ matlab/v_opt.m
 matlab/totalCost.m
 *.asv
 matlab/matlab agent
+
+path.txt
