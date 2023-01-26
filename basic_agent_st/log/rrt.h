@@ -212,7 +212,7 @@ void rrt_path(node start, node goal, obstacle obs0, obstacle obs1, obstacle obs2
   while (1)
   {
     // printf("node %d\n", num_node);
-    if (num_node > 15000)
+    if (num_node > 30000)
     {
       printf("Path not find :(\n");
       break;
@@ -265,6 +265,25 @@ void rrt_path(node start, node goal, obstacle obs0, obstacle obs1, obstacle obs2
           path_car[i - 1].p.x = (path_car[i - 1].p.x) / 10.0;
           path_car[i - 1].p.y = (path_car[i - 1].p.y) / 10.0;
         }
+
+        FILE *file = fopen("path.txt", "w");
+        
+        fprintf(file, "Path found!\n");
+        fprintf(file, "Starting point = (%f, %f)\n", nodevec[0].p.x/10.0, nodevec[0].p.y/10.0);
+        fprintf(file, "Final point = (%f, %f)\n", nodevec[num_node].p.x/10.0, nodevec[num_node].p.y/10.0);
+        fprintf(file, "Cost = %f\n", cost);
+        fprintf(file, "nodes = %d\n", tot_nodes);
+
+        for (int i = 0; i < tot_nodes; i++)
+        {
+          fprintf(file, "(%f, %f)\n", path_car[i].p.x, path_car[i].p.y);
+        }
+        
+
+
+        
+
+        fclose(file);
 
         break;
       }
