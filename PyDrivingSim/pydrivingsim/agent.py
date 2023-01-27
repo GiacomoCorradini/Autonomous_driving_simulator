@@ -49,7 +49,7 @@ class Agent():
         self.manoeuvre_msg_pointer = ct.pointer(self.manoeuvre_msg)
 
         self.cycle_number = 0
-        self.requested_cruising_speed = 20
+        self.requested_cruising_speed = 15
         self.action = (0,0)
 
         # Data to be filtered
@@ -131,6 +131,7 @@ class Agent():
                     s.TrfLightThirdTimeToChange = s.TrfLightSecondTimeToChange+trafficlight.time_phases[divmod(trafficlight.state+2,3)[1]]
                 else:
                     s.NrTrfLights = 0
+                    s.TrfLightDist = trafficlight.pos[0] - v.state[0]
                     if trafficlight.pos[0] - v.state[0] < -20.0:
                         s.Status = 1
 
