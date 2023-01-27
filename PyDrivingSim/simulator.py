@@ -26,11 +26,11 @@ def main():
     road_width = 3.75
     white_lane_width = 1
     obs = Obstacle()
-    obs.set_pos((5,0.5))
+    obs.set_pos((40,0.5))
     obs = Obstacle()
-    obs.set_pos((10,2.5))
+    obs.set_pos((60,2.5))
     obs = Obstacle()
-    obs.set_pos((15,0.5))
+    obs.set_pos((80,0.5))
 
     killer = GracefulKiller()
     while not killer.kill_now and World().loop:

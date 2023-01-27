@@ -1,5 +1,5 @@
 // Definisco la distanza minima tra due punti dell'albero
-#define min_distance 1  // = distance*10
+#define min_distance 10 // = distance*10
 int num_node = 0.0;
 
 // Definisco una struct point
@@ -37,9 +37,9 @@ bool isObstacle(std::vector<double> &rvec_x, std::vector<double> &rvec_y, obstac
     double y = rvec_y[i];
 
     if ((x >= obs0.x - offs && x <= obs0.x + obs0.lenght + offs && y >= obs0.y - offs && y <= obs0.y + obs0.width + offs) || (x >= obs1.x - offs && x <= obs1.x + obs1.lenght + offs && y >= obs1.y - offs && y <= obs1.y + obs1.width + offs) || (x >= obs0.x - offs && x <= obs2.x + obs2.lenght + offs && y >= obs2.y - offs && y <= obs2.y + obs2.width + offs))
-      {
-        ret = true;
-      }
+    {
+      ret = true;
+    }
   }
 
   // Controllo che il punto esteso non sia sull'ostacolo
@@ -96,7 +96,7 @@ int closest_node(double num_node, std::vector<node> &nodevec, node random)
 }
 
 // Funzione per individuare la retta tra due punti
-void retta(node random, node closest, std::vector<double> &rvec_x, std::vector<double> &rvec_y, int point_retta, double m_retta, double b_retta)
+double retta(node random, node closest, std::vector<double> &rvec_x, std::vector<double> &rvec_y, int point_retta, double m_retta, double b_retta)
 {
   double x1 = random.p.x;
   double y1 = random.p.y;
@@ -133,6 +133,8 @@ void retta(node random, node closest, std::vector<double> &rvec_x, std::vector<d
     m_retta = m;
     b_retta = b;
   }
+
+  return m;
 }
 
 // Funzione per estendere il nodo più vicino verso un punto casuale
@@ -236,11 +238,11 @@ void rrt_path(node start, node goal, obstacle obs0, obstacle obs1, obstacle obs2
     std::vector<double> rvecx;
     std::vector<double> rvecy;
     double m, b;
-    retta(extended, closest, rvecx, rvecy, point_retta, m, b);
+    m = retta(extended, closest, rvecx, rvecy, point_retta, m, b);
     int isobs = isObstacle(rvecx, rvecy, obs0, obs1, obs2, point_retta, extended);
 
     // Aggiungo un nuovo punto all'albero se non incontra ostacoli
-    if (isobs != 1)
+    if (isobs != 1 && m <= 1)
     {
       nodevec.push_back(extended);    // aggiungo nodo all'albero
       nodevec_par.push_back(closest); // aggiungo il parent del nodo
@@ -248,7 +250,7 @@ void rrt_path(node start, node goal, obstacle obs0, obstacle obs1, obstacle obs2
       // Termina algoritmo quando un punto dell'albero è a distanza d <= min_distance dal punto finale
       double d = distance(nodevec[num_node], goal);
 
-      if (d <= 10)
+      if (d <= min_distance)
       {
         printf("Punto finale = (%f, %f)\n", extended.p.x, extended.p.y);
         printf("Percorso trovato!\n");
@@ -267,10 +269,10 @@ void rrt_path(node start, node goal, obstacle obs0, obstacle obs1, obstacle obs2
         }
 
         FILE *file = fopen("path.txt", "w");
-        
+
         fprintf(file, "Path found!\n");
-        fprintf(file, "Starting point = (%f, %f)\n", nodevec[0].p.x/10.0, nodevec[0].p.y/10.0);
-        fprintf(file, "Final point = (%f, %f)\n", nodevec[num_node].p.x/10.0, nodevec[num_node].p.y/10.0);
+        fprintf(file, "Starting point = (%f, %f)\n", nodevec[0].p.x / 10.0, nodevec[0].p.y / 10.0);
+        fprintf(file, "Final point = (%f, %f)\n", nodevec[num_node].p.x / 10.0, nodevec[num_node].p.y / 10.0);
         fprintf(file, "Cost = %f\n", cost);
         fprintf(file, "nodes = %d\n", tot_nodes);
 
@@ -278,10 +280,6 @@ void rrt_path(node start, node goal, obstacle obs0, obstacle obs1, obstacle obs2
         {
           fprintf(file, "(%f, %f)\n", path_car[i].p.x, path_car[i].p.y);
         }
-        
-
-
-        
 
         fclose(file);
 
