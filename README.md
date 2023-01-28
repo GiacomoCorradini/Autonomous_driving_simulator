@@ -1,6 +1,6 @@
 # Autonomous driving simulator
 
-**Compile agent communication library**
+## Compile agent communication library
 
    1) enter inside the folder agent_communication_lib
 ```
@@ -14,7 +14,7 @@ cmake --build build -t install
    3) copy file in bin/lib/libagent_lib.so into ../PyDrivingSim/agent
    4) copy file in bin/lib_static/libagent_lib.a into ../basic_agent_st/lib
 
-**Compile Clothoids library**
+## Compile Clothoids library
 
    1) enter inside the folder Clothoids
 ```
@@ -26,7 +26,7 @@ cmake -Bbuild
 cmake --build build -t install
 ```
 
-**Compile basic_agent**
+## Compile basic_agent
 
    1) enter inside the folder basic_agent
 ```
@@ -37,11 +37,11 @@ cd basic_agent
 cmake -Bbuild
 cmake --build build
 ```
-**Run the project**
+## Run the project
 
 Open two different terminals
 
-***Run basic_agent in the first terminal***
+**Run basic_agent in the first terminal**
 
    1) enter inside the folder basic_agent
 ```
@@ -52,7 +52,7 @@ cd basic_agent
 ./bin/basic_agent
 ```
 
-***Run pydriving simulator in the second terminal***
+**Run pydriving simulator in the second terminal**
 
    1) enter inside the folder PyDrivingSim
 ```
