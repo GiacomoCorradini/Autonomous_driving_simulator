@@ -28,7 +28,8 @@ typedef struct
 bool isObstacle(std::vector<double> &rvec_x, std::vector<double> &rvec_y, obstacle obs0, obstacle obs1, obstacle obs2, int point_retta, node extended)
 {
   bool ret = false;
-  double offs = 4;
+  double offsx = 20;
+  double offsy = 4;
 
   // Controllo che nessun punto della retta sia sull'ostacolo
   for (int i = 0; i < point_retta; i++)
@@ -36,7 +37,7 @@ bool isObstacle(std::vector<double> &rvec_x, std::vector<double> &rvec_y, obstac
     double x = rvec_x[i];
     double y = rvec_y[i];
 
-    if ((x >= obs0.x - offs && x <= obs0.x + obs0.lenght + offs && y >= obs0.y - offs && y <= obs0.y + obs0.width + offs) || (x >= obs1.x - offs && x <= obs1.x + obs1.lenght + offs && y >= obs1.y - offs && y <= obs1.y + obs1.width + offs) || (x >= obs0.x - offs && x <= obs2.x + obs2.lenght + offs && y >= obs2.y - offs && y <= obs2.y + obs2.width + offs))
+    if ((x >= obs0.x - offsx && x <= obs0.x + obs0.lenght + offsx && y >= obs0.y - offsy && y <= obs0.y + obs0.width + offsy) || (x >= obs1.x - offsx && x <= obs1.x + obs1.lenght + offsx && y >= obs1.y - offsy && y <= obs1.y + obs1.width + offsy) || (x >= obs0.x - offsx && x <= obs2.x + obs2.lenght + offsx && y >= obs2.y - offsy && y <= obs2.y + obs2.width + offsy))
     {
       ret = true;
     }
@@ -45,7 +46,7 @@ bool isObstacle(std::vector<double> &rvec_x, std::vector<double> &rvec_y, obstac
   // Controllo che il punto esteso non sia sull'ostacolo
   double x = extended.p.x;
   double y = extended.p.y;
-  if ((x >= obs0.x - offs && x <= obs0.x + obs0.lenght + offs && y >= obs0.y - offs && y <= obs0.y + obs0.width + offs) || (x >= obs1.x - offs && x <= obs1.x + obs1.lenght + offs && y >= obs1.y - offs && y <= obs1.y + obs1.width + offs) || (x >= obs0.x - offs && x <= obs2.x + obs2.lenght + offs && y >= obs2.y - offs && y <= obs2.y + obs2.width + offs))
+  if ((x >= obs0.x - offsx && x <= obs0.x + obs0.lenght + offsx && y >= obs0.y - offsy && y <= obs0.y + obs0.width + offsy) || (x >= obs1.x - offsx && x <= obs1.x + obs1.lenght + offsx && y >= obs1.y - offsy && y <= obs1.y + obs1.width + offsy) || (x >= obs0.x - offsx && x <= obs2.x + obs2.lenght + offsx && y >= obs2.y - offsy && y <= obs2.y + obs2.width + offsy))
   {
     ret = true;
   }
