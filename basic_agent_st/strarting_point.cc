@@ -29,7 +29,6 @@ void intHandler(int signal)
 }
 
 // STATIC FUNCTION DECLARATION
-
 static void copy_m(double m1[6], double m2[6]);
 static int check_0(double m[6]);
 static double jEval(double t, double m[6]);
@@ -102,6 +101,9 @@ int main(int argc, const char *argv[])
             //    | | |  _ <  / ___ \ |_| | |__| |___  | || |_| |  _ < | |
             //    |_| |_| \_\/_/   \_\___/|_____\____| |_| \___/|_| \_\|_|
 
+            static std::string chose_traj = "RRT";
+            // static std::string chose_traj = "Staigth_line";
+
             // Get the initial car position
             static double pos_X0 = 0.;
             static double pos_Y0 = in->LatOffsLineL;
@@ -112,81 +114,83 @@ int main(int argc, const char *argv[])
             {
 
                 /* RRT ALGORITHM */
+                if(chose_traj == "RRT"){
+                    // Starting and goal points definition
+                    node start, goal;
+                    start.p.x = pos_X0 * 10;
+                    start.p.y = pos_Y0 * 10;
+                    goal.p.x = 1800.0;
+                    goal.p.y = 0.0;
 
-                // Starting and goal points definition
-                node start, goal;
-                start.p.x = pos_X0 * 10;
-                start.p.y = pos_Y0 * 10;
-                goal.p.x = 1800.0;
-                goal.p.y = 0.0;
+                    // Obstacles definition
+                    obstacle obs0, obs1, obs2;
+                    
+                    obs0.x = in->ObjX[0]*10;
+                    obs0.y = in->ObjY[0]*10;
+                    obs0.lenght = in->ObjLen[0]*10;
+                    obs0.width = in->ObjWidth[0]*10;
 
-                // Obstacles definition
-                obstacle obs0, obs1, obs2;
-                
-                obs0.x = in->ObjX[0]*10;
-                obs0.y = in->ObjY[0]*10;
-                obs0.lenght = in->ObjLen[0]*10;
-                obs0.width = in->ObjWidth[0]*10;
+                    obs1.x = in->ObjX[1]*10;
+                    obs1.y = in->ObjY[1]*10;
+                    obs1.lenght = in->ObjLen[0]*10;
+                    obs1.width = in->ObjWidth[0]*10;
 
-                obs1.x = in->ObjX[1]*10;
-                obs1.y = in->ObjY[1]*10;
-                obs1.lenght = in->ObjLen[0]*10;
-                obs1.width = in->ObjWidth[0]*10;
+                    obs2.x = in->ObjX[2]*10;
+                    obs2.y = in->ObjY[2]*10;
+                    obs2.lenght = in->ObjLen[0]*10;
+                    obs2.width = in->ObjWidth[0]*10;
 
-                obs2.x = in->ObjX[2]*10;
-                obs2.y = in->ObjY[2]*10;
-                obs2.lenght = in->ObjLen[0]*10;
-                obs2.width = in->ObjWidth[0]*10;
+                    // Definisco il vettore dei punti che definiscono il path da seguire
+                    std::vector<node> path_car;
 
-                // Definisco il vettore dei punti che definiscono il path da seguire
-                std::vector<node> path_car;
+                    rrt_path(start, goal, obs0, obs1, obs2, path_car);
 
-                rrt_path(start, goal, obs0, obs1, obs2, path_car);
+                    for (int i = 0; i < path_car.size() - 1; i++)
+                    {
+                        G2lib::ClothoidCurve part_traj;
+                        part_traj.build_G1(path_car[i].p.x, path_car[i].p.y, 0., path_car[i + 1].p.x, path_car[i + 1].p.y, 0.);
+                        trajectory.push_back(part_traj);
+                    }
 
-                for (int i = 0; i < path_car.size() - 1; i++)
-                {
-                    G2lib::ClothoidCurve part_traj;
-                    part_traj.build_G1(path_car[i].p.x, path_car[i].p.y, 0., path_car[i + 1].p.x, path_car[i + 1].p.y, 0.);
-                    trajectory.push_back(part_traj);
-                }
+                    G2lib::real_type x_1, y_1;
+                    std::vector<G2lib::real_type> vec_x_1, vec_y_1;
+                    for (int i = 0; i <= (trajectory.length() / DT); i++)
+                    {
+                        G2lib::real_type s = i * 0.05;
+                        trajectory.eval(s, x_1, y_1);
 
-                G2lib::real_type x_1, y_1;
-                std::vector<G2lib::real_type> vec_x_1, vec_y_1;
-                for (int i = 0; i <= (trajectory.length() / DT); i++)
-                {
-                    G2lib::real_type s = i * 0.05;
-                    trajectory.eval(s, x_1, y_1);
+                        vec_x_1.push_back(x_1);
+                        vec_y_1.push_back(y_1);
 
-                    vec_x_1.push_back(x_1);
-                    vec_y_1.push_back(y_1);
-
-                    logger.log_var(filename_path, "X path", vec_x_1[i]);
-                    logger.log_var(filename_path, "Y path", vec_y_1[i]);
-                    logger.write_line(filename_path);
+                        logger.log_var(filename_path, "X path", vec_x_1[i]);
+                        logger.log_var(filename_path, "Y path", vec_y_1[i]);
+                        logger.write_line(filename_path);
+                    }
                 }
 
                 /* LINE */
+                if(chose_traj == "Staigth_line"){
+                G2lib::ClothoidCurve line;
+                G2lib::real_type x_1, y_1, theta_1;
+                std::vector<G2lib::real_type> vec_x_1, vec_y_1, vec_theta_1;
+                line.build_G1(0., 2., 0., 180., 2., 0.);
+                for(int i = 0; i <= (line.length() / DT); i++){
+                    G2lib::real_type s = i * 0.05;
+                    line.eval(s, x_1, y_1);
+                    theta_1 = line.theta(s);
 
-                // G2lib::ClothoidCurve line;
-                // G2lib::real_type x_1, y_1, theta_1;
-                // std::vector<G2lib::real_type> vec_x_1, vec_y_1, vec_theta_1;
-                // line.build_G1(0., 2., 0., 180., 2., 0.);
-                // for(int i = 0; i <= (line.length() / DT); i++){
-                //     G2lib::real_type s = i * 0.05;
-                //     line.eval(s, x_1, y_1);
-                //     theta_1 = line.theta(s);
+                    vec_x_1.push_back(x_1);
+                    vec_y_1.push_back(y_1);
+                    vec_theta_1.push_back(theta_1);
 
-                //     vec_x_1.push_back(x_1);
-                //     vec_y_1.push_back(y_1);
-                //     vec_theta_1.push_back(theta_1);
+                    logger.log_var(filename_path, "X0", vec_x_1[i]);
+                    logger.log_var(filename_path, "Y0", vec_y_1[i]);
+                    logger.log_var(filename_path, "THETA0", vec_theta_1[i]);
+                    logger.write_line(filename_path);
+                }
 
-                //     logger.log_var(filename_path, "X0", vec_x_1[i]);
-                //     logger.log_var(filename_path, "Y0", vec_y_1[i]);
-                //     logger.log_var(filename_path, "THETA0", vec_theta_1[i]);
-                //     logger.write_line(filename_path);
-                // }
-
-                // trajectory.push_back(line);
+                trajectory.push_back(line);
+                }
 
                 traj = true;
             }
@@ -285,7 +289,6 @@ int main(int argc, const char *argv[])
             double m_star[6], m1[6], m2[6];              // primitives
             double T1 = 0, T2 = 0, smax = 0, v1 = 0;     // usefull variable
 
-            // Check if there is almost one Traffic light in the scenario
             if (in->NrTrfLights != 0)
             {
                 x_tr = in->TrfLightDist;
