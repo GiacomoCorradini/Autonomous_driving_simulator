@@ -56,6 +56,10 @@ int main(int argc, const char *argv[])
     std::string filename_traj = "Trajectory";
     static bool traj = false;
     G2lib::ClothoidList trajectory;
+    G2lib::ClothoidList trajectory_prova;
+
+    std::string test = "test";
+
 
 #ifndef _MSC_VER
     // More portable way of supporting signals on UNIX
@@ -101,8 +105,8 @@ int main(int argc, const char *argv[])
             //    | | |  _ <  / ___ \ |_| | |__| |___  | || |_| |  _ < | |
             //    |_| |_| \_\/_/   \_\___/|_____\____| |_| \___/|_| \_\|_|
 
-            static std::string chose_traj = "RRT";
-            // static std::string chose_traj = "Staigth_line";
+            static std::string select_traj = "RRT";
+            //static std::string select_traj = "Staigth_line";
 
             // Get the initial car position
             static double pos_X0 = 0.;
@@ -114,7 +118,7 @@ int main(int argc, const char *argv[])
             {
 
                 /* RRT ALGORITHM */
-                if(chose_traj == "RRT"){
+                if(select_traj == "RRT"){
                     // Starting and goal points definition
                     node start, goal;
                     start.p.x = pos_X0 * 10;
@@ -148,48 +152,66 @@ int main(int argc, const char *argv[])
                     for (int i = 0; i < path_car.size() - 1; i++)
                     {
                         G2lib::ClothoidCurve part_traj;
-                        part_traj.build_G1(path_car[i].p.x, path_car[i].p.y, 0., path_car[i + 1].p.x, path_car[i + 1].p.y, 0.);
+                        double x1 = path_car[i].p.x;
+                        double x2 = path_car[i + 1].p.x;
+                        double y1 = path_car[i].p.y;
+                        double y2 = path_car[i + 1].p.y;
+                        double angle = 0. ; //atan2(y1 - y2, x1 - x2);
+                        part_traj.build_G1(x1, y1, 0., x2, y2, angle);
+
+                        G2lib::PolyLine poly;
+                        poly.build(part_traj,1);
                         trajectory.push_back(part_traj);
+                        trajectory_prova.push_back(poly);
                     }
 
                     G2lib::real_type x_1, y_1;
+                    G2lib::real_type x_1p, y_1p;
                     std::vector<G2lib::real_type> vec_x_1, vec_y_1;
+                    std::vector<G2lib::real_type> vec_x_1p, vec_y_1p;
                     for (int i = 0; i <= (trajectory.length() / DT); i++)
                     {
                         G2lib::real_type s = i * 0.05;
                         trajectory.eval(s, x_1, y_1);
+                        trajectory_prova.eval(s, x_1p, y_1p);
 
                         vec_x_1.push_back(x_1);
                         vec_y_1.push_back(y_1);
+                        vec_x_1p.push_back(x_1p);
+                        vec_y_1p.push_back(y_1p);
 
                         logger.log_var(filename_path, "X path", vec_x_1[i]);
                         logger.log_var(filename_path, "Y path", vec_y_1[i]);
+                        logger.log_var(filename_path, "Xp path", vec_x_1p[i]);
+                        logger.log_var(filename_path, "Yp path", vec_y_1p[i]);
                         logger.write_line(filename_path);
                     }
                 }
 
+                return 0;
+
                 /* LINE */
-                if(chose_traj == "Staigth_line"){
-                G2lib::ClothoidCurve line;
-                G2lib::real_type x_1, y_1, theta_1;
-                std::vector<G2lib::real_type> vec_x_1, vec_y_1, vec_theta_1;
-                line.build_G1(0., 2., 0., 180., 2., 0.);
-                for(int i = 0; i <= (line.length() / DT); i++){
-                    G2lib::real_type s = i * 0.05;
-                    line.eval(s, x_1, y_1);
-                    theta_1 = line.theta(s);
+                if(select_traj == "Staigth_line"){
+                    G2lib::ClothoidCurve line;
+                    G2lib::real_type x_1, y_1, theta_1;
+                    std::vector<G2lib::real_type> vec_x_1, vec_y_1, vec_theta_1;
+                    line.build_G1(pos_X0, pos_Y0, 0., 182., pos_Y0, 0.);
+                    for(int i = 0; i <= (line.length() / DT); i++){
+                        G2lib::real_type s = i * 0.05;
+                        line.eval(s, x_1, y_1);
+                        theta_1 = line.theta(s);
 
-                    vec_x_1.push_back(x_1);
-                    vec_y_1.push_back(y_1);
-                    vec_theta_1.push_back(theta_1);
+                        vec_x_1.push_back(x_1);
+                        vec_y_1.push_back(y_1);
+                        vec_theta_1.push_back(theta_1);
 
-                    logger.log_var(filename_path, "X0", vec_x_1[i]);
-                    logger.log_var(filename_path, "Y0", vec_y_1[i]);
-                    logger.log_var(filename_path, "THETA0", vec_theta_1[i]);
-                    logger.write_line(filename_path);
-                }
+                        logger.log_var(filename_path, "X0", vec_x_1[i]);
+                        logger.log_var(filename_path, "Y0", vec_y_1[i]);
+                        logger.log_var(filename_path, "THETA0", vec_theta_1[i]);
+                        logger.write_line(filename_path);
+                    }
 
-                trajectory.push_back(line);
+                    trajectory.push_back(line);
                 }
 
                 traj = true;
@@ -226,43 +248,69 @@ int main(int argc, const char *argv[])
             //  | |___ / ___ \| | | |___|  _ <  / ___ \| |___  | |__| |_| | |\  | | | |  _ <| |_| | |___
             //  |_____/_/   \_\_| |_____|_| \_\/_/   \_\_____|  \____\___/|_| \_| |_| |_| \_\\___/|_____|
 
-            double K_US = 0;               // understeering gradient
+            static std::string select_latcontroller = "Clothoids";
+            //static std::string select_latcontroller = "Previw_point";
+
             double req_steer_angle = 0;    // Requested steering wheel angle
-            double lookahead_lat = 10;     // [m]
             double steer = in->SteerWhlAg; // Actual steering wheel angle
 
-            // car position
-            G2lib::real_type P0x = vehicle_X; // x coordinate of car
-            G2lib::real_type P0y = vehicle_Y; // y coordinate of car
-            G2lib::real_type P0theta = yaw;   // yaw angle of the car
+            if(select_latcontroller == "Clothoids"){
+                double K_US = 0;               // understeering gradient
+                double lookahead_lat = 10;     // [m]
 
-            logger.log_var(filename_traj, "X vehicle", P0x);
-            logger.log_var(filename_traj, "Y vehicle", P0y);
+                // car position
+                G2lib::real_type P0x = vehicle_X; // x coordinate of car
+                G2lib::real_type P0y = vehicle_Y; // y coordinate of car
+                G2lib::real_type P0theta = yaw;   // yaw angle of the car
 
-            // Take a point from the reference trajectory
-            G2lib::real_type P1x;     // x coordinate of point trajectory
-            G2lib::real_type P1y;     // y coordinate of point trajectory
-            G2lib::real_type P1theta; // Default
-            G2lib::real_type variable_s, temp_1, temp_2;
+                logger.log_var(filename_traj, "X vehicle", P0x);
+                logger.log_var(filename_traj, "Y vehicle", P0y);
 
-            // evaluate the closest point on the trajectory considering the actual position of the vehicle
-            trajectory.closestPoint_ISO(P0x, P0y, P1x, P1y, variable_s, temp_1, temp_2);
+                // Take a point from the reference trajectory
+                G2lib::real_type P1x;     // x coordinate of point trajectory
+                G2lib::real_type P1y;     // y coordinate of point trajectory
+                G2lib::real_type P1theta; // Default
+                G2lib::real_type variable_s, temp_1, temp_2;
 
-            // calculate the lookahead point on the trajectory
-            trajectory.eval(variable_s + lookahead_lat, P1x, P1y);
-            P1theta = trajectory.theta(variable_s + lookahead_lat);
+                // evaluate the closest point on the trajectory considering the actual position of the vehicle
+                trajectory.closestPoint_ISO(P0x, P0y, P1x, P1y, variable_s, temp_1, temp_2);
 
-            G2lib::ClothoidCurve C1; // Clothoid
-            // std::vector<G2lib::real_type> vec_x, vec_y;         //
-            // std::vector<G2lib::real_type> vec_theta, vec_kappa; //
-            // G2lib::real_type x, y, theta, kappa;
+                // calculate the lookahead point on the trajectory
+                trajectory.eval(variable_s + lookahead_lat, P1x, P1y);
+                P1theta = trajectory.theta(variable_s + lookahead_lat);
 
-            // Build the clothoid
-            C1.build_G1(P0x, P0y, P0theta, P1x, P1y, P1theta);
-            double curvature = C1.kappaBegin();
+                G2lib::ClothoidCurve C1; // Clothoid
+                // std::vector<G2lib::real_type> vec_x, vec_y;         //
+                // std::vector<G2lib::real_type> vec_theta, vec_kappa; //
+                // G2lib::real_type x, y, theta, kappa;
 
-            // Update output: requested steering angle
-            req_steer_angle = curvature * (in->VehicleLen + K_US * pow(in->VLgtFild, 2));
+                // Build the clothoid
+                C1.build_G1(P0x, P0y, P0theta, P1x, P1y, P1theta);
+                double curvature = C1.kappaBegin();
+
+                // Update output: requested steering angle
+                req_steer_angle = curvature * (in->VehicleLen + K_US * pow(in->VLgtFild, 2));
+            }
+
+            if(select_latcontroller == "Previw_point"){
+                double lookahead_lat = 10;     // [m]
+                double K_e = 0.2;                // traking error coefficient
+                double K_theta = 0.01;            // heading error coefficient
+
+                // Lookahead point Ph
+                G2lib::real_type Ph_x = vehicle_X + lookahead_lat * cos(yaw); // x coordinate of the lookahead point
+                G2lib::real_type Ph_y = vehicle_Y + lookahead_lat * sin(yaw); // y coordinate of the lookahead point
+                G2lib::real_type Pp_x;     // x coordinate of point trajectory
+                G2lib::real_type Pp_y;     // y coordinate of point trajectory
+                G2lib::real_type Pp_theta; // Default
+                G2lib::real_type variable_s, temp_1, e_p;
+
+                trajectory.closestPoint_ISO(Ph_x, Ph_y, Pp_x, Pp_y, variable_s, temp_1, e_p);
+                Pp_theta = trajectory.theta(variable_s);
+                double e_theta = yaw - Pp_theta;
+
+                req_steer_angle = -(K_e * e_p + K_theta * e_theta);
+            }
 
             /* -------------------------------------------------------------------------------------------------------------- */
 
@@ -387,15 +435,6 @@ int main(int argc, const char *argv[])
                 a0_bar = 0.0;
                 integral_long = 0.0;
             }
-
-            // // PID longitudinal control
-            // static double integral_lat = 0.0;
-            // double P_gain_lat = 5.;
-            // double I_gain_lat = 1.;
-            // double req_steer;
-            // double error_lat = req_steer_angle - steer;
-            // integral_lat = integral_lat + (error_lat * DT);
-            // req_steer = (P_gain_lat * error_lat) + (I_gain_lat * integral_lat);
 
             // Update output: requested acceleration and requested steering angle
             out->RequestedAcc = req_pedal;

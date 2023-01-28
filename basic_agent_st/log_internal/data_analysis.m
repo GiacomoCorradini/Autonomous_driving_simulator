@@ -2,23 +2,36 @@ clc
 clear
 close all
 
-%% Load data
+% Load data
 data = readtable("Long_param.csv");
 path = readtable("Path.csv");
 traj = readtable("Trajectory.csv");
+test = readtable("test.csv");
 
-
-%% Path plot
+% Path plot
 
 X0 = table2array(path(:,1));
 Y0 = table2array(path(:,2));
 X1 = table2array(traj(:,1));
 Y1 = table2array(traj(:,2));
+X1p = table2array(path(:,3));
+Y1p = table2array(path(:,4));
+
+
+XH = table2array(test(:,1));
+YH = table2array(test(:,2));
+X = table2array(test(:,3));
+Y = table2array(test(:,4));
+theta_traj = table2array(test(:,5));
+theta_car = table2array(test(:,6));
 
 figure, clf, hold on;
 %axis equal
 plot(X0,Y0)
 plot(X1,Y1)
+plot(X1p,Y1p,'r--')
+%plot(XH,YH,'.','markersize', 8,'Color','g')
+%plot(X,Y,'.','markersize', 8,'Color','m')
 
 rectangle("Position",[40 0.5 1.5 1])
 rectangle("Position",[60 2.5 1.5 1])
