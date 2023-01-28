@@ -56,10 +56,6 @@ int main(int argc, const char *argv[])
     std::string filename_traj = "Trajectory";
     static bool traj = false;
     G2lib::ClothoidList trajectory;
-    G2lib::ClothoidList trajectory_prova;
-
-    std::string test = "test";
-
 
 #ifndef _MSC_VER
     // More portable way of supporting signals on UNIX
@@ -156,39 +152,29 @@ int main(int argc, const char *argv[])
                         double x2 = path_car[i + 1].p.x;
                         double y1 = path_car[i].p.y;
                         double y2 = path_car[i + 1].p.y;
-                        double angle = 0. ; //atan2(y1 - y2, x1 - x2);
-                        part_traj.build_G1(x1, y1, 0., x2, y2, angle);
+                        part_traj.build_G1(x1, y1, 0., x2, y2, 0.);
 
                         G2lib::PolyLine poly;
                         poly.build(part_traj,1);
                         trajectory.push_back(part_traj);
-                        trajectory_prova.push_back(poly);
                     }
 
                     G2lib::real_type x_1, y_1;
-                    G2lib::real_type x_1p, y_1p;
                     std::vector<G2lib::real_type> vec_x_1, vec_y_1;
-                    std::vector<G2lib::real_type> vec_x_1p, vec_y_1p;
                     for (int i = 0; i <= (trajectory.length() / DT); i++)
                     {
                         G2lib::real_type s = i * 0.05;
                         trajectory.eval(s, x_1, y_1);
-                        trajectory_prova.eval(s, x_1p, y_1p);
 
                         vec_x_1.push_back(x_1);
                         vec_y_1.push_back(y_1);
-                        vec_x_1p.push_back(x_1p);
-                        vec_y_1p.push_back(y_1p);
 
                         logger.log_var(filename_path, "X path", vec_x_1[i]);
                         logger.log_var(filename_path, "Y path", vec_y_1[i]);
-                        logger.log_var(filename_path, "Xp path", vec_x_1p[i]);
-                        logger.log_var(filename_path, "Yp path", vec_y_1p[i]);
                         logger.write_line(filename_path);
                     }
                 }
 
-                return 0;
 
                 /* LINE */
                 if(select_traj == "Staigth_line"){

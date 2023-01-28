@@ -14,8 +14,6 @@ X0 = table2array(path(:,1));
 Y0 = table2array(path(:,2));
 X1 = table2array(traj(:,1));
 Y1 = table2array(traj(:,2));
-X1p = table2array(path(:,3));
-Y1p = table2array(path(:,4));
 
 
 XH = table2array(test(:,1));
@@ -28,14 +26,13 @@ theta_car = table2array(test(:,6));
 figure, clf, hold on;
 %axis equal
 plot(X0,Y0)
-plot(X1,Y1)
-plot(X1p,Y1p,'r--')
+%plot(X1,Y1)
 %plot(XH,YH,'.','markersize', 8,'Color','g')
 %plot(X,Y,'.','markersize', 8,'Color','m')
 
-rectangle("Position",[40 0.5 1.5 1])
-rectangle("Position",[60 2.5 1.5 1])
-rectangle("Position",[80 0.5 1.5 1])
+rectangle("Position",[50 0.5 1.5 1])
+rectangle("Position",[90 2.5 1.5 1])
+rectangle("Position",[130 0.5 1.5 1])
 
 xlabel 'x [m]'
 ylabel 'y [m]'
