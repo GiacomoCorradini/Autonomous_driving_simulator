@@ -26,7 +26,7 @@ theta_car = table2array(test(:,6));
 figure, clf, hold on;
 %axis equal
 plot(X0,Y0)
-%plot(X1,Y1)
+plot(X1,Y1)
 %plot(XH,YH,'.','markersize', 8,'Color','g')
 %plot(X,Y,'.','markersize', 8,'Color','m')
 

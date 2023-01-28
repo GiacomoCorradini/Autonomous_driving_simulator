@@ -175,7 +175,6 @@ int main(int argc, const char *argv[])
                     }
                 }
 
-
                 /* LINE */
                 if(select_traj == "Staigth_line"){
                     G2lib::ClothoidCurve line;
@@ -226,6 +225,10 @@ int main(int argc, const char *argv[])
              * YAW = Yaw angle from the horizontal axel
              */
 
+            logger.log_var(filename_traj, "X vehicle", vehicle_X);
+            logger.log_var(filename_traj, "Y vehicle", vehicle_Y);
+            logger.log_var(filename_traj, "Yaw vehicle", yaw);
+
             /* -------------------------------------------------------------------------------------------------------------- */
 
             //   _        _  _____ _____ ____      _    _        ____ ___  _   _ _____ ____   ___  _
@@ -234,68 +237,60 @@ int main(int argc, const char *argv[])
             //  | |___ / ___ \| | | |___|  _ <  / ___ \| |___  | |__| |_| | |\  | | | |  _ <| |_| | |___
             //  |_____/_/   \_\_| |_____|_| \_\/_/   \_\_____|  \____\___/|_| \_| |_| |_| \_\\___/|_____|
 
-            static std::string select_latcontroller = "Clothoids";
-            //static std::string select_latcontroller = "Previw_point";
+            //static std::string select_latcontroller = "Clothoids";
+            static std::string select_latcontroller = "Previw_point";
 
             double req_steer_angle = 0;    // Requested steering wheel angle
             double steer = in->SteerWhlAg; // Actual steering wheel angle
 
             if(select_latcontroller == "Clothoids"){
                 double K_US = 0;               // understeering gradient
-                double lookahead_lat = 10;     // [m]
-
-                // car position
-                G2lib::real_type P0x = vehicle_X; // x coordinate of car
-                G2lib::real_type P0y = vehicle_Y; // y coordinate of car
-                G2lib::real_type P0theta = yaw;   // yaw angle of the car
-
-                logger.log_var(filename_traj, "X vehicle", P0x);
-                logger.log_var(filename_traj, "Y vehicle", P0y);
+                double lookahead_lat = 15;     // lookahead distance [m]
 
                 // Take a point from the reference trajectory
                 G2lib::real_type P1x;     // x coordinate of point trajectory
                 G2lib::real_type P1y;     // y coordinate of point trajectory
-                G2lib::real_type P1theta; // Default
-                G2lib::real_type variable_s, temp_1, temp_2;
+                G2lib::real_type P1theta; // theta coordinate of point trajectory
+                G2lib::real_type variable_s, t_coordiate, points_dist;
 
                 // evaluate the closest point on the trajectory considering the actual position of the vehicle
-                trajectory.closestPoint_ISO(P0x, P0y, P1x, P1y, variable_s, temp_1, temp_2);
+                trajectory.closestPoint_ISO(vehicle_X, vehicle_Y, P1x, P1y, variable_s, t_coordiate, points_dist);
 
                 // calculate the lookahead point on the trajectory
                 trajectory.eval(variable_s + lookahead_lat, P1x, P1y);
                 P1theta = trajectory.theta(variable_s + lookahead_lat);
 
-                G2lib::ClothoidCurve C1; // Clothoid
-                // std::vector<G2lib::real_type> vec_x, vec_y;         //
-                // std::vector<G2lib::real_type> vec_theta, vec_kappa; //
-                // G2lib::real_type x, y, theta, kappa;
+                // Clothoid to connect vehicle position to lookahead point
+                G2lib::ClothoidCurve C1;
+                C1.build_G1(vehicle_X, vehicle_Y, yaw, P1x, P1y, P1theta);
+                double curvature = C1.kappaBegin(); // curvature at the beginning
 
-                // Build the clothoid
-                C1.build_G1(P0x, P0y, P0theta, P1x, P1y, P1theta);
-                double curvature = C1.kappaBegin();
-
-                // Update output: requested steering angle
+                // requested steering angle
                 req_steer_angle = curvature * (in->VehicleLen + K_US * pow(in->VLgtFild, 2));
             }
 
             if(select_latcontroller == "Previw_point"){
-                double lookahead_lat = 10;     // [m]
-                double K_e = 0.2;                // traking error coefficient
-                double K_theta = 0.01;            // heading error coefficient
+                double lookahead_lat = 15;     // lookahead distance [m]
+                double K_e = 0.1;              // traking error coefficient
+                double K_theta = 0.007;         // heading error coefficient
 
                 // Lookahead point Ph
                 G2lib::real_type Ph_x = vehicle_X + lookahead_lat * cos(yaw); // x coordinate of the lookahead point
                 G2lib::real_type Ph_y = vehicle_Y + lookahead_lat * sin(yaw); // y coordinate of the lookahead point
+                
+                // Closest point on the trajectory
                 G2lib::real_type Pp_x;     // x coordinate of point trajectory
                 G2lib::real_type Pp_y;     // y coordinate of point trajectory
-                G2lib::real_type Pp_theta; // Default
-                G2lib::real_type variable_s, temp_1, e_p;
+                G2lib::real_type Pp_theta; // theta coordinate of point trajectory
+                G2lib::real_type variable_s, t_coordiate, e_p;
 
-                trajectory.closestPoint_ISO(Ph_x, Ph_y, Pp_x, Pp_y, variable_s, temp_1, e_p);
+                trajectory.closestPoint_ISO(Ph_x, Ph_y, Pp_x, Pp_y, variable_s, t_coordiate, e_p);
                 Pp_theta = trajectory.theta(variable_s);
                 double e_theta = yaw - Pp_theta;
 
-                req_steer_angle = -(K_e * e_p + K_theta * e_theta);
+                if(vehicle_Y >= Pp_y) e_p = -e_p;
+
+                req_steer_angle = K_e * e_p + K_theta * e_theta;
             }
 
             /* -------------------------------------------------------------------------------------------------------------- */
@@ -393,7 +388,7 @@ int main(int argc, const char *argv[])
             double maxAcc = 3;
 
             double j_req = (DT * (jEval(0.0, m_star) + jEval(DT, m_star)) * 0.5);
-            double req_acc = a0_bar + j_req;
+            double req_acc = fmin(fmax((a0_bar + j_req),minAcc),maxAcc);
 
             a0_bar = req_acc;
             double v_req = v_requested(DT, m_star);
@@ -408,7 +403,7 @@ int main(int argc, const char *argv[])
 
             // PID longitudinal control
             static double integral_long = 0.0;
-            double P_gain_long = 0.15;
+            double P_gain_long = 0.1;
             double I_gain_long = 1.0;
             double req_pedal;
             double error_long = req_acc - a0;
