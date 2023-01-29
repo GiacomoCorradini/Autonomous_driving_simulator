@@ -132,7 +132,7 @@ class Agent():
                 else:
                     s.NrTrfLights = 0
                     s.TrfLightDist = trafficlight.pos[0] - v.state[0]
-                    if trafficlight.pos[0] - v.state[0] < -20.0:
+                    if trafficlight.pos[0] - v.state[0] < -10.0:
                         s.Status = 1
 
             if type(obj) is Obstacle:

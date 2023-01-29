@@ -103,6 +103,7 @@ int main(int argc, const char *argv[])
 
             static std::string select_traj = "RRT";
             //static std::string select_traj = "Staigth_line";
+            
 
             // Get the initial car position
             static double pos_X0 = 0.;
@@ -403,7 +404,7 @@ int main(int argc, const char *argv[])
 
             // PID longitudinal control
             static double integral_long = 0.0;
-            double P_gain_long = 0.1;
+            double P_gain_long = 0.15;
             double I_gain_long = 1.0;
             double req_pedal;
             double error_long = req_acc - a0;

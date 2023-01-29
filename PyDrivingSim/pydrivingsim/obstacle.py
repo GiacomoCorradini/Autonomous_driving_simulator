@@ -18,7 +18,7 @@ class ObstacleSprite(pygame.sprite.Sprite):
 
     def update(self) -> None:
         self.rect.center = [
-            self.obstacle.pos[0] * World().scaling_factor - World().get_world_pos()[0],
+            self.obstacle.pos[0] * World().scaling_factor - World().get_world_pos()[0] - 60,
             self.obstacle.pos[1] * World().scaling_factor - World().get_world_pos()[1] - self.size[1]/2
         ]
         self.image = self.image_fix

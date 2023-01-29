@@ -6,7 +6,7 @@ close all
 data = readtable("Long_param.csv");
 path = readtable("Path.csv");
 traj = readtable("Trajectory.csv");
-test = readtable("test.csv");
+%test = readtable("test.csv");
 
 % Path plot
 
@@ -15,13 +15,12 @@ Y0 = table2array(path(:,2));
 X1 = table2array(traj(:,1));
 Y1 = table2array(traj(:,2));
 
-
-XH = table2array(test(:,1));
-YH = table2array(test(:,2));
-X = table2array(test(:,3));
-Y = table2array(test(:,4));
-theta_traj = table2array(test(:,5));
-theta_car = table2array(test(:,6));
+% XH = table2array(test(:,1));
+% YH = table2array(test(:,2));
+% X = table2array(test(:,3));
+% Y = table2array(test(:,4));
+% theta_traj = table2array(test(:,5));
+% theta_car = table2array(test(:,6));
 
 figure, clf, hold on;
 %axis equal

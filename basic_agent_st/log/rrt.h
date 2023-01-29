@@ -28,8 +28,8 @@ typedef struct
 bool isObstacle(std::vector<double> &rvec_x, std::vector<double> &rvec_y, obstacle obs0, obstacle obs1, obstacle obs2, int point_retta, node extended)
 {
   bool ret = false;
-  double offsx = 20;
-  double offsy = 4;
+  double offsx = 35;
+  double offsy = 4.5;
 
   // Controllo che nessun punto della retta sia sull'ostacolo
   for (int i = 0; i < point_retta; i++)
