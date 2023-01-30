@@ -3,6 +3,7 @@
 # License : MIT
 
 import signal
+import sys
 
 from pydrivingsim import World, Vehicle, TrafficLight, Agent, Obstacle
 
@@ -16,6 +17,15 @@ class GracefulKiller:
     self.kill_now = True
 
 def main():
+
+    argv = sys.argv[1:]
+
+    if(len(argv) < 1): 
+      exit("Argument not valid, choose\n 0 -> no object in the simulator\n 1 -> insert objects in the simulator")
+    elif(argv[0] == '0' or argv[0] == '1'):
+      mode = argv
+    else:
+      exit("Argument not valid, choose\n 0 -> no object in the simulator\n 1 -> insert objects in the simulator")
 
     mode = 1    # 0 = basic, 1 = obstacles
 
