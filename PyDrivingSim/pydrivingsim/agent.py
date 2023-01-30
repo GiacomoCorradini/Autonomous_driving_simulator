@@ -142,6 +142,9 @@ class Agent():
                 s.ObjLen[objn] = obj.lenght
                 s.ObjWidth[objn] = obj.width
                 objn = objn + 1
+                s.ObjID[0] = 1
+            else:
+                s.ObjID[0] = 0
 
         s.NrObjs = objn
 

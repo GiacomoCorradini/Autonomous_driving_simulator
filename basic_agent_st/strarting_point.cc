@@ -103,19 +103,22 @@ int main(int argc, const char *argv[])
 
             static std::string select_traj = "RRT";
             //static std::string select_traj = "Staigth_line";
-            
+
+           int mode = in->ObjID[0];
+           
 
             // Get the initial car position
             static double pos_X0 = 0.;
             static double pos_Y0 = in->LatOffsLineL;
             static double yaw0 = in->LaneHeading;
 
+
             // Calculate the trajectory only at the beginning of the algorithm
             if (!traj)
             {
 
                 /* RRT ALGORITHM */
-                if(select_traj == "RRT"){
+                if(mode == 1){
                     // Starting and goal points definition
                     node start, goal;
                     start.p.x = pos_X0 * 10;
@@ -177,7 +180,7 @@ int main(int argc, const char *argv[])
                 }
 
                 /* LINE */
-                if(select_traj == "Staigth_line"){
+                if(mode == 0){
                     G2lib::ClothoidCurve line;
                     G2lib::real_type x_1, y_1, theta_1;
                     std::vector<G2lib::real_type> vec_x_1, vec_y_1, vec_theta_1;
