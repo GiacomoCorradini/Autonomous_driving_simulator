@@ -23,7 +23,7 @@ def main():
     if(len(argv) < 1): 
       exit("Argument not valid, choose\n 0 -> no object in the simulator\n 1 -> insert objects in the simulator")
     elif(argv[0] == '0' or argv[0] == '1'):
-      mode = argv # 0 = basic, 1 = obstacles
+      mode = argv[0] # 0 = basic, 1 = obstacles
     else:
       exit("Argument not valid, choose\n 0 -> no object in the simulator\n 1 -> insert objects in the simulator")
 
@@ -32,8 +32,8 @@ def main():
     agent = Agent(vehicle)
     trafficlight = TrafficLight()
     trafficlight.set_pos((162,-2))
-
-    if mode == 1:
+    
+    if mode == '1':
       # Obstacles position setting
       obs = Obstacle()
       obs.set_pos((50,0.5))
