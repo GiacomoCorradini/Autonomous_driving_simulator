@@ -1,5 +1,10 @@
 # Autonomous driving simulator
 
+The project consists in a semplified version of an autonomous driving system, in particular is developed the longitudinal control for a traffic-light intersection and a lateral control for obstacle avoidance.
+The path plannig is performed using the high-level planner RRT (rapidly-exploring random tree)
+The longitudinal control is performed using the motion primitive technique
+The lateral control is performed using the preview point lateral control (is also defined the clothoid based lateral control)
+
 ## Compile agent communication library
 
    1) enter inside the folder agent_communication_lib
@@ -59,6 +64,11 @@ cd basic_agent
 cd PyDrivingSim
 ```
    2) run  simulator.py
+   * to simulate the traffic-light environment
 ```
-python3 simulator.py
+python3 simulator.py 0
+```
+   * to simulate the traffic-light environment + obstacle avoidance
+```
+python3 simulator.py 1
 ```
