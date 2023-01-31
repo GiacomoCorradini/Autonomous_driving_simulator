@@ -33,7 +33,7 @@ static void copy_m(double m1[6], double m2[6]);
 static int check_0(double m[6]);
 static double jEval(double t, double m[6]);
 static double v_requested(double t, double m[6]);
-static void vehicle_position(double x0, double x_act, double offL, double offR, double *X, double *Y);
+static void vehicle_position(double x0, double x_act, double offL, double *X, double *Y);
 
 //   __  __    _    ___ _   _
 //  |  \/  |  / \  |_ _| \ | |
@@ -52,8 +52,8 @@ int main(int argc, const char *argv[])
     size_t manoeuvre_msg_size = sizeof(manoeuvre_msg.data_buffer);
     uint32_t message_id = 0;
     std::string filename = "Long_param";
-    std::string filename_path = "Path";
-    std::string filename_traj = "Trajectory";
+    std::string filename_path = "Path_planned";
+    std::string filename_traj = "Actual_trajectory";
     static bool traj = false;
     G2lib::ClothoidList trajectory;
 
@@ -101,11 +101,7 @@ int main(int argc, const char *argv[])
             //    | | |  _ <  / ___ \ |_| | |__| |___  | || |_| |  _ < | |
             //    |_| |_| \_\/_/   \_\___/|_____\____| |_| \___/|_| \_\|_|
 
-            static std::string select_traj = "RRT";
-            //static std::string select_traj = "Staigth_line";
-
            int mode = in->ObjID[0];
-           
 
             // Get the initial car position
             static double pos_X0 = 0.;
@@ -116,7 +112,6 @@ int main(int argc, const char *argv[])
             // Calculate the trajectory only at the beginning of the algorithm
             if (!traj)
             {
-
                 /* RRT ALGORITHM */
                 if(mode == 1){
                     // Starting and goal points definition
@@ -196,13 +191,10 @@ int main(int argc, const char *argv[])
 
                         logger.log_var(filename_path, "X0", vec_x_1[i]);
                         logger.log_var(filename_path, "Y0", vec_y_1[i]);
-                        logger.log_var(filename_path, "THETA0", vec_theta_1[i]);
                         logger.write_line(filename_path);
                     }
-
                     trajectory.push_back(line);
                 }
-
                 traj = true;
             }
 
@@ -216,17 +208,16 @@ int main(int argc, const char *argv[])
 
             static double pos0 = in->TrfLightDist; // initial distance of the traffic-light
             double LatPosL = in->LatOffsLineL;     // Relative lateral position from left line
-            double LatPosR = in->LatOffsLineR;     // Relative lateral position from right line
             double yaw = in->LaneHeading;          // Attitude of the vehicle w.r.t straight road
             double vehicle_X, vehicle_Y;           // (X,Y) coordinate of the vehicle in the env
 
             // compute vehicle position
-            vehicle_position(pos0, in->TrfLightDist, LatPosL, LatPosR, &vehicle_X, &vehicle_Y);
+            vehicle_position(pos0, in->TrfLightDist, LatPosL, &vehicle_X, &vehicle_Y);
             /**
              * Position of the vehicle
              * X = distance from the start position of the car
              * Y = distance from the left line
-             * YAW = Yaw angle from the horizontal axel
+             * YAW = Yaw angle from the horizontal axis
              */
 
             logger.log_var(filename_traj, "X vehicle", vehicle_X);
@@ -275,7 +266,7 @@ int main(int argc, const char *argv[])
 
             if(select_latcontroller == "Previw_point"){
                 double lookahead_lat = 15;     // lookahead distance [m]
-                double K_e = 0.1;              // traking error coefficient
+                double K_e = 0.1;              // tracking error coefficient
                 double K_theta = 0.007;         // heading error coefficient
 
                 // Lookahead point Ph
@@ -408,9 +399,9 @@ int main(int argc, const char *argv[])
             // PID longitudinal control
             static double integral_long = 0.0;
             double P_gain_long;
-            if(mode == 0) P_gain_long = 0.13;
-            else P_gain_long = 0.15;
-            double I_gain_long = 1.0;
+            if(mode == 0) P_gain_long = 0.15;
+            else P_gain_long = 0.16;
+            double I_gain_long = 1.2;
             double req_pedal;
             double error_long = req_acc - a0;
             integral_long = integral_long + (error_long * DT);
@@ -461,17 +452,16 @@ int main(int argc, const char *argv[])
             logger.write_line(filename);
 
             // Screen print
-            printLogVar(message_id, "Status", in->Status);
-            printLogVar(message_id, "CycleNumber", in->CycleNumber);
+            //printLogVar(message_id, "Status", in->Status);
+            //printLogVar(message_id, "CycleNumber", in->CycleNumber);
             printLogVar(message_id, "Time", num_seconds);
             printLogVar(message_id, "TrafficLight", in->TrfLightCurrState);
-            printLogVar(message_id, "Actual velocity", in->VLgtFild);
-            printLogVar(message_id, "Actual acceleration", in->ALgtFild);
-            printLogVar(message_id, "Actual steering wheel", steer);
+            printLogVar(message_id, "Velocity", in->VLgtFild);
+            printLogVar(message_id, "Acceleration", in->ALgtFild);
+            printLogVar(message_id, "Steering-wheel angle", steer);
             printLogVar(message_id, "Vehicle X coordinate", vehicle_X);
             printLogVar(message_id, "Vehicle Y coordinate", vehicle_Y);
             printLogVar(message_id, "Vehicle Yaw coordinate", yaw);
-            printLogVar(message_id, "Obs1 X coordinate", in->ObjX[0]);
 
             // Send manoeuvre message to the environment
             if (server_send_to_client(server_run, message_id, &manoeuvre_msg.data_struct) == -1)
@@ -528,7 +518,7 @@ static double v_requested(double t, double m[6])
     return vel;
 }
 
-static void vehicle_position(double x0, double x_act, double offL, double offR, double *X, double *Y)
+static void vehicle_position(double x0, double x_act, double offL, double *X, double *Y)
 {
     *X = x0 - x_act;
     *Y = offL;
