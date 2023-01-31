@@ -407,7 +407,9 @@ int main(int argc, const char *argv[])
 
             // PID longitudinal control
             static double integral_long = 0.0;
-            double P_gain_long = 0.15;
+            double P_gain_long;
+            if(mode == 0) P_gain_long = 0.13;
+            else P_gain_long = 0.15;
             double I_gain_long = 1.0;
             double req_pedal;
             double error_long = req_acc - a0;

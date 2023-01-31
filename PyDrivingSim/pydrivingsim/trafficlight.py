@@ -9,6 +9,8 @@ import random
 #random.seed(10)
 # stop with red
 #random.seed(1)
+# approach with yellow
+random.seed(5)
 
 from pydrivingsim import VirtualObject, World
 

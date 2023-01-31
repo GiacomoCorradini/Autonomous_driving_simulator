@@ -26,7 +26,7 @@ add_executable(basic_agent
         matlab/codegen/lib/primitives/primitives.cpp
         log/screen_print.c
         log/logvars.cc
-        strarting_point.cc
+        main.cc
 )
 
 
