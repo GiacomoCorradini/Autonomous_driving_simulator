@@ -7,11 +7,17 @@ The lateral control is performed using the preview point lateral control (is als
 
 ![](Agent_logic.png)
 
+## Clone repositorry
+
+```
+git clone --recurse-submodules  https://github.com/GiacomoCorradini/Autonomous_driving_simulator.git ~/Autonomous_driving_simulator
+```
+
 ## Compile agent communication library
 
    1) enter inside the folder agent_communication_lib
 ```
-cd agent_communication_lib
+cd ~/Autonomous_driving_simulator/agent_communication_lib
 ```
    2) compile the project with cmake (need ruby)
 ```
@@ -25,7 +31,7 @@ cmake --build build -t install
 
    1) enter inside the folder Clothoids
 ```
-cd basic_agent/Clothoids
+cd ~/Autonomous_driving_simulator/basic_agent/Clothoids
 ```
    2) compile the project with cmake
 ```
@@ -37,7 +43,7 @@ cmake --build build -t install
 
    1) enter inside the folder basic_agent
 ```
-cd basic_agent
+cd ~/Autonomous_driving_simulator/basic_agent
 ```
    2) compile the project with cmake
 ```   
@@ -52,7 +58,7 @@ Open two different terminals
 
    1) enter inside the folder basic_agent
 ```
-cd basic_agent
+cd ~/Autonomous_driving_simulator/basic_agent
 ```
    2) run basic_agent
 ```
@@ -63,7 +69,7 @@ cd basic_agent
 
    1) enter inside the folder PyDrivingSim
 ```
-cd PyDrivingSim
+cd ~/Autonomous_driving_simulator/PyDrivingSim
 ```
    2) run  simulator.py
    * to simulate the traffic-light environment

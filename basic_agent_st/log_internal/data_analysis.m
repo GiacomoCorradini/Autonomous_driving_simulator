@@ -4,8 +4,8 @@ close all
 
 % Load data
 data = readtable("Long_param.csv");
-path = readtable("Path.csv");
-traj = readtable("Trajectory.csv");
+path = readtable("Path_planned.csv");
+traj = readtable("Actual_trajectory.csv");
 %test = readtable("test.csv");
 
 % Path plot
