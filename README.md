@@ -1,7 +1,7 @@
 # Collaborators
 
-[Giacomo Corradini](https://github.com/GiacomoCorradini)
-[Mattia Pettene](https://github.com/mattiapettene)
+- [Giacomo Corradini](https://github.com/GiacomoCorradini)
+- [Mattia Pettene](https://github.com/mattiapettene)
 
 # Autonomous driving simulator
 
