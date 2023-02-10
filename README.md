@@ -1,3 +1,8 @@
+# Collaborators
+
+[Giacomo Corradini](https://github.com/GiacomoCorradini)
+[Mattia Pettene](https://github.com/mattiapettene)
+
 # Autonomous driving simulator
 
 The project consists in a semplified version of an autonomous driving system, in particular are developed the longitudinal control for a traffic-light intersection and a lateral control for obstacle avoidance.
